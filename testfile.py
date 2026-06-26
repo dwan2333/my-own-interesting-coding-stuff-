@@ -1,1 +1,2 @@
-print(10//3)
+print('spam' + "spamspam")
+print('spam' * 3)
