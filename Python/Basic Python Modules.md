@@ -43,9 +43,9 @@ print(random.random())   # 0.6394267984578837  (repeats!)
 | `random.uniform(a, b)` | float | `[a, b]` — any two bounds, order-independent |
 
 ```python
-random.random()           # 0.0 <= x < 1.0
-random.uniform(1, 10)     # e.g. 7.34 — a float between 1 and 10
-random.uniform(10, 1)     # works too; bounds can be reversed
+print(random.random())           # 0.0 <= x < 1.0
+print(random.uniform(1, 10))     # e.g. 7.34 — a float between 1 and 10
+print(random.uniform(10, 1))    # works too; bounds can be reversed
 ```
 
 > [!tip] Scaling `random()`
