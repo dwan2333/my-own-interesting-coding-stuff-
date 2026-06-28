@@ -43,9 +43,11 @@ print(random.random())   # 0.6394267984578837  (repeats!)
 | `random.uniform(a, b)` | float | `[a, b]` — any two bounds, order-independent |
 
 ```python
+import random
+
 print(random.random())           # 0.0 <= x < 1.0
 print(random.uniform(1, 10))     # e.g. 7.34 — a float between 1 and 10
-print(random.uniform(10, 1))    # works too; bounds can be reversed
+print(random.uniform(10, 1))     # works too; bounds can be reversed
 ```
 
 > [!tip] Scaling `random()`
@@ -62,9 +64,11 @@ print(random.uniform(10, 1))    # works too; bounds can be reversed
 | `random.randrange(start, stop[, step])` | int | Respects a step |
 
 ```python
-random.randint(1, 6)              # simulate a die roll: 1..6 inclusive
-random.randrange(10)             # 0..9
-random.randrange(0, 100, 5)      # 0, 5, 10, ... 95 (multiples of 5)
+import random
+
+print(random.randint(1, 6))         # simulate a die roll: 1..6 inclusive
+print(random.randrange(10))         # 0..9
+print(random.randrange(0, 100, 5))  # 0, 5, 10, ... 95 (multiples of 5)
 ```
 
 > [!warning] `randint` vs `randrange`
@@ -79,8 +83,10 @@ This is where `random` is most useful day-to-day — picking from and reordering
 ### Pick one item — `random.choice()`
 
 ```python
+import random
+
 colors = ["red", "green", "blue"]
-random.choice(colors)            # e.g. "green"
+print(random.choice(colors))     # e.g. "green"
 ```
 
 ### Pick several items
@@ -91,14 +97,16 @@ random.choice(colors)            # e.g. "green"
 | `random.sample(seq, k=n)` | **without** replacement | no | `k` |
 
 ```python
+import random
+
 # choices: same item can appear more than once
-random.choices(["a", "b", "c"], k=5)        # e.g. ['a', 'c', 'c', 'a', 'b']
+print(random.choices(["a", "b", "c"], k=5))        # e.g. ['a', 'c', 'c', 'a', 'b']
 
 # weighted choices — 'win' is 10x more likely than 'lose'
-random.choices(["win", "lose"], weights=[10, 1], k=3)
+print(random.choices(["win", "lose"], weights=[10, 1], k=3))
 
 # sample: unique items, like dealing cards
-random.sample(range(1, 50), k=6)            # 6 distinct lottery numbers
+print(random.sample(range(1, 50), k=6))            # 6 distinct lottery numbers
 ```
 
 ### Shuffle in place — `random.shuffle()`
@@ -106,6 +114,8 @@ random.sample(range(1, 50), k=6)            # 6 distinct lottery numbers
 Reorders a **mutable** sequence (like a list) directly; returns `None`.
 
 ```python
+import random
+
 deck = list(range(1, 53))
 random.shuffle(deck)             # deck is now reordered
 print(deck[:5])                  # e.g. [27, 3, 51, 14, 40]
@@ -128,10 +138,12 @@ When you need numbers that follow a real-world distribution rather than uniform 
 | `random.expovariate(lambd)` | Exponential | Time between events (arrivals, decay) |
 
 ```python
-random.gauss(0, 1)               # standard normal: mean 0, std-dev 1
-random.gauss(170, 10)            # heights around 170 cm
-random.triangular(1, 10, 3)      # between 1 and 10, peaking near 3
-random.expovariate(1/5)          # wait times averaging 5 units
+import random
+
+print(random.gauss(0, 1))         # standard normal: mean 0, std-dev 1
+print(random.gauss(170, 10))      # heights around 170 cm
+print(random.triangular(1, 10, 3))  # between 1 and 10, peaking near 3
+print(random.expovariate(1/5))    # wait times averaging 5 units
 ```
 
 ---
@@ -143,9 +155,9 @@ random.expovariate(1/5)          # wait times averaging 5 units
 ```python
 import secrets
 
-secrets.choice(["a", "b", "c"])     # cryptographically secure pick
-secrets.randbelow(100)              # secure int in [0, 100)
-secrets.token_hex(16)              # secure random token, e.g. for API keys
+print(secrets.choice(["a", "b", "c"]))  # cryptographically secure pick
+print(secrets.randbelow(100))           # secure int in [0, 100)
+print(secrets.token_hex(16))            # secure random token, e.g. for API keys
 ```
 
 | Need | Use |
