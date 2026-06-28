@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Basic Python Modules.md",
+                "file": "Python/Random Modules.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basic Python Modules"
+              "title": "Random Modules"
             }
           }
         ]
@@ -185,7 +185,7 @@
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
     "testfile.py",
-    "Python/Basic Python Modules.md",
+    "Python/Random Modules.md",
     "Python",
     "Automate The Boring Stuff With Python/testfile.py",
     "Automate The Boring Stuff With Python",
