@@ -1,2 +1,5 @@
-for i in range(0):
-    print(i)
+print("Enter the first value")
+first_value = input()
+print("Enter the second value")
+second_valut = input()
+print("There sume is " + first_value + second_valut)
