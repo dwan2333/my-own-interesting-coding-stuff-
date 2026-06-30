@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Random Modules.md",
+                "file": "Python/The Logging Module.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Random Modules"
+              "title": "The Logging Module"
             }
           }
         ]
@@ -184,8 +184,8 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
-    "Python/The Logging Module.md",
     "Python/Random Modules.md",
+    "Python/The Logging Module.md",
     "Python/Random Modules.md.tmp.8560.da4ea86f3001",
     "Python/The Traceback Module.md",
     "Python/The Logging Module.md.tmp.8560.1252e1087dae",
