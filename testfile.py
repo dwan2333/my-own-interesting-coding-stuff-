@@ -1,14 +1,18 @@
-import random 
+import time
 
-guess = int(input("Guess a number between 0 to 20: "))
-x = random.randint(0,21)
+indent = True
+while True:
+    
+    if indent == True:
+        for i in range(1,8):
+            print(i * " " + "*******")
+        indent = False 
 
-while  x != guess:
-    if guess < x:
-        print("Your guess is smaller than the mysterious number")
     else:
-        print("Your guess is larger than the mysterious number")
-    guess = int(input("Guess a number between 0 to 20: "))
+        for i in range(6,-1,-1):
+            print(i * " " + "*******")
+        indent = True
 
-print("You guessed the right number")
+
+    
     
