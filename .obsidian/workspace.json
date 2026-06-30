@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/The Assert Statement.md",
+                "file": "Python/Random Modules.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "The Assert Statement"
+              "title": "Random Modules"
             }
           }
         ]
@@ -184,9 +184,9 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/The Assert Statement.md",
     "Python/The Logging Module.md",
     "Python/Random Modules.md.tmp.8560.cb4a773ed2d5",
-    "Python/The Assert Statement.md",
     "Python/The Assert Statement.md.tmp.8560.e6f42ce0c150",
     "Python/Random Modules.md",
     "Python/Random Modules.md.tmp.8560.da4ea86f3001",
