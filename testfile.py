@@ -4,15 +4,17 @@ def printbox(symbol, width, height):
     if height < 2:
         raise Exception("Height has to be bigger or equal to 2")
     
-    for y in range(height):
-        for x in range(width):
-            print(symbol, end = '')
-        print()
+    print(symbol * width)
+    for i in range(height-2):
+        print(symbol + ' ' * (width-2) + symbol)
+    print(symbol * width)
+
+print(printbox('*',5,4))
 
 
         
         
-print(printbox("*",3,3))
+
 
     
     
