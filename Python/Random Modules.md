@@ -3,6 +3,8 @@
 _Research compiled 2026-06-27 — Python standard library (`random` module)_
 
 > First entry in a growing reference on Python's most useful built-in modules. This note covers **`random`** — pseudo-random number generation for floats, integers, sequences, and statistical distributions.
+>
+> **Related notes:** [The Traceback Module](<The Traceback Module.md>) — logging full error details.
 
 ---
 
