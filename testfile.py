@@ -1,18 +1,18 @@
-import time
-
-indent = True
-while True:
+def printbox(symbol, width, height):
+    if width < 2:
+        raise Exception("Width has to be bigger or equal to 2")
+    if height < 2:
+        raise Exception("Height has to be bigger or equal to 2")
     
-    if indent == True:
-        for i in range(1,8):
-            print(i * " " + "*******")
-        indent = False 
+    for y in range(height):
+        for x in range(width):
+            print(symbol, end = '')
+        print()
 
-    else:
-        for i in range(6,-1,-1):
-            print(i * " " + "*******")
-        indent = True
 
+        
+        
+print(printbox("*",3,3))
 
     
     
