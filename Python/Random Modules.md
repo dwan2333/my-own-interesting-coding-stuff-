@@ -1,4 +1,4 @@
-# Basic Python Modules
+# Random Modules
 
 _Research compiled 2026-06-27 — Python standard library (`random` module)_
 

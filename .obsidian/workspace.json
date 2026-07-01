@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/The Enumerate Function.md",
+                "file": "Python/Dictionary Methods.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "The Enumerate Function"
+              "title": "Dictionary Methods"
             }
           }
         ]
@@ -184,11 +184,12 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
-    "Python/The Logging Module.md",
     "Python/The Enumerate Function.md",
+    "Python/The Logging Module.md",
     "Python/The Assert Statement.md",
-    "Python/List Methods.md",
     "Python/Random Modules.md",
+    "Python/List Methods.md",
+    "Python/Dictionary Methods.md",
     "Python/Random Modules.md.tmp.13096.7a0564e5bc7f",
     "Python/List Methods.md.tmp.13096.6624b844e49c",
     "Python/Random Modules.md.tmp.8560.cb4a773ed2d5",
