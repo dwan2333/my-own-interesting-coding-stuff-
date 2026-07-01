@@ -182,8 +182,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5fef6e44c579900d",
+  "active": "ae9ea628906818db",
   "lastOpenFiles": [
+    "Python/Random Modules.md.tmp.5248.97630cf46ba9",
+    "Python/Escape Sequences.md.tmp.5248.bc86f87321dc",
+    "Python/Escape Sequences.md",
+    "Python/Escape Sequences.md.tmp.5248.0620eabca888",
     "Python/Random Modules.md.tmp.5248.80e2c609d4d5",
     "Python/The ord and chr Functions.md",
     "Python/The ord and chr Functions.md.tmp.5248.d8a7aa6f8748",
@@ -200,10 +204,7 @@
     "Python/Random Modules.md.tmp.13096.7a0564e5bc7f",
     "Python/List Methods.md.tmp.13096.6624b844e49c",
     "Python/Random Modules.md.tmp.8560.cb4a773ed2d5",
-    "Python/The Assert Statement.md.tmp.8560.e6f42ce0c150",
-    "Python/Random Modules.md.tmp.8560.da4ea86f3001",
     "Python/The Traceback Module.md",
-    "Python/The Logging Module.md.tmp.8560.1252e1087dae",
     "Welcome.md"
   ]
 }
