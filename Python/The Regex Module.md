@@ -52,6 +52,46 @@ print(re.split(r'\s', text))                 # ['cat', 'hat', 'sat', 'mat']
 > [!warning] Check for `None` before `.group()`
 > `search()` / `match()` return `None` when nothing matches. Calling `.group()` on `None` raises `AttributeError`. Guard it: `m = re.search(...); if m: ...`.
 
+### `match()` — only at the **start** of the string
+
+Unlike `search` (which looks anywhere), `match` only succeeds if the pattern is found right at the beginning.
+
+```python
+import re
+
+print(bool(re.match(r'\d+', '123 abc')))     # True  — starts with digits
+print(bool(re.match(r'\d+', 'abc 123')))     # False — digits aren't at the start
+print(re.match(r'\d+', '123 abc').group())   # '123'
+```
+
+### `fullmatch()` — the **whole** string must match
+
+Succeeds only if the pattern covers the entire string end to end — ideal for **validation** (is this string *exactly* a phone number?).
+
+```python
+import re
+
+print(bool(re.fullmatch(r'\d{3}-\d{4}', '555-1234')))      # True
+print(bool(re.fullmatch(r'\d{3}-\d{4}', '555-1234 ext')))  # False — extra text
+```
+
+### `finditer()` — every match as a match **object**
+
+Like `findall`, but yields match **objects** (not strings), so you also get each match's position via `.start()` / `.end()`.
+
+```python
+import re
+
+for m in re.finditer(r'\d+', 'a1 bb22 ccc333'):
+    print(m.group(), 'at', m.start(), '-', m.end())
+# 1 at 1 - 2
+# 22 at 5 - 7
+# 333 at 11 - 14
+```
+
+> [!tip] `findall` vs `finditer`
+> `findall` gives you a quick **list of strings**. `finditer` gives you match **objects** — reach for it when you also need each match's **position** or groups.
+
 ---
 
 ## Branch 3 — Groups With Parentheses
