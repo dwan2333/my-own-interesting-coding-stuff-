@@ -236,11 +236,36 @@ print(bool(re.search(r'world$', 'Hello world')))     # True  (ends with world)
 | `re.DOTALL` (`re.S`) | let `.` also match newlines |
 | `re.MULTILINE` (`re.M`) | `^` and `$` match at each line, not just string ends |
 
+**`re.IGNORECASE`** — match regardless of upper/lower case:
+
 ```python
 import re
 
 print(re.findall(r'cat', 'Cat CAT cat', re.IGNORECASE))   # ['Cat', 'CAT', 'cat']
 ```
+
+**`re.DOTALL`** — let `.` also match newline characters (normally it stops at `\n`):
+
+```python
+import re
+
+text = 'first line\nsecond line'
+print(re.search(r'first.*second', text))                    # None  — . won't cross \n
+print(re.search(r'first.*second', text, re.DOTALL).group()) # 'first line\nsecond'
+```
+
+**`re.MULTILINE`** — make `^` and `$` match at the start/end of **each line**, not just the whole string:
+
+```python
+import re
+
+log = 'ERROR disk\nok cpu\nERROR ram'
+print(re.findall(r'^ERROR', log))                 # ['ERROR']          (only the very start)
+print(re.findall(r'^ERROR', log, re.MULTILINE))   # ['ERROR', 'ERROR'] (start of each line)
+```
+
+> [!tip] Combining flags
+> Combine flags with the `|` operator: `re.search(pattern, text, re.IGNORECASE | re.DOTALL)`.
 
 ---
 
