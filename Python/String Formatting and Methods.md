@@ -239,15 +239,9 @@ print('xxhixx'.strip('x'))   # 'hi'
 
 ---
 
-## Branch 10 — `ord()` and `chr()`
+## Related
 
-Convert between a character and its Unicode code-point number.
-
-```python
-print(ord('A'))    # 65
-print(chr(65))     # 'A'
-print(chr(ord('A') + 1))  # 'B'
-```
+- **[The ord() and chr() Functions](<The ord and chr Functions.md>)** — converting between a character and its Unicode code-point number (split out into its own note).
 
 ---
 
