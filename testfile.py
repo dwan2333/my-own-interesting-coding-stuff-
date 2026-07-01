@@ -1,9 +1,6 @@
-from random import randint 
-import math
-result = []
-for i in range(100):
-    result.append(randint(0,1))
-print(result.count(1)/100 * 100)
+inventory = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
+ivt = inventory['rope'] + 1
+print(ivt)
 
     
 
