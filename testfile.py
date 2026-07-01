@@ -1,5 +1,5 @@
-word = "Hello"
-print(word[::-1])
+word = 'DANIEL'
+print(word.isupper())
 
     
 
