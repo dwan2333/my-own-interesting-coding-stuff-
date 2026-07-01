@@ -31,7 +31,7 @@ for i in range(len(text)):
         for character in word[::-1]:
             logging.debug("character %s is being tested for isalpha for right side", character)
             if not character.isalpha():
-                right_stripped_chracter += character
+                right_stripped_character += character
                 word = word.rstrip(character)
                 logging.debug("%s is being stripped out from the left side and added to the left striped characters = %s" % (word,right_stripped_character))
             else:
@@ -45,9 +45,10 @@ for i in range(len(text)):
     word = word.lower()
 
     prefix_consonants = ""
-    while len(word) > 0 and word[0] not in vowels:
+    while len(word) > 0 and not word[0]in vowels:
         prefix_consonants += word[0]
         word = word[1:]
+    logging.debug(f'{prefix_consonants} is being stripped out of {word}')
 
     if prefix_consonants != "": 
         word += prefix_consonants + 'ay'
