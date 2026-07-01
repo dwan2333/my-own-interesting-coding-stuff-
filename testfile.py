@@ -1,5 +1,5 @@
-text = input(">").split()
-print(text)
+word = "Hello"
+print(word[::-1])
 
     
 
