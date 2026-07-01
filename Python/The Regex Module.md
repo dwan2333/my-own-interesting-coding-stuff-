@@ -333,6 +333,7 @@ print(bool(re.search(r'world$', 'Hello world')))     # True  (ends with world)
 | `re.IGNORECASE` (`re.I`) | case-insensitive matching |
 | `re.DOTALL` (`re.S`) | let `.` also match newlines |
 | `re.MULTILINE` (`re.M`) | `^` and `$` match at each line, not just string ends |
+| `re.VERBOSE` (`re.X`) | ignore whitespace and allow `#` comments **inside the pattern** — for readability |
 
 **`re.IGNORECASE`** — match regardless of upper/lower case:
 
@@ -341,6 +342,24 @@ import re
 
 print(re.findall(r'cat', 'Cat CAT cat', re.IGNORECASE))   # ['Cat', 'CAT', 'cat']
 ```
+
+**`re.VERBOSE`** — lets you spread a pattern across lines with **indentation and `#` comments**, all ignored by the engine. The two patterns below are identical to the regex, but one is readable:
+
+```python
+import re
+
+phone = re.compile(r'''
+    (\d{3})    # area code
+    -          # separator
+    (\d{4})    # local number
+''', re.VERBOSE)
+
+print(phone.search('call 555-1234').groups())   # ('555', '1234')
+# same as the compact r'(\d{3})-(\d{4})'
+```
+
+> [!warning] Whitespace becomes invisible under VERBOSE
+> Because VERBOSE ignores spaces, a space you actually want to match must be **escaped** (`\ `) or put in a class (`[ ]`) or written as `\s`. Otherwise your literal spaces silently disappear.
 
 **`re.DOTALL`** — let `.` also match newline characters (normally it stops at `\n`):
 
@@ -375,7 +394,7 @@ print(re.findall(r'^ERROR', log, re.MULTILINE))   # ['ERROR', 'ERROR'] (start of
 - **Special group notations:** `|` (or), `(?:...)` (group without capturing), `(?=...)` / `(?!...)` (look *ahead*, positive/negative), `(?<=...)` / `(?<!...)` (look *behind*, fixed-width only), `\1` (backreference). Lookarounds are **zero-width** — they test context without consuming characters.
 - **Character classes:** `\d` digit, `\w` word char, `\s` whitespace — uppercase negates. `\b` = word boundary; backslash escapes literals like `\.` `\$`.
 - **Quantifiers:** `?` `*` `+` `{n}` `{n,m}`; greedy by default — add `?` for non-greedy.
-- **Anchors** `^` `$` `.`; **flags** `re.IGNORECASE`, `re.DOTALL`, `re.MULTILINE`. Always check a match isn't `None` before `.group()`.
+- **Anchors** `^` `$` `.`; **flags** `re.IGNORECASE`, `re.DOTALL`, `re.MULTILINE`, `re.VERBOSE` (readable multi-line patterns). Always check a match isn't `None` before `.group()`.
 
 ---
 
