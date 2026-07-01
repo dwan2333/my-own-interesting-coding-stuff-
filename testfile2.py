@@ -4,9 +4,9 @@ import logging
 
 logging.basicConfig(level = logging.DEBUG, format = "%(asctime)s - %(levelname)s - %(message)s", force = True)
 
-
+breakpoint()
 def display_inventory(ivt):
-    logging.debug(f"The inventory {ivt} is being processed")
+    logging.debug("The inventory %s is being processed", ivt)
     print('Inventory:')
     count = 0
     for k,v in ivt.items():

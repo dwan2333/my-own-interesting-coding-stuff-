@@ -184,10 +184,12 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
-    "Python/The Enumerate Function.md",
+    "__pycache__/testfile2.cpython-314.pyc",
+    "__pycache__",
     "Python/The Assert Statement.md",
-    "Python/Dictionary Methods.md",
+    "Python/The Enumerate Function.md",
     "Python/The Logging Module.md",
+    "Python/Dictionary Methods.md",
     "Python/Random Modules.md",
     "Python/List Methods.md",
     "Python/Random Modules.md.tmp.13096.7a0564e5bc7f",
@@ -200,7 +202,6 @@
     "Python/Random Modules.md.tmp.8560.2185123240ae",
     "Python/The Traceback Module.md.tmp.8560.a17899373c3a",
     "testfile2.py",
-    "testfile.py",
     "Welcome.md"
   ]
 }
