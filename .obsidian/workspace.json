@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/String Formatting and Methods.md",
+                "file": "Python/The Pyperclip Module.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "String Formatting and Methods"
+              "title": "The Pyperclip Module"
             }
           }
         ]
@@ -182,28 +182,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ae9ea628906818db",
+  "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Escape Sequences.md",
+    "Python/Dictionary Methods.md",
+    "Python/List Methods.md",
+    "Python/Random Modules.md.tmp.19916.83567358d07a",
+    "Python/The Pyperclip Module.md",
+    "Python/The Pyperclip Module.md.tmp.19916.19505ca82938",
+    "Python/Random Modules.md",
+    "Python/String Formatting and Methods.md",
+    "Python/The Assert Statement.md",
+    "Python/The Logging Module.md",
+    "Python/The ord and chr Functions.md",
     "Python/Random Modules.md.tmp.5248.97630cf46ba9",
     "Python/Escape Sequences.md.tmp.5248.bc86f87321dc",
-    "Python/Escape Sequences.md",
     "Python/Escape Sequences.md.tmp.5248.0620eabca888",
     "Python/Random Modules.md.tmp.5248.80e2c609d4d5",
-    "Python/The ord and chr Functions.md",
     "Python/The ord and chr Functions.md.tmp.5248.d8a7aa6f8748",
-    "Python/The Logging Module.md",
     "Python/Random Modules.md.tmp.5248.928aff29e841",
-    "Python/String Formatting and Methods.md",
     "__pycache__/testfile2.cpython-314.pyc",
     "__pycache__",
-    "Python/The Assert Statement.md",
     "Python/The Enumerate Function.md",
-    "Python/Dictionary Methods.md",
-    "Python/Random Modules.md",
-    "Python/List Methods.md",
-    "Python/Random Modules.md.tmp.13096.7a0564e5bc7f",
-    "Python/List Methods.md.tmp.13096.6624b844e49c",
-    "Python/Random Modules.md.tmp.8560.cb4a773ed2d5",
     "Python/The Traceback Module.md",
     "Welcome.md"
   ]

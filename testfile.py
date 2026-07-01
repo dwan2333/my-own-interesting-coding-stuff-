@@ -1,6 +1,5 @@
-inventory = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
-ivt = inventory['rope'] + 1
-print(ivt)
+text = input(">").split()
+print(text)
 
     
 
