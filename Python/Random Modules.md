@@ -4,7 +4,7 @@ _Research compiled 2026-06-27 — Python standard library (`random` module)_
 
 > First entry in a growing reference on Python's most useful built-in modules. This note covers **`random`** — pseudo-random number generation for floats, integers, sequences, and statistical distributions.
 >
-> **Related notes:** [The Logging Module](<The Logging Module.md>) — recording timestamped messages about what your program does · [The Assert Statement](<The Assert Statement.md>) — sanity-check tripwires for catching bugs early · [List Methods](<List Methods.md>) — the 11 methods of the `list` class · [The Enumerate Function](<The Enumerate Function.md>) — pairing items with their index in a loop.
+> **Related notes:** [The Logging Module](<The Logging Module.md>) — recording timestamped messages about what your program does · [The Assert Statement](<The Assert Statement.md>) — sanity-check tripwires for catching bugs early · [List Methods](<List Methods.md>) — the 11 methods of the `list` class · [The Enumerate Function](<The Enumerate Function.md>) — pairing items with their index in a loop · [Dictionary Methods](<Dictionary Methods.md>) — the 11 methods of the `dict` class.
 
 ---
 
