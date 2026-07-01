@@ -10,9 +10,12 @@ phone_number_match = re.compile(r'''(?:\+?\d[-\.\s])? # optional country code
                                 \d{4} # tailing number
                                 ''', re.VERBOSE)
 
-text = "858-308-2978 , +1 858 308 2978, 858.308.2978"
 
-print(phone_number_match.findall(text))
+phone_number_match = phone_number_match.findall(text)
+
+pyperclip.copy(" ".join(phone_number_match))
+
+
 
 
 
