@@ -1,12 +1,18 @@
 inventory = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
 dragon_loot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
+import logging
+
+logging.basicConfig(level = logging.DEBUG, format = "%(asctime)s - %(levelname)s - %(message)s", force = True)
+
 
 def display_inventory(ivt):
+    logging.debug(f"The inventory {ivt} is being processed")
     print('Inventory:')
     count = 0
     for k,v in ivt.items():
         print(v, k)
         count += v
+        logging.debug(f'{v} items of {k} is being counted and the total count is {count} ')
     print(f"Total number of items : {count}")
 
 
