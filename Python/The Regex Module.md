@@ -134,7 +134,105 @@ print(re.findall(r'(\d\d\d)-(\d\d\d\d)', '555-1234, 999-8888'))
 
 ---
 
-## Branch 4 — Character Classes (`\d`, `\w`, `\s`, …)
+## Branch 4 — Alternation, Non-Capturing Groups & Lookaround
+
+The parentheses from Branch 3 unlock a family of special notations. All of them start with `(?`.
+
+### `|` — alternation ("match one of these")
+
+The pipe means **or**. Combine it with `()` to scope which part it applies to.
+
+```python
+import re
+
+print(re.findall(r'cat|dog|bird', 'a cat, a dog, a bird'))   # ['cat', 'dog', 'bird']
+
+# () scopes the alternation to just the suffix
+print(re.search(r'Bat(man|mobile|copter)', 'Batmobile').group())   # 'Batmobile'
+```
+
+### `(?:...)` — non-capturing group
+
+A normal `(...)` both **groups** *and* **captures** (adds to `.groups()`). When you only need the grouping — e.g. to apply `|` or a quantifier — use `(?:...)` so it doesn't clutter your captured groups.
+
+```python
+import re
+
+# capturing: the area code becomes group 1
+print(re.search(r'(\d{3})-(\d{4})', '555-1234').groups())     # ('555', '1234')
+
+# non-capturing: the (?:...) is grouped but NOT captured
+print(re.search(r'(?:\d{3})-(\d{4})', '555-1234').groups())   # ('1234',)  — only one group
+```
+
+> [!tip] When to use `(?:...)`
+> Reach for a non-capturing group whenever you group *only* to apply `|`, `?`, `*`, or `+` and you don't actually want that text back. It keeps `.groups()` clean and is slightly faster.
+
+### Lookahead — `(?=...)` and `(?!...)`
+
+A **lookahead** checks what comes *next* **without consuming it** (it's not part of the returned match — a "zero-width" assertion).
+
+- `(?=...)` **positive** — succeeds if the pattern *is* ahead.
+- `(?!...)` **negative** — succeeds if the pattern is *not* ahead.
+
+```python
+import re
+
+# positive: digits ONLY when followed by ' dollars' (the words aren't captured)
+print(re.findall(r'\b\d+\b(?= dollars)', '5 dollars, 9 cents, 20 dollars'))  # ['5', '20']
+
+# negative: numbers NOT followed by ' cents'
+print(re.findall(r'\b\d+\b(?! cents)', '5 dollars 9 cents 20 dollars'))      # ['5', '20']
+```
+
+### Lookbehind — `(?<=...)` and `(?<!...)`
+
+A **lookbehind** checks what comes *before* the match, again without consuming it.
+
+- `(?<=...)` **positive** — succeeds if the pattern *is* behind.
+- `(?<!...)` **negative** — succeeds if the pattern is *not* behind.
+
+```python
+import re
+
+# positive: numbers that come right after a '$' (the $ isn't included in the match)
+print(re.findall(r'(?<=\$)\d+', 'costs $5 and 9 and $20'))    # ['5', '20']
+
+# negative: numbers NOT preceded by a '$'
+print(re.findall(r'(?<!\$)\b\d+\b', 'costs $5 and 9 and $20'))  # ['9']
+```
+
+> [!warning] Lookbehind must be fixed-width
+> Python's lookbehind requires a **fixed length** — `(?<=\$)` (1 char) is fine, but `(?<=\$+)` or `(?<=ab|c)` (variable length) raises an error. Lookahead has no such restriction.
+
+### `\1` — backreference (match the same text again)
+
+Inside the pattern, `\1` means *"whatever group 1 captured"* — useful for finding repeats.
+
+```python
+import re
+
+# (\w+) \1  →  a word followed by the SAME word
+print(bool(re.search(r'(\w+) \1', 'the the cat')))    # True  (doubled 'the')
+print(bool(re.search(r'(\w+) \1', 'the big cat')))    # False
+```
+
+### Quick reference
+
+| Notation | Name | Consumes text? | Captures? |
+|---|---|---|---|
+| `a|b` | alternation | yes | — |
+| `(...)` | capturing group | yes | yes |
+| `(?:...)` | non-capturing group | yes | no |
+| `(?=...)` | positive lookahead | no | no |
+| `(?!...)` | negative lookahead | no | no |
+| `(?<=...)` | positive lookbehind (fixed-width) | no | no |
+| `(?<!...)` | negative lookbehind (fixed-width) | no | no |
+| `\1` | backreference to group 1 | yes | — |
+
+---
+
+## Branch 5 — Character Classes (`\d`, `\w`, `\s`, …)
 
 These shorthand classes are the workhorses — they match *kinds* of characters. Each has an **uppercase = NOT** version.
 
@@ -181,7 +279,7 @@ print(re.findall(r'[A-Z][a-z]+', 'Alice met Bob'))        # ['Alice', 'Bob']
 
 ---
 
-## Branch 5 — Repetition (Quantifiers)
+## Branch 6 — Repetition (Quantifiers)
 
 How **many** times the preceding piece must match.
 
@@ -211,7 +309,7 @@ print(re.search(r'colou?r', 'color').group())         # 'color'  (u optional)
 
 ---
 
-## Branch 6 — Anchors and Flags
+## Branch 7 — Anchors and Flags
 
 **Anchors** pin a match to a position (they match a *place*, not a character):
 
@@ -274,6 +372,7 @@ print(re.findall(r'^ERROR', log, re.MULTILINE))   # ['ERROR', 'ERROR'] (start of
 - Workflow: `import re` → write a **raw-string** pattern → `search`/`findall`/`sub` → read the **match object**.
 - **Search methods:** `search` (first), `match` (at start), `fullmatch` (whole string), `findall` (list of all), `finditer` (match objects), `sub` (replace), `split`.
 - **Groups** with `()` — `group(0)` is the whole match, `group(1)`, `group(2)`, … are the parts; name them with `(?P<name>...)`.
+- **Special group notations:** `|` (or), `(?:...)` (group without capturing), `(?=...)` / `(?!...)` (look *ahead*, positive/negative), `(?<=...)` / `(?<!...)` (look *behind*, fixed-width only), `\1` (backreference). Lookarounds are **zero-width** — they test context without consuming characters.
 - **Character classes:** `\d` digit, `\w` word char, `\s` whitespace — uppercase negates. `\b` = word boundary; backslash escapes literals like `\.` `\$`.
 - **Quantifiers:** `?` `*` `+` `{n}` `{n,m}`; greedy by default — add `?` for non-greedy.
 - **Anchors** `^` `$` `.`; **flags** `re.IGNORECASE`, `re.DOTALL`, `re.MULTILINE`. Always check a match isn't `None` before `.group()`.
