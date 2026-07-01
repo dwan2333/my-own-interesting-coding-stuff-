@@ -1,16 +1,12 @@
-import pyperclip 
+print("Please enter the sentence that you want to translate:")
+text = str(input(">").split())
+import logging
 
-def add_bullet_point():
-    text = pyperclip.paste().split('\n')
-
-    for i in range(len(text)):
-        text[i] = "- " + text[i]
-
-    new_text = "\n".join(text)
-    pyperclip.copy(new_text)
-
-add_bullet_point()
-
-"""Okay that is fine
-I am okay """
-
+logging.basicConfig(level = logging.DEBUG, format = '%(asctime)s - %(levelname)s - %(message)s', force = True)
+logging.debug('Test')
+for word in range(len(text)):
+    
+    if not word.isalpha(): 
+        for character in word:
+            if not character.isaplpha():
+                print()
