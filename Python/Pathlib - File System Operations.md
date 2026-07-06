@@ -86,7 +86,41 @@ for txt in folder.rglob('*.txt'):
 ```
 
 > [!tip] `glob` wildcards
-> `*` = any run of characters, `?` = one character, `**` = this folder and all subfolders. `folder.glob('**/*.py')` is the same as `folder.rglob('*.py')`.
+> `*` = any run of characters, `?` = **one** character, `**` = this folder and all subfolders. `folder.glob('**/*.py')` is the same as `folder.rglob('*.py')`.
+
+Given a folder with `a.txt`, `b.txt`, `c.py`, and `sub/deep.txt`, `sub/e.py`:
+
+```python
+from pathlib import Path
+base = Path('.')
+
+print(sorted(p.name for p in base.glob('*.txt')))    # ['a.txt', 'b.txt']
+print(sorted(p.name for p in base.glob('?.py')))     # ['c.py']   (? = one char)
+print(sorted(p.name for p in base.rglob('*.txt')))   # ['a.txt', 'b.txt', 'deep.txt']
+print(sorted(p.name for p in base.glob('**/*.py')))  # ['c.py', 'e.py']  (recursive)
+```
+
+### The standalone `glob` module
+
+Before `pathlib`, Python's separate **`glob` module** did the same wildcard matching but returned **strings** instead of `Path` objects. You'll still see it in lots of code, so it's worth knowing.
+
+| Function | What it does | Returns |
+|---|---|---|
+| `glob.glob(pattern)` | list paths matching the pattern | **list** of strings |
+| `glob.glob(pattern, recursive=True)` | let `**` descend into subfolders | list of strings |
+| `glob.iglob(pattern)` | same, but as a lazy **iterator** | generator |
+| `glob.escape(text)` | escape `*`, `?`, `[` so they match literally | string |
+
+```python
+import glob
+
+print(glob.glob('*.txt'))                        # ['a.txt', 'b.txt']
+print(glob.glob('**/*.txt', recursive=True))     # ['a.txt', 'b.txt', 'sub\\deep.txt']
+print(glob.escape('file[1].txt'))                # 'file[[]1].txt'  (brackets escaped)
+```
+
+> [!tip] `glob` module vs `Path.glob()`
+> They use the **same wildcard syntax**. The difference: `glob.glob()` returns plain **strings** and needs `recursive=True` to make `**` descend; `Path.glob()` returns **`Path` objects** and `**` is always recursive. In new code prefer **`Path.glob()`** / **`.rglob()`** — you get `Path` objects you can immediately `.read_text()`, `.rename()`, etc. Reach for the `glob` module only when you specifically want strings or are matching a bare pattern without a starting `Path`.
 
 ---
 
@@ -123,7 +157,7 @@ Path('output/logs').rmdir()           # remove the (now empty) folder
 
 - **Check first:** `.exists()`, `.is_file()`, `.is_dir()` (`.is_symlink()` added); `.stat().st_size` for the byte size.
 - **Read/write in one call:** `.read_text()` / `.write_text()` for strings, `.read_bytes()` / `.write_bytes()` for binary; `.open('a')` for appending; `.touch()` to make an empty file. `write_text()` **overwrites**.
-- **List folders:** `.iterdir()` (direct children), `.glob(pattern)` (wildcards), `.rglob(pattern)` (recursive).
+- **List folders:** `.iterdir()` (direct children), `.glob(pattern)` (wildcards: `*`, `?`, `**`), `.rglob(pattern)` (recursive). The older standalone **`glob` module** (`glob.glob()`, `recursive=True` for `**`) does the same but returns **strings** — prefer `Path.glob()` in new code.
 - **Create/delete:** `.mkdir(parents=True, exist_ok=True)`, `.rename()` / `.replace()` to move, `.unlink(missing_ok=True)` for files, `.rmdir()` for empty folders.
 - For **recursive deletion**, reach outside pathlib to **`shutil.rmtree()`**.
 - Path *building* and inspection live in the sibling note: [Pathlib - Building and Inspecting Paths](<Pathlib - Building and Inspecting Paths.md>).
