@@ -19,7 +19,12 @@ _Research compiled 2026-06-30 — Python standard library `pathlib`, based on Au
 ```python
 from pathlib import Path
 
+folder = Path('.')
 p = Path('notes.txt')
+
+print(folder.is_dir())      # True  — a directory
+print(p.is_file())          # True  — a regular file (if it exists)
+print(p.is_symlink())       # False — not a symbolic link
 if p.exists() and p.is_file():
     print('size in bytes:', p.stat().st_size)
 ```
@@ -167,6 +172,22 @@ p2 = p.rename('output/final.txt')      # move/rename → returns the new Path
 p2.unlink(missing_ok=True)             # delete the file safely
 Path('output/logs').rmdir()           # remove the (now empty) folder
 ```
+
+**`rename()` vs `replace()`** — both move a file, but they differ when the target already exists:
+
+```python
+from pathlib import Path
+
+a = Path('a.txt'); a.write_text('AAA')
+b = Path('b.txt'); b.write_text('BBB')
+
+a.replace(b)                 # move a → b, OVERWRITING the existing b
+print(b.read_text())         # 'AAA'
+print(a.exists())            # False
+```
+
+- **`replace(target)`** always overwrites `target` if it exists (cross-platform, predictable).
+- **`rename(target)`** may **error or silently overwrite** depending on the OS when `target` exists — use `replace()` when the destination might already be there.
 
 > [!warning] `pathlib` deletes are limited on purpose
 > `.unlink()` only removes a **file**; `.rmdir()` only removes an **empty** folder. To delete a folder that still has contents, use **`shutil.rmtree(path)`** from the `shutil` module — `pathlib` deliberately has no recursive-delete, to avoid accidents.
