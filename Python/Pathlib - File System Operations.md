@@ -59,6 +59,9 @@ with p.open('a', encoding='utf-8') as f:
     f.write('\nline3')
 ```
 
+> [!note] What does `'a'` mean here? See [File Open Modes](<File Open Modes.md>)
+> `Path.open()` takes the exact same mode strings as the built-in `open()` — `'r'` read, `'w'` write (wipes), `'a'` append, `'x'` create-only, plus `'b'`/`'+'`. The dedicated **[File Open Modes](<File Open Modes.md>)** note breaks down every mode and the `'w'` vs `'a'` difference.
+
 **`read_bytes()` / `write_bytes()`** — the binary equivalents, for non-text files (images, audio, `.zip`). They take and return `bytes`, not `str`:
 
 ```python
