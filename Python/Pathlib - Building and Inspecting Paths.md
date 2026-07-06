@@ -40,17 +40,17 @@ print(Path('~/notes').expanduser())        # (added) expands ~ to your home fold
 
 Every `Path` exposes its pieces as attributes. Using `C:\Users\dwan0\report.final.txt`:
 
-| Attribute | Value | Meaning |
-|---|---|---|
-| `.parts` | `('C:\\', 'Users', 'dwan0', 'report.final.txt')` | every component as a tuple |
-| `.name` | `report.final.txt` | the full filename |
-| `.stem` | `report.final` | filename **without** the final extension |
-| `.suffix` | `.txt` | the final extension |
-| `.suffixes` *(added)* | `['.final', '.txt']` | **all** extensions as a list |
-| `.parent` | `C:\Users\dwan0` | the containing folder |
-| `.parents[0]`, `.parents[1]` | `C:\Users\dwan0`, `C:\Users` | ancestor folders by index |
-| `.anchor` | `C:\` | the root |
-| `.drive` | `C:` | the drive (Windows) |
+| Attribute                    | Value                                            | Meaning                                  |
+| ---------------------------- | ------------------------------------------------ | ---------------------------------------- |
+| `.parts`                     | `('C:\\', 'Users', 'dwan0', 'report.final.txt')` | every component as a tuple               |
+| `.name`                      | `report.final.txt`                               | the full filename                        |
+| `.stem`                      | `report.final`                                   | filename **without** the final extension |
+| `.suffix`                    | `.txt`                                           | the final extension                      |
+| `.suffixes` *(added)*        | `['.final', '.txt']`                             | **all** extensions as a list             |
+| `.parent`                    | `C:\Users\dwan0`                                 | the containing folder                    |
+| `.parents[0]`, `.parents[1]` | `C:\Users\dwan0`, `C:\Users`                     | ancestor folders by index                |
+| `.anchor`                    | `C:\`                                            | the root                                 |
+| `.drive`                     | `C:`                                             | the drive (Windows)                      |
 
 ```python
 from pathlib import Path
@@ -62,6 +62,7 @@ print(p.suffix)      # .txt
 print(p.suffixes)    # ['.final', '.txt']   (added)
 print(p.parent)      # C:\Users\dwan0
 print(p.parts)       # ('C:\\', 'Users', 'dwan0', 'report.final.txt')
+print(p.anchor)      # C:\\
 ```
 
 ---
