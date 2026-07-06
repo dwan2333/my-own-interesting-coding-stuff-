@@ -185,6 +185,7 @@
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
     "Python/Pathlib - Building and Inspecting Paths.md",
+    "Python/Pathlib - File System Operations.md",
     "Python/List Methods.md",
     "Python/Dictionary Methods.md",
     "Python/Escape Sequences.md",
@@ -196,7 +197,6 @@
     "Python/The Assert Statement.md",
     "Python/String Formatting and Methods.md",
     "Python/Random Modules.md",
-    "Python/Pathlib - File System Operations.md",
     "Python/Pathlib - File System Operations.md.tmp.20136.c8d62c1fd9b9",
     "Python/Random Modules.md.tmp.11752.cbd7a0847d51",
     "Python/The Regex Module.md.tmp.12512.f038c8c38bb9",
