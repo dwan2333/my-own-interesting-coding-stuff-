@@ -111,6 +111,33 @@ print(random.choices(["win", "lose"], weights=[10, 1], k=3))
 print(random.sample(range(1, 50), k=6))            # 6 distinct lottery numbers
 ```
 
+#### `weights` vs `cum_weights` in `choices()`
+
+`weights` gives each item a **relative** likelihood; `cum_weights` gives **running totals** of those weights. They're two ways to express the same distribution — `weights=[8, 2]` is identical to `cum_weights=[8, 10]`. (Internally `choices` converts `weights` to `cum_weights`, so passing `cum_weights` directly is marginally faster for huge repeated calls.) Pass **one or the other**, never both.
+
+```python
+import random, collections
+
+random.seed(42)
+picks = random.choices(['red', 'blue'], weights=[8, 2], k=1000)
+print(collections.Counter(picks))     # Counter({'red': 788, 'blue': 212}) — ~80/20
+
+random.seed(42)
+picks2 = random.choices(['red', 'blue'], cum_weights=[8, 10], k=1000)
+print(collections.Counter(picks2))    # identical result
+```
+
+#### `counts` in `sample()` *(added)*
+
+To sample **without replacement** from a pool that has duplicates, use `counts` instead of building a big list. `sample(['x','y'], counts=[2,1], k=3)` treats the pool as `['x','x','y']`.
+
+```python
+import random
+
+random.seed(1)
+print(random.sample(['x', 'y'], counts=[2, 1], k=3))   # draws from x, x, y
+```
+
 ### Shuffle in place — `random.shuffle()`
 
 Reorders a **mutable** sequence (like a list) directly; returns `None`.

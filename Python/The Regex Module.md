@@ -92,6 +92,30 @@ for m in re.finditer(r'\d+', 'a1 bb22 ccc333'):
 > [!tip] `findall` vs `finditer`
 > `findall` gives you a quick **list of strings**. `finditer` gives you match **objects** — reach for it when you also need each match's **position** or groups.
 
+### Limiting `sub` and `split` — the `count` / `maxsplit` arguments
+
+By default `sub` replaces **every** match and `split` splits at **every** match. A number limits how many:
+
+```python
+import re
+
+# sub: count = how many replacements to make (0 or omitted = all)
+print(re.sub(r'\d', '#', 'a1b2c3'))            # 'a#b#c#'   (all)
+print(re.sub(r'\d', '#', 'a1b2c3', count=2))   # 'a#b#c3'   (first 2 only)
+
+# split: maxsplit = how many splits to make
+print(re.split(r',', 'a,b,c,d'))               # ['a', 'b', 'c', 'd']
+print(re.split(r',', 'a,b,c,d', maxsplit=2))   # ['a', 'b', 'c,d']  (2 splits)
+```
+
+**`subn()`** is like `sub()` but returns a **tuple** of `(new_string, number_of_replacements)` — handy when you need to know how many changes happened:
+
+```python
+import re
+
+print(re.subn(r'\d', '#', 'a1b2c3'))           # ('a#b#c#', 3)
+```
+
 ---
 
 ## Branch 3 — Groups With Parentheses
