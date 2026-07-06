@@ -63,6 +63,7 @@ print(p.suffixes)    # ['.final', '.txt']   (added)
 print(p.parent)      # C:\Users\dwan0
 print(p.parts)       # ('C:\\', 'Users', 'dwan0', 'report.final.txt')
 print(p.anchor)      # C:\\
+print(p.drive)       # C:
 ```
 
 ---
@@ -93,13 +94,13 @@ print(p.with_stem('draft'))       # C:\Users\dwan0\draft.txt
 
 ## Branch 4 — Absolute, Relative, and Resolved Paths
 
-| Method | What it does |
-|---|---|
-| `.is_absolute()` | `True` if the path starts from a root/drive |
-| `.absolute()` | turn a relative path into an absolute one (does **not** resolve `..`) |
-| `.resolve()` *(added)* | the **canonical** absolute path — resolves `..` and symlinks |
-| `.relative_to(other)` *(added)* | the part of this path **below** `other` |
-| `.match(pattern)` *(added)* | test the path against a glob pattern → `True/False` |
+| Method                          | What it does                                                          |
+| ------------------------------- | --------------------------------------------------------------------- |
+| `.is_absolute()`                | `True` if the path starts from a root/drive                           |
+| `.absolute()`                   | turn a relative path into an absolute one (does **not** resolve `..`) |
+| `.resolve()` *(added)*          | the **canonical** absolute path — resolves `..` and symlinks          |
+| `.relative_to(other)` *(added)* | the part of this path **below** `other`                               |
+| `.match(pattern)` *(added)*     | test the path against a glob pattern → `True/False`                   |
 
 ```python
 from pathlib import Path
