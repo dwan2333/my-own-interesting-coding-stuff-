@@ -28,9 +28,18 @@ quiz_folder = Path("D:/ Quiz folder")
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
 
-file_path = quiz_folder / 'testfile.txt'
-with file_path.open('w', encoding='UTF-8') as f:
-    f.write('something new')
+
+while (number_of_quiz := int(input("Please select the number of quizes that you want to create: "))) < 0:
+    print('Please select a positive integer')\
+
+
+for i in range(number_of_quiz):
+    folder_path = Path(f'quiz_folder/quiz{i+1}.txt')
+    with folder_path.open(f"quiz{i+1}.txt", 'w', encoding = 'UTF-8') as quiz: 
+        quiz.write('hello')
+
+    
+
 
 
 
