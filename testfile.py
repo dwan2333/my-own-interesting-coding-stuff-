@@ -30,13 +30,17 @@ if quiz_folder.exists() != True:
 
 
 while (number_of_quiz := int(input("Please select the number of quizes that you want to create: "))) < 0:
-    print('Please select a positive integer')\
+    print('Please select a positive integer')
 
 
 for i in range(number_of_quiz):
-    folder_path = Path(f'quiz_folder/quiz{i+1}.txt')
-    with folder_path.open(f"quiz{i+1}.txt", 'w', encoding = 'UTF-8') as quiz: 
-        quiz.write('hello')
+    folder_path = quiz_folder / f'Quiz {i+1}'
+    with folder_path.open('w', encoding = 'UTF-8') as quiz: 
+        quiz.write('Name: \n\n')
+        quiz.write('Date: \n\n')
+        quiz.write('Period: \n\n')
+        quiz.write(f'State Captial Quiz (Form{i+1})\n\n'.center(50))
+
 
     
 
