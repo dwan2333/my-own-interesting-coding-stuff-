@@ -1,3 +1,4 @@
+import random
 capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Phoenix', 'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado':
 'Denver', 'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida':
@@ -16,16 +17,22 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 
 'West Virginia':'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-
+# convert the dict into list would be eazier to apply to iterables
 def dict_shuffle(dict):
     output = []
     for value, key in dict.items():
         (inner_layer := [value,key])
         output.append(inner_layer)
-
     return output
 
-print(dict_shuffle(capitals))
+x = dict_shuffle(capitals)
+
+for n in range(len(x)):
+    for s in x[n]:
+        print(s)
+
+
+
 
 
 
