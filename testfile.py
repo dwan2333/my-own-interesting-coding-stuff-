@@ -1,4 +1,4 @@
-import random, logging
+import random
 from pathlib import Path
 
 capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
@@ -19,16 +19,15 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 
 'West Virginia':'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-        
-logging.basicConfig(level = logging.DEBUG, format = "%(acstime)s - %(levelname)s - %(message)s")  
+
 
 quiz_folder = Path("D:/ Quiz folder")
 
-
+# create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
 
-
+# ask user how many quiz they want to print out 
 while (number_of_quiz := int(input("Please select the number of quizes that you want to create: "))) < 0:
     print('Please select a positive integer')
 
@@ -36,11 +35,16 @@ while (number_of_quiz := int(input("Please select the number of quizes that you 
 for i in range(number_of_quiz):
     folder_path = quiz_folder / f'Quiz {i+1}'
     with folder_path.open('w', encoding = 'UTF-8') as quiz: 
+
+        # writing the title of the quiz
         quiz.write('Name: \n\n')
         quiz.write('Date: \n\n')
         quiz.write('Period: \n\n')
-        quiz.write(f'State Captial Quiz (Form{i+1})\n\n'.center(50))
+        quiz.write(f'State Capital Quiz (Form{i+1})\n\n'.center(80))
 
+        states = [states for states, capitals in capitals.items()]
+        random.shuffle(states)
+        print(states)
 
     
 
