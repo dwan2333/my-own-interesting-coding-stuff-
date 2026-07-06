@@ -130,6 +130,44 @@ logging.debug('This line goes into myProgramLog.txt, not the screen')
 
 This is ideal for programs that run unattended — you can read the log file afterward to see exactly what happened.
 
+### `filemode` — append vs overwrite the log file
+
+By default the log file opens in **append** mode (`'a'`), so each run adds to the end and history builds up. Pass `filemode='w'` to **wipe** the file at the start of every run instead (same `'w'` vs `'a'` meaning as the built-in `open()` — see [File Open Modes](<File Open Modes.md>)).
+
+```python
+import logging
+logging.basicConfig(filename='run.log',
+                    filemode='w',        # 'w' = fresh file each run; 'a' (default) = keep appending
+                    level=logging.DEBUG,
+                    format=' %(asctime)s - %(levelname)s - %(message)s',
+                    force=True)
+
+logging.info('Only this run of messages will be in run.log')
+```
+
+### Useful extra format fields
+
+The `format=` string can include more than time/level/message:
+
+| Field | Shows |
+|---|---|
+| `%(name)s` | the logger's name |
+| `%(lineno)d` | the line number the log call is on |
+| `%(funcName)s` | the function the log call is in |
+| `%(filename)s` | the source filename |
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format=' %(levelname)s [%(funcName)s:%(lineno)d] %(message)s',
+                    force=True)
+
+def do_work():
+    logging.debug('starting')      #  DEBUG [do_work:XX] starting
+
+do_work()
+```
+
 ---
 
 ## Branch 5 — Disabling Logging

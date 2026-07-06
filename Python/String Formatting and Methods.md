@@ -210,6 +210,13 @@ print('user@example.com'.partition('@'))  # ('user', '@', 'example.com')
 print('-'.join(['a', 'b', 'c']))     # 'a-b-c'
 ```
 
+**`maxsplit` — limit how many splits happen** *(added)*. A second argument caps the number of splits; `rsplit` does the same but works from the **right**:
+
+```python
+print('a,b,c,d'.split(',', 2))       # ['a', 'b', 'c,d']   — only 2 splits
+print('a,b,c,d'.rsplit(',', 1))      # ['a,b,c', 'd']      — 1 split, from the right
+```
+
 > [!note] `join()` reads backwards
 > You call `join()` on the **separator**, passing the list: `'-'.join(items)`, not `items.join('-')`.
 
@@ -234,6 +241,16 @@ print('42'.zfill(5))         # '00042'
 print('  hello  '.strip())   # 'hello'
 print('xxhixx'.strip('x'))   # 'hi'
 ```
+
+> [!warning] `strip('chars')` removes a **set of characters**, not a substring
+> The argument is treated as a *bag of individual characters* to strip from each end — **not** a prefix/suffix to match. So it can eat more than you expect:
+> ```python
+> print('commit.com'.strip('.com'))   # 'it'  — leading 'com' AND trailing '.com' stripped!
+> ```
+> To remove an exact prefix/suffix, use **`removeprefix()`** / **`removesuffix()`** (Python 3.9+):
+> ```python
+> print('commit.com'.removesuffix('.com'))   # 'commit'  — only the exact suffix
+> ```
 
 `rjust`/`ljust`/`center` are handy for lining up columns in a table printed to the screen.
 
