@@ -54,6 +54,26 @@ with p.open('a', encoding='utf-8') as f:
     f.write('\nline3')
 ```
 
+**`read_bytes()` / `write_bytes()`** — the binary equivalents, for non-text files (images, audio, `.zip`). They take and return `bytes`, not `str`:
+
+```python
+from pathlib import Path
+
+b = Path('data.bin')
+b.write_bytes(b'\x00\x01\x02ABC')     # write raw bytes
+print(b.read_bytes())                 # b'\x00\x01\x02ABC'
+```
+
+**`touch()`** — create an empty file (or, if it already exists, just update its modified-time):
+
+```python
+from pathlib import Path
+
+t = Path('empty.txt')
+t.touch()
+print(t.exists(), t.stat().st_size)   # True 0   (exists, zero bytes)
+```
+
 > [!warning] `write_text()` overwrites without warning
 > It replaces the entire file — there's no "append" mode. To add to a file, use `.open('a')`. To specify a UTF-8 encoding (recommended on Windows, given the cp1252 default), pass `encoding='utf-8'`.
 
