@@ -22,7 +22,17 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
         
 logging.basicConfig(level = logging.DEBUG, format = "%(acstime)s - %(levelname)s - %(message)s")  
 
-print(Path.cwd())
+quiz_folder = Path("D:/ Quiz folder")
+
+
+if quiz_folder.exists() != True:
+    quiz_folder.mkdir()
+
+with open('a', encoding = 'UTF-8') as quiz:
+    quiz.write("Here is something new")
+
+
+
 
 
 
