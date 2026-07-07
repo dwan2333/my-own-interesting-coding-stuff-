@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Conda/Conda Environment Basics.md",
+                "file": "Python/Dictionary Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Conda Environment Basics"
+              "title": "Dictionary Methods"
             }
           }
         ],
@@ -199,9 +199,10 @@
   },
   "active": "619a1df45dc566c7",
   "lastOpenFiles": [
+    "Python/Escape Sequences.md",
+    "Conda/Conda Environment Basics.md",
     "Conda/Conda vs Pip.md",
     "Python/Random Modules.md",
-    "Conda/Conda Environment Basics.md",
     "Conda",
     "Python/The ord and chr Functions.md",
     "Python/The Pyperclip Module.md",
@@ -214,7 +215,6 @@
     "Python/The Logging Module.md.tmp.22932.44f3d2d83677",
     "quizfolder",
     "Python/Dictionary Methods.md",
-    "Python/Escape Sequences.md",
     "Python/The Logging Module.md",
     "Python/The Enumerate Function.md",
     "Python/The Assert Statement.md",
