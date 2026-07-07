@@ -27,10 +27,10 @@ The `(base)` in parentheses is **conda telling you which environment is currentl
 
 A **channel** is a *source* conda downloads packages from — like an app store. `conda config` edits conda's settings file (`.condarc`).
 
-| Command | What it does |
-|---|---|
-| `conda config --add channels conda-forge` | Adds **conda-forge** to your list of package sources, at the **top** (highest priority) |
-| `conda config --set channel_priority strict` | Turns on **strict** channel priority |
+| Command                                      | What it does                                                                            |
+| -------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `conda config --add channels conda-forge`    | Adds **conda-forge** to your list of package sources, at the **top** (highest priority) |
+| `conda config --set channel_priority strict` | Turns on **strict** channel priority                                                    |
 
 - **`conda-forge`** is a large, community-maintained channel with more packages and fresher versions than conda's default channel. Adding it means "look here first."
 - **`channel_priority strict`** tells conda: *always* prefer the higher-priority channel (conda-forge), even if a lower channel has a newer version. This keeps all your packages coming from **one consistent source**, which avoids the mix-and-match conflicts that cause broken environments. It also makes installs resolve faster.
@@ -87,14 +87,14 @@ To leave and return to `base`:
 
 Once you understand the four above, these round out day-to-day use:
 
-| Command | What it does |
-|---|---|
-| `conda env list` | list all your environments (a `*` marks the active one) |
-| `conda install <pkg>` | install a package into the active environment |
-| `conda install numpy pandas jupyter` | install several at once |
-| `conda list` | show every package installed in the active environment |
-| `conda remove -n <name> --all` | delete an entire environment |
-| `conda deactivate` | leave the current environment |
+| Command                              | What it does                                            |
+| ------------------------------------ | ------------------------------------------------------- |
+| `conda env list`                     | list all your environments (a `*` marks the active one) |
+| `conda install <pkg>`                | install a package into the active environment           |
+| `conda install numpy pandas jupyter` | install several at once                                 |
+| `conda list`                         | show every package installed in the active environment  |
+| `conda remove -n <name> --all`       | delete an entire environment                            |
+| `conda deactivate`                   | leave the current environment                           |
 
 ---
 
@@ -105,6 +105,12 @@ Once you understand the four above, these round out day-to-day use:
 - `conda create -y -n NAME python=X.Y` builds a new isolated environment: `-y` skips prompts, `-n` names it, `python=X.Y` pins the version.
 - `conda activate NAME` switches into it (prompt changes); `conda deactivate` returns to `base`.
 - Everyday helpers: `conda env list`, `conda install`, `conda list`, `conda remove -n NAME --all`.
+
+---
+
+## Related
+
+- **[Conda vs Pip](<Conda vs Pip.md>)** — how `conda install` differs from `pip install`, and how to safely use both.
 
 ---
 
