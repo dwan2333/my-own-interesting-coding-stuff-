@@ -1,7 +1,7 @@
 import random
 from pathlib import Path
 
-capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
+States_and_Captials = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Phoenix', 'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado':
 'Denver', 'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida':
 'Tallahassee', 'Georgia': 'Atlanta', 'Hawaii': 'Honolulu', 'Idaho': 'Boise',
@@ -19,7 +19,7 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 
 'West Virginia':'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-
+States = [keys for keys, values in States_and_Captials.items()]
 
 quiz_folder = Path("D:/ Quiz folder")
 
@@ -27,12 +27,18 @@ quiz_folder = Path("D:/ Quiz folder")
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
 
+choice = ['A', 'B', 'C', 'D']
+
 # ask user how many quiz they want to print out 
 while (number_of_quiz := int(input("Please select the number of quizes that you want to create: "))) < 0:
     print('Please select a positive integer')
 
 
 for i in range(number_of_quiz):
+    
+    # reset capitals for each new quiz created 
+    Capitals = [values for keys, values in States_and_Captials.items()]
+
     folder_path = quiz_folder / f'Quiz {i+1}'
     with folder_path.open('w', encoding = 'UTF-8') as quiz: 
 
@@ -42,9 +48,20 @@ for i in range(number_of_quiz):
         quiz.write('Period: \n\n')
         quiz.write(f'State Capital Quiz (Form{i+1})\n\n'.center(80))
 
-        states = [states for states, capitals in capitals.items()]
-        random.shuffle(states)
-        print(states)
+        random.shuffle(States)
+        # writing the each specific quiz
+        for n in range(len(States)):
+            quiz.write(f"{n+1}. What is the capital of {States[n]} ?\n")
+            for x in range(4):
+                correct_answer = States_and_Captials.get(States[n])
+                print(correct_answer)
+                Capitals.remove(correct_answer)
+                mutiple_choice = random.sample(Capitals, k = 3)
+                print(mutiple_choice)
+                
+
+                 
+        
 
     
 

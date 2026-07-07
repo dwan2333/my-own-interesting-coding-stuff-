@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Pathlib - Building and Inspecting Paths.md",
+                "file": "Python/Dictionary Methods.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pathlib - Building and Inspecting Paths"
+              "title": "Dictionary Methods"
             }
           }
         ],
@@ -199,11 +199,11 @@
   },
   "active": "619a1df45dc566c7",
   "lastOpenFiles": [
-    "Python/Pathlib - File System Operations.md",
+    "Python/Escape Sequences.md",
     "Python/Pathlib - Building and Inspecting Paths.md",
+    "Python/Pathlib - File System Operations.md",
     "Python/File Open Modes.md",
     "Python/Dictionary Methods.md",
-    "Python/Escape Sequences.md",
     "Conda/Conda Environment Basics.md",
     "Conda/Conda vs Pip.md",
     "Python/Random Modules.md",
