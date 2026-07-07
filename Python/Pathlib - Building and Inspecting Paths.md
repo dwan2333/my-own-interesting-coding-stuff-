@@ -44,7 +44,7 @@ Every `Path` exposes its pieces as attributes. Using `C:\Users\dwan0\report.fina
 | ---------------------------- | ------------------------------------------------ | ---------------------------------------- |
 | `.parts`                     | `('C:\\', 'Users', 'dwan0', 'report.final.txt')` | every component as a tuple               |
 | `.name`                      | `report.final.txt`                               | the full filename                        |
-| `.stem`                      | `report.final`                                   | filename **without** the final extension |
+| `.stem`s                     | `report.final`                                   | filename **without** the final extension |
 | `.suffix`                    | `.txt`                                           | the final extension                      |
 | `.suffixes` *(added)*        | `['.final', '.txt']`                             | **all** extensions as a list             |
 | `.parent`                    | `C:\Users\dwan0`                                 | the containing folder                    |
