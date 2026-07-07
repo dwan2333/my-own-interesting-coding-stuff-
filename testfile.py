@@ -36,11 +36,12 @@ while (number_of_quiz := int(input("Please select the number of quizes that you 
 
 
 for i in range(number_of_quiz):
-    
-    # reset capitals for each new quiz created 
-    Capitals = [values for keys, values in States_and_Captials.items()]
 
     folder_path = quiz_folder / f'Quiz {i+1}'
+
+    Capitals = [values for keys, values in States_and_Captials.items()]
+    print(Capitals)
+
     with folder_path.open('w', encoding = 'UTF-8') as quiz: 
 
         # writing the title of the quiz
@@ -50,7 +51,21 @@ for i in range(number_of_quiz):
         quiz.write(f'State Capital Quiz (Form{i+1})'.center(80)+ '\n\n')
 
         for s in range(len(States)):
+
             quiz.write(f'{s+1}. What is the capital of {States[s]} ? \n')
+
+            # creating the mutiple choice
+            correct_answer = States_and_Captials.get(States[s])
+            Capitals.remove(correct_answer)
+            multiple_choice = random.sample(Capitals, k = 3)
+            multiple_choice.append(correct_answer)
+            random.shuffle(multiple_choice)
+
+            for x in range(4):
+                quiz.write(f'    {choice[x]}. {multiple_choice[x]}\n')
+
+            quiz.write("\n")
+                
 
         
                 
