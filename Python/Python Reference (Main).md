@@ -1,0 +1,51 @@
+# Python Reference
+
+_A growing, example-driven reference on Python — every method and function has a runnable, verified example (tested against `E:\Python`). Built alongside Automate the Boring Stuff (3e) and Python for Data Analysis._
+
+> This is the **index**. Notes are grouped into folders by theme. Each note runs directly in the Obsidian Execute Code plugin.
+
+---
+
+## Data Structures
+
+- **[List Methods](<Data Structures/List Methods.md>)** — all 11 `list` methods (`append`, `extend`, `pop`, `sort`, …).
+- **[Dictionary Methods](<Data Structures/Dictionary Methods.md>)** — all 11 `dict` methods (`get`, `setdefault`, `update`, `pop`, …).
+- **[The Enumerate Function](<Data Structures/The Enumerate Function.md>)** — pairing items with their index in a loop; what's iterable.
+
+---
+
+## Strings and Text
+
+- **[String Formatting and Methods](<Strings and Text/String Formatting and Methods.md>)** — f-strings, `%s`, `.format()`, and the `str` methods.
+- **[Escape Sequences](<Strings and Text/Escape Sequences.md>)** — `\n`, `\t`, quotes, raw strings, Unicode escapes.
+- **[The ord and chr Functions](<Strings and Text/The ord and chr Functions.md>)** — characters ↔ Unicode code points.
+- **[The Regex Module](<Strings and Text/The Regex Module.md>)** — `re`: search methods, groups, `\d`/`\w`/`\s`, lookaround, flags.
+
+---
+
+## Files and Paths
+
+- **[Pathlib - Building and Inspecting Paths](<Files and Paths/Pathlib - Building and Inspecting Paths.md>)** — constructing paths and reading their parts.
+- **[Pathlib - File System Operations](<Files and Paths/Pathlib - File System Operations.md>)** — reading, writing, listing, creating, deleting files.
+- **[File Open Modes](<Files and Paths/File Open Modes.md>)** — `open()` modes: `r`/`w`/`a`/`x`/`b`/`+` and `'w'` vs `'a'`.
+
+---
+
+## Debugging
+
+- **[The Assert Statement](<Debugging/The Assert Statement.md>)** — sanity-check tripwires for catching bugs early.
+- **[The Logging Module](<Debugging/The Logging Module.md>)** — recording timestamped messages about what your program does.
+
+---
+
+## Modules and Libraries
+
+- **[Random Modules](<Modules and Libraries/Random Modules.md>)** — the `random` module: floats, ints, sequences, distributions.
+- **[The Pyperclip Module](<Modules and Libraries/The Pyperclip Module.md>)** — reading and writing the system clipboard.
+- **[The Yfinance Library](<Modules and Libraries/The Yfinance Library.md>)** — downloading Yahoo Finance market data into pandas.
+
+---
+
+## Related folders
+
+- **Conda** — environment and package management (`Conda Environment Basics`, `Conda vs Pip`).

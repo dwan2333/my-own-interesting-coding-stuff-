@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python string escape sequences, based on Automate the Boring Stuff Ch. 8_
 
-> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<Random Modules.md>). An **escape sequence** is a backslash `\` followed by a character — it lets you put characters into a string that would otherwise be hard or impossible to type directly (quotes, tabs, newlines).
+> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). An **escape sequence** is a backslash `\` followed by a character — it lets you put characters into a string that would otherwise be hard or impossible to type directly (quotes, tabs, newlines).
 
 ---
 
@@ -57,14 +57,14 @@ You can drop any character into a string by its Unicode number (see [The ord() a
 | Escape | Meaning | Example |
 |---|---|---|
 | `\xHH` | character from 2 hex digits | `'\x41'` → `'A'` |
-| `\uHHHH` | character from 4 hex digits | `'é'` → `'é'` |
+| `\uHHHH` | character from 4 hex digits | `'\u00e9'` → `é` |
 | `\U00HHHHHH` | character from 8 hex digits | `'\U0001F600'` → 😀 |
 | `\N{NAME}` | character by its Unicode name | `'\N{BULLET}'` → `•` |
 
 ```python
 print('\x41\x42\x43')            # ABC   (pure ASCII — always safe)
 print('caf\xe9')                 # café  (é is in the Windows cp1252 set)
-print('café')               # café  (\uHHHH — 4 hex digits give é)
+print('caf\u00e9')               # café  (\uHHHH — 4 hex digits give é)
 ```
 
 > [!warning] Windows console encoding (cp1252) — read before printing π, •, or emoji

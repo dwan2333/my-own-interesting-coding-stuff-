@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python standard library `re`, based on Automate the Boring Stuff Ch. 12_
 
-> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<Random Modules.md>). A **regular expression** (regex) is a pattern for matching text. The `re` module compiles these patterns and searches, extracts, and replaces text with them — far more powerful than `str.find()` or `in`.
+> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). A **regular expression** (regex) is a pattern for matching text. The `re` module compiles these patterns and searches, extracts, and replaces text with them — far more powerful than `str.find()` or `in`.
 
 ---
 
@@ -272,6 +272,11 @@ import re
 print(re.findall(r'\d+', 'Order 12 costs $34'))      # ['12', '34']
 print(re.findall(r'\w+', 'hi_there, world!'))         # ['hi_there', 'world']
 print(re.split(r'\s+', 'split   these\twords'))       # ['split', 'these', 'words']
+
+# the uppercase negations — NOT digit / NOT word / NOT space
+print(re.findall(r'\D', 'a1 b2'))                     # ['a', ' ', 'b']  (non-digits)
+print(re.findall(r'\W', 'a_b! c?'))                   # ['!', ' ', '?']  (non-word chars)
+print(re.findall(r'\S+', 'hi  there'))                # ['hi', 'there']  (non-space runs)
 ```
 
 ### Related escape-based tokens
@@ -287,6 +292,14 @@ import re
 
 print(re.findall(r'\bcat\b', 'the cat scattered'))   # ['cat']  (not 'cat' in 'scattered')
 print(re.findall(r'\$\d+', 'costs $5 and $40'))       # ['$5', '$40']  (escaped $)
+
+# escaping other special characters to match them literally
+print(re.findall(r'\d+\.\d+', 'v1.5 and 2.34'))       # ['1.5', '2.34']  (\. = literal dot)
+print(re.findall(r'\(\d+\)', 'call (123) or (45)'))   # ['(123)', '(45)']  (\( = literal paren)
+
+# \n and \t inside a pattern match an actual newline / tab in the text
+print(re.findall(r'end\nstart', 'end\nstart'))        # ['end\nstart']  (matches across the newline)
+print(bool(re.search(r'a\tb', 'a\tb')))               # True  (\t matches a tab)
 ```
 
 ### Custom classes with `[ ]`
@@ -322,6 +335,8 @@ import re
 print(re.findall(r'\d{3}-\d{4}', 'call 555-1234'))    # ['555-1234']
 print(re.findall(r'go*d', 'gd god good goood'))       # ['gd','god','good','goood']
 print(re.search(r'colou?r', 'color').group())         # 'color'  (u optional)
+print(re.findall(r'\d{2,3}', '1 22 333 4444'))        # ['22', '333', '444']  ({n,m}: 2 to 3)
+print(re.findall(r'\d{2,}', '1 22 333'))              # ['22', '333']         ({n,}: 2 or more)
 ```
 
 > [!warning] Greedy vs non-greedy

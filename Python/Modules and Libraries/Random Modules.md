@@ -2,9 +2,7 @@
 
 _Research compiled 2026-06-27 — Python standard library (`random` module)_
 
-> First entry in a growing reference on Python's most useful built-in modules. This note covers **`random`** — pseudo-random number generation for floats, integers, sequences, and statistical distributions.
->
-> **Related notes:** [The Logging Module](<The Logging Module.md>) — recording timestamped messages about what your program does · [The Assert Statement](<The Assert Statement.md>) — sanity-check tripwires for catching bugs early · [List Methods](<List Methods.md>) — the 11 methods of the `list` class · [The Enumerate Function](<The Enumerate Function.md>) — pairing items with their index in a loop · [Dictionary Methods](<Dictionary Methods.md>) — the 11 methods of the `dict` class · [String Formatting and Methods](<String Formatting and Methods.md>) — f-strings, `%s`, `.format()`, and the `str` methods · [The ord() and chr() Functions](<The ord and chr Functions.md>) — characters ↔ Unicode code points · [Escape Sequences](<Escape Sequences.md>) — `\n`, `\t`, quotes, raw strings, and Unicode escapes · [The Pyperclip Module](<The Pyperclip Module.md>) — reading and writing the system clipboard · [The Regex Module](<The Regex Module.md>) — pattern matching with `re`: groups, search methods, `\d`/`\w`/`\s` · [Pathlib - Building and Inspecting Paths](<Pathlib - Building and Inspecting Paths.md>) — constructing paths and their parts · [Pathlib - File System Operations](<Pathlib - File System Operations.md>) — reading, writing, listing, and deleting files · [File Open Modes](<File Open Modes.md>) — `open()` modes: `r`/`w`/`a`/`x`/`b`/`+` and `'w'` vs `'a'` · [The Yfinance Library](<The Yfinance Library.md>) — downloading Yahoo Finance market data into pandas.
+> Part of the [Python Reference](<../Python Reference (Main).md>) — the index of all Python notes. This note covers the **`random`** module — pseudo-random number generation for floats, integers, sequences, and statistical distributions.
 
 ---
 
@@ -171,6 +169,7 @@ import random
 
 print(random.gauss(0, 1))         # standard normal: mean 0, std-dev 1
 print(random.gauss(170, 10))      # heights around 170 cm
+print(random.normalvariate(0, 1)) # normal too — thread-safe variant of gauss
 print(random.triangular(1, 10, 3))  # between 1 and 10, peaking near 3
 print(random.expovariate(1/5))    # wait times averaging 5 units
 ```

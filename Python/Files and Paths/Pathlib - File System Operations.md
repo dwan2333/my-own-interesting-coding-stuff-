@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python standard library `pathlib`, based on Automate the Boring Stuff Ch. 10_
 
-> Companion to [Pathlib - Building and Inspecting Paths](<Pathlib - Building and Inspecting Paths.md>) and [Random Modules](<Random Modules.md>). Where the sibling note builds and dissects paths (pure string math), **this note actually touches the disk** — checking, reading, writing, listing, creating, and deleting real files. Methods marked **added** go beyond what Chapter 10 shows.
+> Companion to [Pathlib - Building and Inspecting Paths](<Pathlib - Building and Inspecting Paths.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). Where the sibling note builds and dissects paths (pure string math), **this note actually touches the disk** — checking, reading, writing, listing, creating, and deleting real files. Methods marked **added** go beyond what Chapter 10 shows.
 
 ---
 
@@ -144,6 +144,7 @@ import glob
 
 print(glob.glob('*.txt'))                        # ['a.txt', 'b.txt']
 print(glob.glob('**/*.txt', recursive=True))     # ['a.txt', 'b.txt', 'sub\\deep.txt']
+print(list(glob.iglob('*.txt')))                 # ['a.txt', 'b.txt']  (iglob = lazy iterator)
 print(glob.escape('file[1].txt'))                # 'file[[]1].txt'  (brackets escaped)
 ```
 

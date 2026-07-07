@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python's built-in `open()` and file modes, based on Automate the Boring Stuff Ch. 10_
 
-> Companion to [Pathlib - File System Operations](<Pathlib - File System Operations.md>) and [Random Modules](<Random Modules.md>). When you open a file with `open(path, mode)` (or `Path.open(mode)`), the **mode string** decides three things: whether you're **reading or writing**, whether existing content is **kept or wiped**, and whether you're working in **text or bytes**. Getting the mode wrong is how people accidentally erase files — so this note covers every mode in detail.
+> Companion to [Pathlib - File System Operations](<Pathlib - File System Operations.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). When you open a file with `open(path, mode)` (or `Path.open(mode)`), the **mode string** decides three things: whether you're **reading or writing**, whether existing content is **kept or wiped**, and whether you're working in **text or bytes**. Getting the mode wrong is how people accidentally erase files — so this note covers every mode in detail.
 
 ---
 
@@ -126,7 +126,7 @@ with open('test.txt', encoding='utf-8') as f:
 ```
 
 > [!warning] Always pass `encoding='utf-8'` on Windows
-> Without it, Python uses the OS default — on your machine that's **cp1252**, which mis-reads or crashes on non-Latin text (see [Escape Sequences](<Escape Sequences.md>)). Passing `encoding='utf-8'` makes files read/write consistently across systems. The same applies to `Path.read_text()` / `write_text()`.
+> Without it, Python uses the OS default — on your machine that's **cp1252**, which mis-reads or crashes on non-Latin text (see [Escape Sequences](<../Strings and Text/Escape Sequences.md>)). Passing `encoding='utf-8'` makes files read/write consistently across systems. The same applies to `Path.read_text()` / `write_text()`.
 
 ---
 

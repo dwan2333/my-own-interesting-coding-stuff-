@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python built-ins `ord()` and `chr()`, based on Automate the Boring Stuff Ch. 8_
 
-> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<Random Modules.md>). These two built-ins convert between a **character** and its **Unicode code-point number** — they're inverses of each other.
+> Companion to [String Formatting and Methods](<String Formatting and Methods.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). These two built-ins convert between a **character** and its **Unicode code-point number** — they're inverses of each other.
 
 ---
 

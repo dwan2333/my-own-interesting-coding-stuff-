@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python standard library (`logging` module), based on Automate the Boring Stuff Ch. 5_
 
-> Companion to [Random Modules](<Random Modules.md>). **`logging`** is Python's built-in way to record timestamped messages about what your program is doing — a smarter replacement for scattering `print()` calls when you're debugging.
+> Companion to [Random Modules](<../Modules and Libraries/Random Modules.md>). **`logging`** is Python's built-in way to record timestamped messages about what your program is doing — a smarter replacement for scattering `print()` calls when you're debugging.
 
 ---
 
@@ -132,7 +132,7 @@ This is ideal for programs that run unattended — you can read the log file aft
 
 ### `filemode` — append vs overwrite the log file
 
-By default the log file opens in **append** mode (`'a'`), so each run adds to the end and history builds up. Pass `filemode='w'` to **wipe** the file at the start of every run instead (same `'w'` vs `'a'` meaning as the built-in `open()` — see [File Open Modes](<File Open Modes.md>)).
+By default the log file opens in **append** mode (`'a'`), so each run adds to the end and history builds up. Pass `filemode='w'` to **wipe** the file at the start of every run instead (same `'w'` vs `'a'` meaning as the built-in `open()` — see [File Open Modes](<../Files and Paths/File Open Modes.md>)).
 
 ```python
 import logging
@@ -159,14 +159,19 @@ The `format=` string can include more than time/level/message:
 ```python
 import logging
 logging.basicConfig(level=logging.DEBUG,
-                    format=' %(levelname)s [%(funcName)s:%(lineno)d] %(message)s',
+                    format=' %(name)s %(levelname)s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s',
                     force=True)
 
 def do_work():
-    logging.debug('starting')      #  DEBUG [do_work:XX] starting
+    logging.debug('starting')
+    #  root DEBUG [example.py:do_work:8] starting
+    #  ^name        ^filename  ^funcName ^lineno
 
 do_work()
 ```
+
+- `%(name)s` is the logger's name — the default root logger is called `root`.
+- `%(filename)s` is the source file the log call is in.
 
 ---
 

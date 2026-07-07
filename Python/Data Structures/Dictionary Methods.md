@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python built-in `dict` methods, based on Automate the Boring Stuff Ch. 7_
 
-> Companion to [List Methods](<List Methods.md>) and [Random Modules](<Random Modules.md>). A dictionary stores **key → value** pairs. The `dict` class has **11 methods**; Chapter 7 covers 5, and the other 6 (marked **added**) are essential day-to-day tools.
+> Companion to [List Methods](<List Methods.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). A dictionary stores **key → value** pairs. The `dict` class has **11 methods**; Chapter 7 covers 5, and the other 6 (marked **added**) are essential day-to-day tools.
 
 ---
 

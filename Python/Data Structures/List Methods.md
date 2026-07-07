@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python built-in `list` methods, based on Automate the Boring Stuff Ch. 6_
 
-> Companion to [Random Modules](<Random Modules.md>). The `list` class has **11 methods**. Chapter 6 covers 6 of them; the other 5 (marked **added**) are just as worth knowing. Most list methods change the list **in place** and return `None` — don't assign their result back to a variable.
+> Companion to [Random Modules](<../Modules and Libraries/Random Modules.md>). The `list` class has **11 methods**. Chapter 6 covers 6 of them; the other 5 (marked **added**) are just as worth knowing. Most list methods change the list **in place** and return `None` — don't assign their result back to a variable.
 
 ---
 

@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python standard library `pathlib`, based on Automate the Boring Stuff Ch. 10_
 
-> Companion to [Pathlib - File System Operations](<Pathlib - File System Operations.md>) and [Random Modules](<Random Modules.md>). `pathlib` represents a file path as a **`Path` object** instead of a plain string, giving you clean methods for building paths and pulling them apart. This note covers **construction and the path components**; the sibling note covers reading, writing, and changing files. Methods marked **added** go beyond what Chapter 10 shows.
+> Companion to [Pathlib - File System Operations](<Pathlib - File System Operations.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). `pathlib` represents a file path as a **`Path` object** instead of a plain string, giving you clean methods for building paths and pulling them apart. This note covers **construction and the path components**; the sibling note covers reading, writing, and changing files. Methods marked **added** go beyond what Chapter 10 shows.
 
 ---
 
@@ -64,6 +64,8 @@ print(p.parent)      # C:\Users\dwan0
 print(p.parts)       # ('C:\\', 'Users', 'dwan0', 'report.final.txt')
 print(p.anchor)      # C:\\
 print(p.drive)       # C:
+print(p.parents[0])  # C:\Users\dwan0   (immediate parent)
+print(p.parents[1])  # C:\Users         (grandparent — index up the tree)
 ```
 
 ---
@@ -110,6 +112,7 @@ print(Path('C:/a/b/../c').resolve())                 # C:\a\c   (.. collapsed)
 print(Path('C:/Users/dwan0/report.txt')
         .relative_to('C:/Users'))                    # dwan0\report.txt
 print(Path('C:/Users/dwan0/report.txt').match('*.txt'))  # True
+print(Path('notes.txt').absolute())                  # e.g. C:\Users\dwan0\notes.txt (cwd + name)
 ```
 
 > [!warning] `relative_to()` must actually be a sub-path

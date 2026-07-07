@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python string formatting + `str` methods, based on Automate the Boring Stuff Ch. 8_
 
-> Companion to [List Methods](<List Methods.md>) and [Dictionary Methods](<Dictionary Methods.md>). Covers the **three ways to build formatted strings** (f-strings, `%s`, `.format()`) and the most useful **`str` methods**. Items marked **added** go beyond what Chapter 8 shows.
+> Companion to [List Methods](<../Data Structures/List Methods.md>) and [Dictionary Methods](<../Data Structures/Dictionary Methods.md>). Covers the **three ways to build formatted strings** (f-strings, `%s`, `.format()`) and the most useful **`str` methods**. Items marked **added** go beyond what Chapter 8 shows.
 
 ---
 
@@ -99,7 +99,7 @@ print('%x' % 255)          # 'ff'        — hexadecimal
 ```
 
 > [!note] Where `%s` still matters
-> The `logging` module uses this style: `logging.debug('x is %s', x)`. It's worth recognizing even though f-strings are preferred elsewhere. See [The Logging Module](<The Logging Module.md>).
+> The `logging` module uses this style: `logging.debug('x is %s', x)`. It's worth recognizing even though f-strings are preferred elsewhere. See [The Logging Module](<../Debugging/The Logging Module.md>).
 
 ---
 

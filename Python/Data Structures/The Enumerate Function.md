@@ -2,7 +2,7 @@
 
 _Research compiled 2026-06-30 — Python built-in `enumerate()`, based on Automate the Boring Stuff Ch. 6_
 
-> Companion to [List Methods](<List Methods.md>) and [Random Modules](<Random Modules.md>). **`enumerate()`** pairs each item of an iterable with its **index**, so a loop can use the position and the value at the same time.
+> Companion to [List Methods](<List Methods.md>) and [Random Modules](<../Modules and Libraries/Random Modules.md>). **`enumerate()`** pairs each item of an iterable with its **index**, so a loop can use the position and the value at the same time.
 
 ---
 

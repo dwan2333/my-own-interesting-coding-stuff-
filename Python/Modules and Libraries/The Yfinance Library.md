@@ -74,6 +74,11 @@ aapl = yf.Ticker('AAPL')
 print(aapl.info['shortName'], '—', aapl.info['sector'])   # Apple Inc. — Technology
 print(aapl.fast_info['lastPrice'])                        # quick last price
 print(aapl.dividends.tail(3))                             # last 3 dividend payments
+print(aapl.splits.tail(2))                                # recent stock splits (Series)
+print(aapl.actions.columns.tolist())                      # ['Dividends', 'Stock Splits']
+print(aapl.financials.shape)                              # income statement (DataFrame), e.g. (39, 5)
+print(aapl.balance_sheet.shape)                           # balance sheet DataFrame
+print(aapl.cashflow.shape)                                # cash-flow statement DataFrame
 ```
 
 > [!tip] `.info` is heavy, `.fast_info` is light
@@ -95,6 +100,10 @@ print(data.shape)        # (5, 10)  → 5 days × (5 fields × 2 tickers)
 # one ticker, explicit date range and interval
 one = yf.download('AAPL', start='2024-01-01', end='2024-12-31',
                   interval='1d', progress=False)
+
+# auto_adjust=False keeps a separate 'Adj Close' column (default True folds it in)
+raw = yf.download('AAPL', period='5d', auto_adjust=False, progress=False)
+print('Adj Close' in raw.columns.get_level_values(0))   # True
 ```
 
 Key arguments:
