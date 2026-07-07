@@ -199,6 +199,8 @@
   },
   "active": "619a1df45dc566c7",
   "lastOpenFiles": [
+    "SPCX_historical_data.csv",
+    "calculating_return.py",
     "Python/Escape Sequences.md",
     "Python/Pathlib - Building and Inspecting Paths.md",
     "Python/Pathlib - File System Operations.md",
@@ -224,7 +226,6 @@
     "Python/The Regex Module.md.tmp.12512.c0d40c2f0a4f",
     "Python/The Regex Module.md.tmp.22652.8d849497a0bb",
     "Python/The Regex Module.md.tmp.22652.e7185fc2a11a",
-    "Python/Random Modules.md.tmp.19916.83567358d07a",
     "Python/The Traceback Module.md",
     "Welcome.md"
   ]
