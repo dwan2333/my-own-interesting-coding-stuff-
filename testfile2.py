@@ -1,10 +1,7 @@
-import sys
-import subprocess
+import random
+state = ['open', 'close', 'you']
 
-# This forces the specific Python environment your editor is using right now to install yfinance
-print("Current editor python path:", sys.executable)
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'yfinance'])
+new = random.sample(state, k = 2).append('F')
 
-# Now try importing it
-import yfinance as yf
-print("Successfully imported yfinance version:", yf.__version__)
+
+print(new)

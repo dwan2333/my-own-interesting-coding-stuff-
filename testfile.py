@@ -39,9 +39,6 @@ for i in range(number_of_quiz):
 
     folder_path = quiz_folder / f'Quiz {i+1}'
 
-    Capitals = [values for keys, values in States_and_Captials.items()]
-    print(Capitals)
-
     with folder_path.open('w', encoding = 'UTF-8') as quiz: 
 
         # writing the title of the quiz
@@ -56,9 +53,8 @@ for i in range(number_of_quiz):
 
             # creating the mutiple choice
             correct_answer = States_and_Captials.get(States[s])
-            Capitals.remove(correct_answer)
-            multiple_choice = random.sample(Capitals, k = 3)
-            multiple_choice.append(correct_answer)
+            Capitals = [values for keys, values in States_and_Captials.items() if values != correct_answer]
+            multiple_choice = random.sample(Capitals, k = 3) + [correct_answer]
             random.shuffle(multiple_choice)
 
             for x in range(4):
