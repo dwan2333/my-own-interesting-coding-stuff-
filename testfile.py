@@ -47,8 +47,7 @@ for i in range(number_of_quiz):
         quiz.write('Name: \n\n')
         quiz.write('Date: \n\n')
         quiz.write('Period: \n\n')
-        quiz.write(f'State Capital Quiz (Form{i+1})\n\n'.center(80))
-        quiz.write(" ")
+        quiz.write(f'State Capital Quiz (Form{i+1})'.center(80)+ '\n\n')
 
         for s in range(len(States)):
             quiz.write(f'{s+1}. What is the capital of {States[s]} ? \n')
