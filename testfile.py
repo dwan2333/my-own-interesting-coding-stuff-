@@ -19,6 +19,7 @@ States_and_Captials = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 
 'West Virginia':'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
+# list out only states
 States = [keys for keys, values in States_and_Captials.items()]
 
 quiz_folder = Path("D:/ Quiz folder")
@@ -47,17 +48,12 @@ for i in range(number_of_quiz):
         quiz.write('Date: \n\n')
         quiz.write('Period: \n\n')
         quiz.write(f'State Capital Quiz (Form{i+1})\n\n'.center(80))
+        quiz.write(" ")
 
-        random.shuffle(States)
-        # writing the each specific quiz
-        for n in range(len(States)):
-            quiz.write(f"{n+1}. What is the capital of {States[n]} ?\n")
-            for x in range(4):
-                correct_answer = States_and_Captials.get(States[n])
-                print(correct_answer)
-                Capitals.remove(correct_answer)
-                mutiple_choice = random.sample(Capitals, k = 3)
-                print(mutiple_choice)
+        for s in range(len(States)):
+            quiz.write(f'{s+1}. What is the capital of {States[s]} ? \n')
+
+        
                 
 
                  
