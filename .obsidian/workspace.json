@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Random Modules.md",
+                "file": "Conda/Conda Environment Basics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Random Modules"
+              "title": "Conda Environment Basics"
             }
           }
         ],
@@ -199,6 +199,10 @@
   },
   "active": "619a1df45dc566c7",
   "lastOpenFiles": [
+    "Conda/Conda vs Pip.md",
+    "Python/Random Modules.md",
+    "Conda/Conda Environment Basics.md",
+    "Conda",
     "Python/The ord and chr Functions.md",
     "Python/The Pyperclip Module.md",
     "Python/The Regex Module.md",
@@ -214,7 +218,6 @@
     "Python/The Logging Module.md",
     "Python/The Enumerate Function.md",
     "Python/The Assert Statement.md",
-    "Python/Random Modules.md",
     "Python/Pathlib - File System Operations.md.tmp.20136.c8d62c1fd9b9",
     "Python/Random Modules.md.tmp.11752.cbd7a0847d51",
     "Python/The Regex Module.md.tmp.12512.f038c8c38bb9",
@@ -222,7 +225,6 @@
     "Python/The Regex Module.md.tmp.22652.8d849497a0bb",
     "Python/The Regex Module.md.tmp.22652.e7185fc2a11a",
     "Python/Random Modules.md.tmp.19916.83567358d07a",
-    "Python/The Pyperclip Module.md.tmp.19916.19505ca82938",
     "Python/The Traceback Module.md",
     "Welcome.md"
   ]
