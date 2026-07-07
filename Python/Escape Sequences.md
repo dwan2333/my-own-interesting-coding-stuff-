@@ -38,6 +38,11 @@ print('Hello\nWorld')       # Hello  <newline>  World
 print('Name:\tAlice')       # Name:   Alice   (tab gap)
 print('Quote: \"hi\"')      # Quote: "hi"
 print('Path: C:\\Users')    # Path: C:\Users
+
+# the rarer control characters — shown with repr() so you can see them
+print(repr('abc\rXY'))      # 'abc\rXY'   — \r carriage return (jumps to line start)
+print(repr('ab\bc'))        # 'ab\x08c'   — \b backspace
+print(repr('a\0b'))         # 'a\x00b'    — \0 null character (length is still 3)
 ```
 
 > [!tip] You only escape the quote that matches your string
@@ -59,6 +64,7 @@ You can drop any character into a string by its Unicode number (see [The ord() a
 ```python
 print('\x41\x42\x43')            # ABC   (pure ASCII — always safe)
 print('caf\xe9')                 # café  (é is in the Windows cp1252 set)
+print('café')               # café  (\uHHHH — 4 hex digits give é)
 ```
 
 > [!warning] Windows console encoding (cp1252) — read before printing π, •, or emoji

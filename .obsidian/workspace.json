@@ -197,16 +197,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "619a1df45dc566c7",
+  "active": "ae9ea628906818db",
   "lastOpenFiles": [
     "Python/The Regex Module.md",
+    "Python/The Yfinance Library.md",
     "Python/The Logging Module.md",
     "Python/The Assert Statement.md",
     "Python/File Open Modes.md",
     "Python/Dictionary Methods.md",
     "Python/Escape Sequences.md",
     "Python/List Methods.md",
-    "Python/The Yfinance Library.md",
     "SPCX_historical_data.csv",
     "calculating_return.py",
     "Python/Pathlib - Building and Inspecting Paths.md",

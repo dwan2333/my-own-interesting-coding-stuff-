@@ -91,6 +91,13 @@ Other conversion codes *(added — the chapter mainly shows `%s`)*:
 | `%.2f` | float, 2 decimals | `'%.2f' % 3.14159` → `3.14` |
 | `%x` | hexadecimal | `'%x' % 255` → `ff` |
 
+```python
+print('%d' % 3.9)          # '3'         — integer (truncates the float)
+print('%f' % 3.14)         # '3.140000'  — float, 6 decimals by default
+print('%.2f' % 3.14159)    # '3.14'      — float, 2 decimals
+print('%x' % 255)          # 'ff'        — hexadecimal
+```
+
 > [!note] Where `%s` still matters
 > The `logging` module uses this style: `logging.debug('x is %s', x)`. It's worth recognizing even though f-strings are preferred elsewhere. See [The Logging Module](<The Logging Module.md>).
 
@@ -130,6 +137,7 @@ print(s.lower())        # 'hello world'
 print(s.title())        # 'Hello World'
 print(s.capitalize())   # 'Hello world'
 print(s.swapcase())     # 'HellO wOrld'
+print('STRASSE'.casefold())  # 'strasse' — aggressive lowercase for comparisons
 ```
 
 > [!warning] String methods return a **new** string
@@ -156,6 +164,8 @@ print('Hello123'.isalnum())  # True
 print('42'.isdecimal())      # True
 print('   '.isspace())       # True
 print('Hello World'.istitle())  # True
+print('HELLO'.isupper())     # True
+print('hello'.islower())     # True
 ```
 
 Common use — validating input in a loop until it's a number:
@@ -184,6 +194,8 @@ s = 'hello world'
 print('world' in s)             # True
 print(s.startswith('hello'))    # True
 print(s.find('o'))              # 4   (first 'o')
+print(s.endswith('world'))      # True
+print(s.index('world'))         # 6   (like find, but raises ValueError if absent)
 print(s.count('o'))             # 2
 print(s.replace('world', 'there'))  # 'hello there'
 ```
@@ -240,6 +252,8 @@ print('Hi'.center(6, '=') )  # '==Hi=='
 print('42'.zfill(5))         # '00042'
 print('  hello  '.strip())   # 'hello'
 print('xxhixx'.strip('x'))   # 'hi'
+print(repr('  hi  '.lstrip()))  # 'hi  '  — left end only
+print(repr('  hi  '.rstrip()))  # '  hi'  — right end only
 ```
 
 > [!warning] `strip('chars')` removes a **set of characters**, not a substring
