@@ -182,8 +182,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5fef6e44c579900d",
+  "active": "ae9ea628906818db",
   "lastOpenFiles": [
+    "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
+    "Python/Core Language/Classes and OOP.md",
+    "Geography Quiz Generator.py",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Python Reference (Main).md",
     "Python/Modules and Libraries/The Datetime Module.md",
@@ -219,10 +222,7 @@
     "Python/Files and Paths",
     "Python/Strings and Text",
     "Python/Data Structures",
-    "Python/Random Modules.md.tmp.5744.57f60fe8dd09",
     "Python/The Regex Module.md",
-    "Python/The Yfinance Library.md",
-    "Python/The Logging Module.md",
-    "Python/The Assert Statement.md"
+    "Python/The Yfinance Library.md"
   ]
 }
