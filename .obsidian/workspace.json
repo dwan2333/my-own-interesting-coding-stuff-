@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Conda/Conda Environment Basics.md",
-                "mode": "preview",
+                "file": "Python/Python Reference (Main).md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Conda Environment Basics"
+              "title": "Python Reference (Main)"
             }
           }
         ]
@@ -184,12 +184,21 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
-    "Conda/Conda vs Pip.md",
+    "Python/Data Structures/The Enumerate Function.md",
+    "Python/Data Structures/List Methods.md",
+    "Python/Data Structures/dsa_fig_1.1_levels_of_abstraction.png",
+    "Python/Data Structures/Dictionary Methods.md",
+    "Python/Data Structures/Abstract Data Types (DSA Ch. 1).md",
     "Conda/Conda Environment Basics.md",
+    "Python/Data Structures/dsa_fig_1.4_bag_iterator.png",
+    "Python/Data Structures/dsa_fig_1.3_bag_as_list.png",
+    "Python/Data Structures/dsa_fig_1.2_adt_vs_implementation.png",
+    "Python/Python Reference (Main).md.tmp.14932.4c9fd5321762",
+    "Python/Modules and Libraries/The Datetime Module.md",
+    "Conda/Conda vs Pip.md",
     "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Python/Files and Paths/File Open Modes.md",
-    "Python/Data Structures/Dictionary Methods.md",
     "Python/Python Reference (Main).md",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Modules and Libraries/The Pyperclip Module.md",
@@ -200,8 +209,6 @@
     "Python/Strings and Text/The ord and chr Functions.md",
     "Python/Strings and Text/Escape Sequences.md",
     "Python/Strings and Text/String Formatting and Methods.md",
-    "Python/Data Structures/The Enumerate Function.md",
-    "Python/Data Structures/List Methods.md",
     "Python/Modules and Libraries",
     "Python/Debugging",
     "Python/Files and Paths",
@@ -214,11 +221,7 @@
     "Python/The Logging Module.md",
     "Python/The Assert Statement.md",
     "Python/File Open Modes.md",
-    "Python/Dictionary Methods.md",
-    "Python/Escape Sequences.md",
-    "Python/List Methods.md",
     "SPCX_historical_data.csv",
-    "calculating_return.py",
-    "Conda"
+    "calculating_return.py"
   ]
 }
