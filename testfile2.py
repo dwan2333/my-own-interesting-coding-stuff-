@@ -1,7 +1,4 @@
 import random
-state = ['open', 'close', 'you']
+state = {'open' : 2, 'close': 2, 'you':2}
 
-new = random.sample(state, k = 2).append('F')
-
-
-print(new)
+print(list(state.keys())[0])
