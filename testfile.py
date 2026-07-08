@@ -24,9 +24,6 @@ States = [keys for keys, values in States_and_Captials.items()]
 
 quiz_folder = Path("D:/ Quiz folder")
 
-# to store correct answer
-answer_sheet = {}
-
 # create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
@@ -39,6 +36,8 @@ while (number_of_quiz := int(input("Please select the number of quizes that you 
 
 
 for i in range(number_of_quiz):
+
+    answer_sheet = {}
 
     folder_path = quiz_folder / f'Quiz {i+1}'
 
@@ -63,15 +62,20 @@ for i in range(number_of_quiz):
             for x in range(4):
                 quiz.write(f'    {choice[x]}. {multiple_choice[x]}\n')
                 if multiple_choice[x] == correct_answer:
-                    answer_sheet.setdefault(choice[x], correct_answer)
+                    answer_sheet.update({choice[x]:correct_answer})
             quiz.write("\n")
+
+        print(answer_sheet)
 
     folder_path = quiz_folder / f'Quiz answer {i+1}'
 
     with folder_path.open('w', encoding = 'UTF-8') as quiz_answer:
         
+        answer_choice = list(answer_sheet.keys())
+        answer_choice_2 = list(answer_sheet.values())
+
         for a in range(len(States)):
-            quiz_answer.write(f'{a+1}, {correct_answer}\n')
+            quiz_answer.write(f'{a+1}, {answer_choice[a]} ---- {answer_choice_2[a]} \n')
                 
 
         
