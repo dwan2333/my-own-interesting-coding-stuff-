@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Files and Paths/Pathlib - File System Operations.md",
+                "file": "Conda/Conda Environment Basics.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pathlib - File System Operations"
+              "title": "Conda Environment Basics"
             }
           }
         ]
@@ -184,6 +184,9 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Conda/Conda vs Pip.md",
+    "Conda/Conda Environment Basics.md",
+    "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Python/Files and Paths/File Open Modes.md",
     "Python/Data Structures/Dictionary Methods.md",
@@ -193,7 +196,6 @@
     "Python/Modules and Libraries/Random Modules.md",
     "Python/Debugging/The Logging Module.md",
     "Python/Debugging/The Assert Statement.md",
-    "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Strings and Text/The Regex Module.md",
     "Python/Strings and Text/The ord and chr Functions.md",
     "Python/Strings and Text/Escape Sequences.md",
@@ -217,8 +219,6 @@
     "Python/List Methods.md",
     "SPCX_historical_data.csv",
     "calculating_return.py",
-    "Python/Pathlib - Building and Inspecting Paths.md",
-    "Python/Pathlib - File System Operations.md",
     "Conda"
   ]
 }
