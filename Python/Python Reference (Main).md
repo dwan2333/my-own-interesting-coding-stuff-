@@ -6,6 +6,12 @@ _A growing, example-driven reference on Python — every method and function has
 
 ---
 
+## Core Language
+
+- **[Star Parameters - args and kwargs](<Core Language/Star Parameters - args and kwargs.md>)** — what `*` and `**` do in function parameters and calls.
+
+---
+
 ## Data Structures
 
 - **[List Methods](<Data Structures/List Methods.md>)** — all 11 `list` methods (`append`, `extend`, `pop`, `sort`, …).
