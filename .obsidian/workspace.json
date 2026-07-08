@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Core Language/Star Parameters - args and kwargs.md",
+                "file": "Python/Files and Paths/Pathlib - File System Operations.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Star Parameters - args and kwargs"
+              "title": "Pathlib - File System Operations"
             }
           }
         ]
@@ -182,15 +182,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ae9ea628906818db",
+  "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
+    "Python/Files and Paths/File Open Modes.md",
+    "Python/Core Language/Star Parameters - args and kwargs.md",
     "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
     "Python/Core Language/Classes and OOP.md",
     "Geography Quiz Generator.py",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Python Reference (Main).md",
     "Python/Modules and Libraries/The Datetime Module.md",
-    "Python/Core Language/Star Parameters - args and kwargs.md",
     "Python/Core Language",
     "Python/Modules and Libraries/The Datetime Module.md.tmp.18888.2f97ab11d75a",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
@@ -206,8 +208,6 @@
     "Python/Python Reference (Main).md.tmp.14932.4c9fd5321762",
     "Conda/Conda vs Pip.md",
     "Python/Files and Paths/Pathlib - File System Operations.md",
-    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
-    "Python/Files and Paths/File Open Modes.md",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Modules and Libraries/The Pyperclip Module.md",
     "Python/Modules and Libraries/Random Modules.md",
@@ -221,7 +221,6 @@
     "Python/Debugging",
     "Python/Files and Paths",
     "Python/Strings and Text",
-    "Python/Data Structures",
     "Python/The Regex Module.md",
     "Python/The Yfinance Library.md"
   ]

@@ -19,20 +19,29 @@ States_and_Captials = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona':
 'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 
 'West Virginia':'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-# list out only states
+# list out only states so that it is much eazier to apply for loops
 States = [keys for keys, values in States_and_Captials.items()]
 
-quiz_folder = Path("D:/ Quiz folder")
+# select a file path to put the folder in 
+print("please type in your choice of the quiz folder path: ")
+quiz_folder = Path(input(">>> "))
 
 # create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
 
+# letters of mutiple choices that is to be used later 
 choice = ['A', 'B', 'C', 'D']
 
 # ask user how many quiz they want to print out 
-while (number_of_quiz := int(input("Please select the number of quizes that you want to create: "))) < 0:
-    print('Please select a positive integer')
+while True:
+    try:
+        number_of_quiz = int(input("Please select the number of quizes that you want to create: "))
+        if number_of_quiz > 0:
+            break
+        print('Please select a positive integer')
+    except ValueError:
+        print('Invalid input. Please enter a valid number.')
 
 
 for i in range(number_of_quiz):
