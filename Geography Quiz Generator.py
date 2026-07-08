@@ -24,10 +24,10 @@ States = [keys for keys, values in States_and_Captials.items()]
 
 # select a file path to put the folder in 
 print("please type in your choice of the quiz folder path: ")
-quiz_folder = Path(input(">>> "))
+quiz_folder = Path(input(">>> ").strip())
 
 # create a new directory named Quiz folder to store all the later quiz 
-if quiz_folder.exists() != True:
+if quiz_folder.exists() == False:
     quiz_folder.mkdir(exist_ok = True, parents = True)
 
 # letters of mutiple choices that is to be used later 

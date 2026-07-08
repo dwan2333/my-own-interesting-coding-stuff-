@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
+                "file": "Python/Modules and Libraries/The Yfinance Library.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Abstract Data Types (DSA Ch. 1)"
+              "title": "The Yfinance Library"
             }
           }
         ]
@@ -182,11 +182,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ae9ea628906818db",
+  "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Modules and Libraries/The Pyperclip Module.md",
+    "Python/Modules and Libraries/The Datetime Module.md",
+    "Python/Modules and Libraries/Random Modules.md",
+    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
     "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md.tmp.23100.c1dbdc2d10a8",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
-    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
     "Python/Core Language/Any and All.md",
     "Python/Core Language/Star Parameters - args and kwargs.md",
     "Python/Core Language/Classes and OOP.md",
@@ -202,10 +205,7 @@
     "Conda/Conda Environment Basics.md",
     "Conda/Conda vs Pip.md",
     "Data Structure and Algorithm/dsa_fig_1.3_bag_as_list.png",
-    "Python/Modules and Libraries/The Datetime Module.md",
-    "Python/Modules and Libraries/The Pyperclip Module.md",
     "Python/Modules and Libraries/The Yfinance Library.md",
-    "Python/Modules and Libraries/Random Modules.md",
     "Python/Strings and Text/Escape Sequences.md",
     "Python/Strings and Text/String Formatting and Methods.md",
     "Python/Strings and Text/The Regex Module.md",
@@ -222,7 +222,6 @@
     "Python/Python Reference (Main).md.tmp.14932.4c9fd5321762",
     "Python/Debugging/The Logging Module.md",
     "Python/Debugging/The Assert Statement.md",
-    "Python/Modules and Libraries",
     "Python/The Regex Module.md"
   ]
 }
