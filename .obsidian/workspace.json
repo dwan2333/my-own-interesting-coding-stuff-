@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "8167856a06dfda62",
@@ -184,6 +185,7 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Modules and Libraries/The Datetime Module.md.tmp.18888.2f97ab11d75a",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
     "Data Structure and Algorithm",
     "Python/Python Reference (Main).md",
@@ -222,7 +224,6 @@
     "Python/The Yfinance Library.md",
     "Python/The Logging Module.md",
     "Python/The Assert Statement.md",
-    "Python/File Open Modes.md",
     "SPCX_historical_data.csv"
   ]
 }
