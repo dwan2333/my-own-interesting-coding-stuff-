@@ -1,7 +1,8 @@
 from datetime import datetime 
 
-time = datetime(2004,1,15,19,3)
+birth = datetime(2004,1,15,19,3)
 
-print(time.weekday)
+time_now = datetime.now()
 
+print((birth - time_now).days/365)
 
