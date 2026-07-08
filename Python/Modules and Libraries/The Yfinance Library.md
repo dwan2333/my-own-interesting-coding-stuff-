@@ -142,12 +142,110 @@ hist['Close'].to_csv('aapl_close.csv') # save to a file
 
 ---
 
+## Branch 6 — Downloading a Historical Chart (data → picture)
+
+> [!important] yfinance gives you **data**, not a picture
+> There's no "download the chart" button. yfinance downloads the historical **numbers** (a table of dates and prices); *you* then **plot** those numbers to draw the chart. So a "historical chart" is always **two steps**: (1) download the data, (2) plot it.
+
+### Step 1 — download the historical data
+
+```python
+import yfinance as yf
+
+# grab 6 months of daily AAPL prices → a pandas DataFrame
+data = yf.download('AAPL', period='6mo', interval='1d', progress=False)
+print(data.shape)          # e.g. (124, 5)  → 124 trading days
+print(data['Close'].tail())  # the last few closing prices
+```
+
+### Step 2 — plot it into a chart
+
+The quickest way is pandas' built-in `.plot()` (it wraps matplotlib):
+
+```python
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+data = yf.download('AAPL', period='6mo', progress=False)
+
+data['Close'].plot(title='AAPL — 6-month close', figsize=(9, 4))
+plt.savefig('aapl_chart.png', dpi=110, bbox_inches='tight')  # save the image
+plt.show()                                                    # or pop it on screen
+```
+
+Or with matplotlib directly for more control:
+
+```python
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+data = yf.download('AAPL', period='6mo', progress=False)
+close = data['Close']
+
+plt.figure(figsize=(9, 4))
+plt.plot(close.index, close.values)     # x = dates, y = prices
+plt.title('AAPL — 6-month close')
+plt.xlabel('Date'); plt.ylabel('Price ($)')
+plt.savefig('aapl_chart.png', dpi=110, bbox_inches='tight')
+```
+
+- **`.savefig('name.png')`** writes the chart to an image file.
+- **`.show()`** opens it in a window (in the Obsidian runner or a plain terminal, prefer `savefig` — there's no pop-up window there).
+- Want a candlestick chart instead of a line? Install **`mplfinance`** (`pip install mplfinance`) and call `mpf.plot(data, type='candle')`.
+
+### Step 3 (optional) — save the raw data too
+
+```python
+data.to_csv('aapl_6mo.csv')     # keep the numbers as a CSV
+# reload later with:  pandas.read_csv('aapl_6mo.csv', index_col=0, parse_dates=True)
+```
+
+---
+
+## Branch 7 — Other Commonly Used Data
+
+Beyond prices, a `Ticker` exposes lots more. These are the ones people reach for most:
+
+| Access | Returns |
+|---|---|
+| `t.options` | tuple of option **expiry dates** available |
+| `t.option_chain('YYYY-MM-DD')` | an object with `.calls` and `.puts` DataFrames for that expiry |
+| `t.news` | a list of recent news items (dicts) about the ticker |
+| `t.recommendations` | analyst buy/hold/sell recommendations (DataFrame) |
+| `t.calendar` | upcoming events (earnings date, dividend date) |
+| `t.earnings_dates` | past & upcoming earnings dates (DataFrame) |
+
+```python
+import yfinance as yf
+
+t = yf.Ticker('AAPL')
+print(t.options[:3])                       # e.g. ('2026-07-08', '2026-07-10', '2026-07-17')
+chain = t.option_chain(t.options[0])       # first expiry
+print(chain.calls.columns.tolist()[:5])    # ['contractSymbol', 'lastTradeDate', 'strike', 'lastPrice', 'bid']
+print(len(t.news), 'news items')
+```
+
+### Multiple tickers as objects — `yf.Tickers`
+
+`yf.download([...])` gives one combined DataFrame; `yf.Tickers(...)` instead gives you a **`Ticker` object per symbol** (so you can use `.info`, `.history()`, etc. on each):
+
+```python
+import yfinance as yf
+
+group = yf.Tickers('AAPL MSFT GOOG')      # space-separated string
+print(group.tickers['MSFT'].fast_info['lastPrice'])   # reach one symbol's object
+```
+
+---
+
 ## Key Takeaways
 
 - **`yfinance` is third-party** (`pip install yfinance`) and pulls Yahoo Finance data into **pandas** structures; it's unofficial and network-dependent.
 - **`yf.Ticker("SYM")`** = one symbol: `.history()` for prices, `.info` / `.fast_info` for company data, `.dividends`, `.financials`, etc.
 - **`yf.download([...])`** = bulk price history for one or many symbols, controlled by `period` **or** `start`/`end`, plus `interval`.
 - Everything comes back as a **DataFrame/Series** indexed by date — use pandas from there (`.mean()`, `.pct_change()`, `.to_csv()`).
+- **A "historical chart" is two steps:** download the data, then **plot** it — `data['Close'].plot()` then `plt.savefig('chart.png')`. yfinance gives numbers, not a picture. (Use `mplfinance` for candlesticks.)
+- Beyond prices: `.options` / `.option_chain()`, `.news`, `.recommendations`, `.calendar`, `.earnings_dates`; and `yf.Tickers('AAPL MSFT')` for one `Ticker` object per symbol.
 - Docs: **GitHub README** for the quickstart, **ranaroussi.github.io/yfinance** for the full reference.
 
 ---
