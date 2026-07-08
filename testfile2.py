@@ -1,7 +1,14 @@
 from pathlib import Path
 
 def is_valid_path(path_str):
-    p = Path(path_str).resolve()
+    p = Path(path_str)
+    
+    # 0. Check if the path is an absolute path (starts with a drive letter like D:\ or C:\)
+    if not p.is_absolute():
+        print("Error: You must provide a full, absolute path (e.g., D:\\my_quiz_folder).")
+        return False
+        
+    p = p.resolve()
     
     # 1. Check if the drive/root actually exists (e.g., making sure D:\ exists)
     if not Path(p.anchor).exists():
