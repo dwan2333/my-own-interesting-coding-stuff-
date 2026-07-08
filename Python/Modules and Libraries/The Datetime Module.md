@@ -175,6 +175,104 @@ print(datetime.combine(d, t))        # 2026-07-07 09:00:00
 
 ---
 
+## Exercises
+
+Try each one yourself first, then click to reveal the solution. All solutions are verified against Python 3.14.
+
+> [!example] Exercise 1 — Days between two dates
+> **Problem.** How many days are there from **July 7, 2026** to **December 25, 2026**? Print the number.
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Subtracting two `date` objects gives a `timedelta`; read its `.days`.
+> > ```python
+> > from datetime import date
+> > gap = date(2026, 12, 25) - date(2026, 7, 7)
+> > print(gap.days)
+> > ```
+> > **Answer.** `171` ✓
+
+> [!example] Exercise 2 — What weekday was it?
+> **Problem.** Which day of the week did **January 1, 2000** fall on? Print the full name (e.g. `Monday`).
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Build the `date`, then format it with `%A` (full weekday name).
+> > ```python
+> > from datetime import date
+> > print(date(2000, 1, 1).strftime('%A'))
+> > ```
+> > **Answer.** `Saturday` ✓
+
+> [!example] Exercise 3 — Reformat a date string
+> **Problem.** You are given the text `'2026-12-25'`. Convert it into the format `December 25, 2026`.
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Two steps: `strptime` to **parse** the text into a datetime, then `strftime` to **format** it the new way.
+> > ```python
+> > from datetime import datetime
+> > d = datetime.strptime('2026-12-25', '%Y-%m-%d')
+> > print(d.strftime('%B %d, %Y'))
+> > ```
+> > **Answer.** `December 25, 2026` ✓
+
+> [!example] Exercise 4 — Add a duration
+> **Problem.** Starting from **2026-07-07 09:00:00**, what date and time is it **90 days and 12 hours** later?
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Add a `timedelta` to the starting `datetime`.
+> > ```python
+> > from datetime import datetime, timedelta
+> > start = datetime(2026, 7, 7, 9, 0, 0)
+> > print(start + timedelta(days=90, hours=12))
+> > ```
+> > **Answer.** `2026-10-05 21:00:00` ✓
+
+> [!example] Exercise 5 — Leap-year checker
+> **Problem.** Write a function `is_leap(year)` that returns `True` if the year is a leap year, `False` otherwise. Use `datetime` (hint: **February 29 only exists in leap years**). Test it on 2000, 2024, 2026, and 1900.
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Try to build `date(year, 2, 29)`. If the year isn't a leap year, that date is invalid and raises `ValueError` — catch it and return `False`.
+> > ```python
+> > from datetime import date
+> > def is_leap(year):
+> >     try:
+> >         date(year, 2, 29)
+> >         return True
+> >     except ValueError:
+> >         return False
+> > print(is_leap(2000), is_leap(2024), is_leap(2026), is_leap(1900))
+> > ```
+> > **Answer.** `True True False False` ✓ (1900 is *not* a leap year — century years must be divisible by 400)
+
+> [!example] Exercise 6 — Weeks and leftover days
+> **Problem.** The gap from **2026-07-07** to **2026-12-25** is 171 days. Express that as **full weeks and leftover days** (e.g. "X weeks and Y days").
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** `divmod(total, 7)` returns the quotient (weeks) and remainder (days) at once.
+> > ```python
+> > from datetime import date
+> > total = (date(2026, 12, 25) - date(2026, 7, 7)).days
+> > weeks, days = divmod(total, 7)
+> > print(f'{weeks} weeks and {days} days')
+> > ```
+> > **Answer.** `24 weeks and 3 days` ✓
+
+> [!example] Exercise 7 — Find the next Friday
+> **Problem.** Given `today = date(2026, 7, 7)` (a Tuesday), compute the date of the **next Friday**. If today were already a Friday, it should return the Friday *one week later*, not today.
+>
+> > [!success]- Click to reveal solution
+> > **Solution.** Friday is weekday `4`. `(4 - today.weekday()) % 7` gives days until the coming Friday; if that's `0` (today is Friday) use `7` instead, then add that many days.
+> > ```python
+> > from datetime import date, timedelta
+> > today = date(2026, 7, 7)
+> > ahead = (4 - today.weekday()) % 7
+> > ahead = ahead or 7          # if 0 (today is Friday), jump a full week
+> > next_friday = today + timedelta(days=ahead)
+> > print(next_friday, next_friday.strftime('%A'))
+> > ```
+> > **Answer.** `2026-07-10 Friday` ✓
+
+---
+
 ### Sources
 
 | Source | Date | Type |
