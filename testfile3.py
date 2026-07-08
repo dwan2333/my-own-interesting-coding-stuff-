@@ -2,4 +2,5 @@ from pathlib import Path
 
 location = Path(input(">>> "))
 
-print(location.exists())
+location.mkdir(exist_ok=True, parents=True)
+

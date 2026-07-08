@@ -28,7 +28,7 @@ quiz_folder = Path(input(">>> "))
 
 # create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() != True:
-    quiz_folder.mkdir()
+    quiz_folder.mkdir(exist_ok = True, parents = True)
 
 # letters of mutiple choices that is to be used later 
 choice = ['A', 'B', 'C', 'D']

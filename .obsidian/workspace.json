@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
+                "file": "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Data Structures and Algorithms (Main)"
+              "title": "Abstract Data Types (DSA Ch. 1)"
             }
           }
         ]
@@ -182,25 +182,30 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5fef6e44c579900d",
+  "active": "ae9ea628906818db",
   "lastOpenFiles": [
-    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
+    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md.tmp.23100.c1dbdc2d10a8",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
-    "Python/Data Structures/Dictionary Methods.md",
+    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
+    "Python/Core Language/Any and All.md",
+    "Python/Core Language/Star Parameters - args and kwargs.md",
+    "Python/Core Language/Classes and OOP.md",
+    "Python/Files and Paths/Pathlib - File System Operations.md",
+    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
+    "Python/Files and Paths/File Open Modes.md",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Data Structures/List Methods.md",
-    "Python/Data Structures/dsa_fig_1.4_bag_iterator.png",
-    "Python/Data Structures/dsa_fig_1.1_levels_of_abstraction.png",
-    "Python/Data Structures/dsa_fig_1.2_adt_vs_implementation.png",
+    "Python/Data Structures/Dictionary Methods.md",
+    "Data Structure and Algorithm/dsa_fig_1.1_levels_of_abstraction.png",
+    "Data Structure and Algorithm/dsa_fig_1.4_bag_iterator.png",
+    "Data Structure and Algorithm/dsa_fig_1.2_adt_vs_implementation.png",
     "Conda/Conda Environment Basics.md",
     "Conda/Conda vs Pip.md",
-    "Python/Data Structures/dsa_fig_1.3_bag_as_list.png",
+    "Data Structure and Algorithm/dsa_fig_1.3_bag_as_list.png",
     "Python/Modules and Libraries/The Datetime Module.md",
     "Python/Modules and Libraries/The Pyperclip Module.md",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Modules and Libraries/Random Modules.md",
-    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
-    "Python/Files and Paths/File Open Modes.md",
     "Python/Strings and Text/Escape Sequences.md",
     "Python/Strings and Text/String Formatting and Methods.md",
     "Python/Strings and Text/The Regex Module.md",
@@ -208,12 +213,8 @@
     "Python/Python Reference (Main).md",
     "testfile3.py",
     "Python/tesfile2.py",
-    "Python/Core Language/Any and All.md",
     "韶光街樱花主题街区方案评估报告.pdf",
-    "Python/Files and Paths/Pathlib - File System Operations.md",
-    "Python/Core Language/Star Parameters - args and kwargs.md",
     "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
-    "Python/Core Language/Classes and OOP.md",
     "Geography Quiz Generator.py",
     "Python/Core Language",
     "Python/Modules and Libraries/The Datetime Module.md.tmp.18888.2f97ab11d75a",

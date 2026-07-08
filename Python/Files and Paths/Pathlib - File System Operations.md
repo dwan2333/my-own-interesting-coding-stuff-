@@ -8,13 +8,13 @@ _Research compiled 2026-06-30 — Python standard library `pathlib`, based on Au
 
 ## Branch 1 — Checking What's There
 
-| Method | Returns `True` when… |
-|---|---|
-| `.exists()` | the path exists at all |
-| `.is_file()` | it's a file |
-| `.is_dir()` | it's a directory |
-| `.is_symlink()` *(added)* | it's a symbolic link |
-| `.stat()` | (not bool) returns metadata: `.st_size`, timestamps |
+| Method                    | Returns `True` when…                                |
+| ------------------------- | --------------------------------------------------- |
+| `.exists()`               | the path exists at all                              |
+| `.is_file()`              | it's a file                                         |
+| `.is_dir()`               | it's a directory                                    |
+| `.is_symlink()` *(added)* | it's a symbolic link                                |
+| `.stat()`                 | (not bool) returns metadata: `.st_size`, timestamps |
 
 ```python
 from pathlib import Path
