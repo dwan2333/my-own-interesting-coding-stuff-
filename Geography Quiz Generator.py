@@ -43,9 +43,10 @@ while True:
     except ValueError:
         print('Invalid input. Please enter a valid number.')
 
-
+# beginning of the loop to create user intended number of quizes
 for i in range(number_of_quiz):
 
+    # defining the path that would be later used with.open()
     folder_path = quiz_folder / f'Quiz {i+1}'
     answer_path = quiz_folder / f'Quiz answer {i+1}'
 
