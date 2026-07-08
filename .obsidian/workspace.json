@@ -184,6 +184,7 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Core Language/Any and All.md",
     "韶光街樱花主题街区方案评估报告.pdf",
     "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
@@ -221,7 +222,6 @@
     "Python/Modules and Libraries",
     "Python/Debugging",
     "Python/Files and Paths",
-    "Python/Strings and Text",
     "Python/The Regex Module.md",
     "Python/The Yfinance Library.md"
   ]
