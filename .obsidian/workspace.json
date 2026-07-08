@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Python Reference (Main).md",
-                "mode": "source",
+                "file": "Python/Modules and Libraries/The Datetime Module.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Python Reference (Main)"
+              "title": "The Datetime Module"
             }
           }
         ]
@@ -184,6 +184,9 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
+    "Data Structure and Algorithm",
+    "Python/Python Reference (Main).md",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Data Structures/List Methods.md",
     "Python/Data Structures/dsa_fig_1.1_levels_of_abstraction.png",
@@ -199,7 +202,6 @@
     "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Python/Files and Paths/File Open Modes.md",
-    "Python/Python Reference (Main).md",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Modules and Libraries/The Pyperclip Module.md",
     "Python/Modules and Libraries/Random Modules.md",
@@ -221,7 +223,6 @@
     "Python/The Logging Module.md",
     "Python/The Assert Statement.md",
     "Python/File Open Modes.md",
-    "SPCX_historical_data.csv",
-    "calculating_return.py"
+    "SPCX_historical_data.csv"
   ]
 }

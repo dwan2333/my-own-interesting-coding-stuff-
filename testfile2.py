@@ -1,4 +1,7 @@
-import random
-state = {'open' : 2, 'close': 2, 'you':2}
+from datetime import datetime 
 
-print(list(state.keys())[0])
+time = datetime(2004,1,15,19,3)
+
+print(time.weekday)
+
+

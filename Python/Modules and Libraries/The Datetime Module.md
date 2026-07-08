@@ -14,12 +14,12 @@ The module gives you four building blocks. Import just the ones you need:
 from datetime import date, time, datetime, timedelta
 ```
 
-| Class | Represents | Example meaning |
-|---|---|---|
-| `date` | a calendar day | 2026-07-07 |
-| `time` | a time of day | 14:30:05 |
-| `datetime` | a day **and** a time together | 2026-07-07 14:30:05 |
-| `timedelta` | a **duration** (a length of time) | 7 days, 3 hours |
+| Class       | Represents                        | Example meaning     |
+| ----------- | --------------------------------- | ------------------- |
+| `date`      | a calendar day                    | 2026-07-07          |
+| `time`      | a time of day                     | 14:30:05            |
+| `datetime`  | a day **and** a time together     | 2026-07-07 14:30:05 |
+| `timedelta` | a **duration** (a length of time) | 7 days, 3 hours     |
 
 The first three are *points* on the calendar/clock; `timedelta` is the *distance* between two of them.
 
@@ -43,9 +43,9 @@ print(dt)                      # 2026-07-07 14:30:05
 
 ### Get the current one
 
-| Call | Returns |
-|---|---|
-| `date.today()` | today's date |
+| Call             | Returns                 |
+| ---------------- | ----------------------- |
+| `date.today()`   | today's date            |
 | `datetime.now()` | right now (date + time) |
 
 ```python
