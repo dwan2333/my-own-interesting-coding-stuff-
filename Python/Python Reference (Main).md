@@ -10,6 +10,7 @@ _A growing, example-driven reference on Python — every method and function has
 
 - **[Star Parameters - args and kwargs](<Core Language/Star Parameters - args and kwargs.md>)** — what `*` and `**` do in function parameters and calls.
 - **[Classes and OOP](<Core Language/Classes and OOP.md>)** — classes, instances, `__init__`/`self`, inheritance, composition, `__str__`.
+- **[Any and All](<Core Language/Any and All.md>)** — the `any()` / `all()` built-ins for testing a condition across a collection.
 
 ---
 
