@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Files and Paths/Pathlib - File System Operations.md",
+                "file": "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pathlib - File System Operations"
+              "title": "Pathlib - Building and Inspecting Paths"
             }
           }
         ]
@@ -184,6 +184,7 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Python/Files and Paths/File Open Modes.md",
     "Python/Core Language/Star Parameters - args and kwargs.md",
@@ -207,7 +208,6 @@
     "Python/Data Structures/dsa_fig_1.2_adt_vs_implementation.png",
     "Python/Python Reference (Main).md.tmp.14932.4c9fd5321762",
     "Conda/Conda vs Pip.md",
-    "Python/Files and Paths/Pathlib - File System Operations.md",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Modules and Libraries/The Pyperclip Module.md",
     "Python/Modules and Libraries/Random Modules.md",
