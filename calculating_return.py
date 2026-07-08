@@ -7,7 +7,10 @@ os.environ['ALL_PROXY'] = ''
 
 import yfinance as yf
 
-SPCA = yf.Ticker('SPCX')
+
 data = yf.download('SPCX')
 data.to_csv('spacex_historical_chart.csv')
+
+
+
 
