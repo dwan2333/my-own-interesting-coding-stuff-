@@ -3,7 +3,7 @@
 _Notes compiled 2026-06-21 — Rance D. Necaise, *Data Structures and Algorithms Using Python*, Ch. 1, with NotebookLM-assisted summaries (written for a first-time reader) and main-agent verification of the technical claims._
 
 > [!tip] Companion notes in this vault
-> This chapter's **Bag** is built on a Python **[List](<List Methods.md>)**; its **iterators** are the machinery that `for` loops and **[The Enumerate Function](<The Enumerate Function.md>)** rely on; and §1.2 weighs a list against a **[Dictionary](<Dictionary Methods.md>)** for storage.
+> This chapter's **Bag** is built on a Python **[List](<../Python/Data Structures/List Methods.md>)**; its **iterators** are the machinery that `for` loops and **[The Enumerate Function](<../Python/Data Structures/The Enumerate Function.md>)** rely on; and §1.2 weighs a list against a **[Dictionary](<../Python/Data Structures/Dictionary Methods.md>)** for storage.
 
 ---
 
@@ -102,7 +102,7 @@ Each button is a **method** (a named operation attached to the type). A special 
 > - **Instance** — one actual object built from that blueprint (the one specific bag you made).
 > - **Method** — a button (operation) attached to the class.
 
-**The Bag's buttons:** `Bag()` (make an empty bag) · `len` (count the items) · `contains` (is item X inside? true/false) · `add` (toss an item in) · `remove` (take one copy out; complains with an error if it isn't there) · `iterator` (hand out every item, one by one — see §1.4).
+**The Bag's buttons:** `Bag()` (make an empty bag) · `length()` (count the items) · `contains` (is item X inside? true/false) · `add` (toss an item in) · `remove` (take one copy out; complains with an error if it isn't there) · `iterator` (hand out every item, one by one — see §1.4).
 
 **Choosing the data structure.** Having decided *what* a Bag does, the book picks *how* to store it. Picture a Python **list** as a **growable row of numbered slots (cubbies)**. Between a list and a *dictionary*, the book chooses the **list**: it happily holds duplicates in separate slots without wasting memory, and gives all the room the Bag needs. (A list keeps a strict order and a bag doesn't care about order — but that mismatch is harmless.)
 

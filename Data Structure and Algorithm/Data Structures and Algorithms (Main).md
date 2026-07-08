@@ -8,7 +8,7 @@ _Notes from **Data Structures and Algorithms Using Python** (Rance D. Necaise), 
 
 ## Chapters
 
-- **Chapter 1 — Abstract Data Types** *(in progress — awaiting NotebookLM)*
+- **[Chapter 1 — Abstract Data Types](<Abstract Data Types (DSA Ch. 1).md>)**
   - 1.1 Introduction · 1.2 The Date ADT · 1.3 Bags · 1.4 Iterators · 1.5 Application: Student Records
 
 _(More chapters will be added here as they're written.)_
