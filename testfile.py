@@ -24,6 +24,9 @@ States = [keys for keys, values in States_and_Captials.items()]
 
 quiz_folder = Path("D:/ Quiz folder")
 
+# to store correct answer
+answer_sheet = {}
+
 # create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() != True:
     quiz_folder.mkdir()
@@ -59,8 +62,16 @@ for i in range(number_of_quiz):
 
             for x in range(4):
                 quiz.write(f'    {choice[x]}. {multiple_choice[x]}\n')
-
+                if multiple_choice[x] == correct_answer:
+                    answer_sheet.setdefault(choice[x], correct_answer)
             quiz.write("\n")
+
+    folder_path = quiz_folder / f'Quiz answer {i+1}'
+
+    with folder_path.open('w', encoding = 'UTF-8') as quiz_answer:
+        
+        for a in range(len(States)):
+            quiz_answer.write(f'{a+1}, {correct_answer}\n')
                 
 
         

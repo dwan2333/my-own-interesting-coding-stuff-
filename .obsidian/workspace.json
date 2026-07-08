@@ -11,10 +11,14 @@
             "id": "5fef6e44c579900d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Python/Data Structures/Dictionary Methods.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Dictionary Methods"
             }
           }
         ]
@@ -178,7 +182,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ae9ea628906818db",
+  "active": "5fef6e44c579900d",
   "lastOpenFiles": [
     "Python/Python Reference (Main).md",
     "Python/Modules and Libraries/The Yfinance Library.md",
