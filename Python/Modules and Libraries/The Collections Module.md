@@ -59,7 +59,7 @@ print(dict(tally))                  # {'b': 1, 'a': 3, 'n': 2}
 | `defaultdict(set)` | `set()` | collecting unique items per key |
 
 > [!note] `defaultdict(list)` vs `dict.setdefault`
-> Both avoid the "check if the key exists" dance. `defaultdict` is cleaner when *every* access should have a default; `setdefault` (see [Dictionary Methods](<Dictionary Methods.md>)) is fine for a one-off.
+> Both avoid the "check if the key exists" dance. `defaultdict` is cleaner when *every* access should have a default; `setdefault` (see [Dictionary Methods](<../Data Structures/Dictionary Methods.md>)) is fine for a one-off.
 
 ---
 
