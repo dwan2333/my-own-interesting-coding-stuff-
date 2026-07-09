@@ -23,6 +23,13 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 
 ![Figure 1.1 — Levels of abstraction: hardware at the bottom, and each layer above hides the details of the one below it](dsa_fig_1.1_levels_of_abstraction.png)
 
+> [!definition] The two kinds of abstraction
+> The book splits abstraction into two flavours — one about **actions**, one about **data**:
+> - **Procedural (functional) abstraction** — using a **function or method** knowing *what* it does but **ignoring *how*** it does it. You call the square-root function `sqrt(x)` and trust it returns the root; you don't need to know the algorithm inside. The *action* is a black box.
+> - **Data abstraction** — separating a **data type's** properties (its values and the operations on them) from **how that type is implemented**. You use Python strings constantly without knowing how the characters are stored in memory or how `.upper()` works internally. The *data* is a black box.
+>
+> An **ADT combines both**: it bundles data (data abstraction) with a set of operations you call without seeing their internals (procedural abstraction).
+
 > [!definition] The two central words
 > - An **Abstract Data Type (ADT)** specifies a set of data values **and** the operations allowed on them — describing *what* it does while **hiding** how it does it. The approved list of operations it exposes is its **interface**.
 > - A **data structure** is the concrete way the data is actually *organized and stored* inside memory — the *how*.
@@ -158,6 +165,7 @@ Re-running the bouncer example (§1.2) is now trivial: store the birth dates in 
 ## Key Ideas & a Beginner's Glossary
 
 - **The one big idea:** an **ADT** is the *interface* (what you can do); a **data structure** is the *implementation* (how it's built). Separating them buys focus, safety, and the freedom to swap internals.
+- **Abstraction** = focusing only on what's relevant and hiding the rest. Two kinds: **procedural abstraction** (use a *function* knowing what it does, not how — e.g. `sqrt`) and **data abstraction** (use a *data type* without knowing how it's stored — e.g. a Python string). An ADT combines both.
 - **Encapsulation / information hiding** — sealing internals behind an interface (the "black box").
 - **Class** = blueprint · **instance/object** = one thing built from it · **method** = a button · **constructor** = the button that builds a new instance · **self** = "this particular instance."
 - **Collection** = a group of values · **container** = holds a collection · **sequence** = a container in strict order.
