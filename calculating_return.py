@@ -21,14 +21,36 @@ else:
 
 # `data['Close']` actually returns a mini-table containing the ticker name (SPCX)
 # We need to specify the ticker name to grab the actual column of numbers!
-close_price = data['Close'][ticker].tolist()
 
-ticker_hist = yf.Ticker(f'{ticker}')
+import csv 
 
-hist = ticker_hist.history(period = 'max')
+csv_open = open(file_name)
+csv_reading = csv.reader(csv_open)
 
-print(hist['Close'].iloc[-2])
+close_price = []
+for row in csv_reading:
+    close_price.append(row[1])
 
+return_calc = []
+for i in range(len(close_price)):
+    try:
+        # CSV files are read as text strings, so we MUST convert them to numbers (floats) first!
+        current_price = float(close_price[i])
+        next_price = float(close_price[i+1])
+        
+        # Standard return formula: (New - Old) / Old
+        returns = (next_price - current_price) / current_price
+        return_calc.append(returns)
+        
+    except IndexError:
+        # This catches the error when i+1 goes past the end of the list!
+        pass
+    except ValueError:
+        # This catches the very first row (the word "Close") which can't be converted to a number
+        pass
+
+print(return_calc)
+    
 
     
 
