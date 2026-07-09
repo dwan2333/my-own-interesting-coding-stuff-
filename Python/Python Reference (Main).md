@@ -23,6 +23,7 @@ _A growing, example-driven reference on Python — every method and function has
 - **[Sorting](<Data Structures/Sorting.md>)** — the `sorted()` function and `.sort()` method: `key`, `reverse`, stability.
 - **[The Zip Function](<Data Structures/The Zip Function.md>)** — pairing several iterables together to loop over them at once.
 - **[Sets](<Data Structures/Sets.md>)** — unordered collection of unique items: dedup, membership, and set math.
+- **[Map and Filter](<Data Structures/Map and Filter.md>)** — the `map()` / `filter()` built-ins for transforming and filtering iterables.
 
 ---
 
