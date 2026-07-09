@@ -67,4 +67,5 @@ _A growing, example-driven reference on Python — every method and function has
 
 ## Related folders
 
+- **[Data Structures and Algorithms](<../Data Structure and Algorithm/Data Structures and Algorithms (Main).md>)** — book notes (Necaise) on ADTs, arrays, and algorithms, which build on these language notes.
 - **Conda** — environment and package management (`Conda Environment Basics`, `Conda vs Pip`).
