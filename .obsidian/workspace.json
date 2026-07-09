@@ -184,6 +184,8 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Data Structures/Sets.md",
+    "Python/Modules and Libraries/The Collections Module.md",
     "Python/Core Language/Any and All.md",
     "Python/Data Structures/List Methods.md",
     "Python/Data Structures/Dictionary Methods.md",
@@ -216,13 +218,11 @@
     "Python/Strings and Text/String Formatting and Methods.md",
     "Python/Strings and Text/The Regex Module.md",
     "Python/Strings and Text/The ord and chr Functions.md",
-    "Python/Python Reference (Main).md",
     "testfile3.py",
     "Python/tesfile2.py",
     "韶光街樱花主题街区方案评估报告.pdf",
     "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
     "Geography Quiz Generator.py",
-    "Python/Core Language",
-    "Python/Debugging/The Logging Module.md"
+    "Python/Core Language"
   ]
 }
