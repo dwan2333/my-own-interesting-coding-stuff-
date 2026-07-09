@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Data Structures/Sets.md",
+                "file": "Python/Core Language/Star Parameters - args and kwargs.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sets"
+              "title": "Star Parameters - args and kwargs"
             }
           }
         ]
@@ -184,18 +184,18 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
-    "Python/Data Structures/Map and Filter.md",
-    "Python/Data Structures/Sets.md",
+    "Python/Core Language/Classes and OOP.md",
+    "Python/Core Language/Any and All.md",
     "Python/Data Structures/Sorting.md",
+    "Python/Data Structures/Sets.md",
+    "Python/Data Structures/Map and Filter.md",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Data Structures/The Zip Function.md",
     "Python/Data Structures/Tuples.md",
     "Python/Data Structures/List Methods.md",
     "Python/Data Structures/Dictionary Methods.md",
     "Python/Modules and Libraries/The Collections Module.md",
-    "Python/Core Language/Any and All.md",
     "Python/Core Language/Star Parameters - args and kwargs.md",
-    "Python/Core Language/Classes and OOP.md",
     "Python/Data Structures/Sorting.md.tmp.26712.6cdd4e31cdbe",
     "Python/Modules and Libraries/The Yfinance Library.md",
     "Spacex_Historical_Chart.csv",
