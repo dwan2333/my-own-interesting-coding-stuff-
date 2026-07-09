@@ -68,8 +68,11 @@ for i in range(number_of_quiz):
             multiple_choice = random.sample(Capitals, k = 3) + [correct_answer]
             random.shuffle(multiple_choice)
 
+            # filling up the random choices with a correct answer
             for x in range(4):
                 quiz.write(f'    {choice[x]}. {multiple_choice[x]}\n')
+
+                # creating the correct answer sheet 
                 if multiple_choice[x] == correct_answer:
                     if answer_path.exists() == False:
                         with answer_path.open('w', encoding = 'UTF-8') as quiz_answer:

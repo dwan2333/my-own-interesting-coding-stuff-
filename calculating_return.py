@@ -1,5 +1,4 @@
 # making sure that the system know that internet is not though a proxy
-from msilib.schema import Error
 import os
 os.environ['http_proxy'] = ''
 os.environ['https_proxy'] = ''
@@ -13,14 +12,14 @@ import yfinance as yf
 import csv
 
 # download the historical chart for your choice of stock
-ticker = 'SPCX'
-try:
-    data = yf.download(ticker)
-    data.to_csv(f'{ticker}_historical_chart.csv')
-except Error:
-    pass
+ticker = input("Please choose the ticker for the stock: ")
+file_name = f'{ticker}_historical_chart'
 
-open(f'{ticker}_historical_chart.csv')
+print(file_name)
+    
+
+
+
 
 
 
