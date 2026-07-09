@@ -18,15 +18,13 @@ if Path(Path.cwd()/f'{file_name}').exists():
 else:
     data.to_csv(file_name)
 
-import csv
 
-target_file = open(file_name)
-to_read_target = csv.reader(target_file)
+close_price = data['Close'].tolist()
+
+print(close_price)
 
 
-for row in to_read_target:
-    open = row[4]
-    print(open)
+    
 
 
 
