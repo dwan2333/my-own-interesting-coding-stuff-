@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Data Structures/Sets.md",
+                "file": "Python/Files and Paths/Pathlib - File System Operations.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sets"
+              "title": "Pathlib - File System Operations"
             }
           }
         ]
@@ -182,12 +182,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ae9ea628906818db",
+  "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
+    "Python/Modules and Libraries/The Collections Module.md",
+    "Python/Modules and Libraries/The Itertools Module.md",
+    "Python/Modules and Libraries/The Datetime Module.md",
+    "Python/Modules and Libraries/The Pyperclip Module.md",
+    "Python/Modules and Libraries/Random Modules.md",
+    "Python/Modules and Libraries/The Yfinance Library.md",
+    "SPCX_historical_chart.csv",
+    "Python/Data Structures/Sets.md",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md.tmp.24900.3424ee675eaa",
     "Data Structure and Algorithm/Multi-Dimensional Arrays (DSA Ch. 3.3).md",
     "Python/Debugging/Exceptions - try except finally.md",
-    "Python/Modules and Libraries/The Itertools Module.md",
     "Python/Core Language/Generators and Yield.md",
     "Python/Core Language/Lambda Functions.md",
     "Python/Data Structures/Sorting.md",
@@ -197,23 +205,16 @@
     "Python/Core Language/Classes and OOP.md",
     "Python/Core Language/Any and All.md",
     "Python/Data Structures/Dictionary Methods.md",
-    "Python/Data Structures/Sets.md",
     "Python/Data Structures/The Enumerate Function.md",
     "Python/Data Structures/The Zip Function.md",
     "Python/Data Structures/Tuples.md",
-    "Python/Modules and Libraries/The Collections Module.md",
     "Python/Data Structures/Sorting.md.tmp.26712.6cdd4e31cdbe",
-    "Python/Modules and Libraries/The Yfinance Library.md",
     "Spacex_Historical_Chart.csv",
     "spacex_historical_chart.csv",
-    "Python/Modules and Libraries/The Pyperclip Module.md",
-    "Python/Modules and Libraries/The Datetime Module.md",
-    "Python/Modules and Libraries/Random Modules.md",
     "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
     "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md.tmp.23100.c1dbdc2d10a8",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md",
     "Python/Files and Paths/Pathlib - File System Operations.md",
-    "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Data Structure and Algorithm/dsa_fig_1.1_levels_of_abstraction.png",
     "Data Structure and Algorithm/dsa_fig_1.4_bag_iterator.png",
     "Data Structure and Algorithm/dsa_fig_1.2_adt_vs_implementation.png",
@@ -221,8 +222,6 @@
     "testfile3.py",
     "Python/tesfile2.py",
     "韶光街樱花主题街区方案评估报告.pdf",
-    "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
-    "Geography Quiz Generator.py",
-    "Python/Core Language"
+    "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b"
   ]
 }

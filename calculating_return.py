@@ -6,16 +6,17 @@ os.environ['HTTP_PROXY'] = ''
 os.environ['HTTPS_PROXY'] = ''
 os.environ['ALL_PROXY'] = ''
 
-# fetch the historical chart from yahoo in csv
 import yfinance as yf
-
-import csv
 
 # download the historical chart for your choice of stock
 ticker = input("Please choose the ticker for the stock: ")
-file_name = f'{ticker}_historical_chart'
+data = yf.download(ticker, interval = '1d', period = 'max')
+file_name = f'{ticker}_historical_chart.csv'
 
-print(file_name)
+data.to_csv(file_name)
+
+
+
     
 
 
