@@ -30,6 +30,13 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 >
 > An **ADT combines both**: it bundles data (data abstraction) with a set of operations you call without seeing their internals (procedural abstraction).
 
+> [!tip] How does high-level code turn into those assembly instructions? A translator.
+> The CPU only understands **machine code** — raw binary instructions (assembly language is just a human-readable spelling of those). The processor has no idea what `x = a + b - 5` means. Sitting **between** the high-level language and the hardware is a **translator** that converts your code into the low-level instructions the machine actually runs:
+> - A **compiler** translates the *whole* program into machine code **ahead of time**; you then run the finished result. (C, C++, and Rust work this way.)
+> - An **interpreter** translates and runs the code **as it goes**, roughly line by line. (Python works this way — it first turns your code into compact **bytecode**, which the Python runtime then executes.)
+>
+> Either way, **you never hand-write the load/add/store steps** — the translator generates them for you from your one-line expression. That translator *is* the bridge between the high-level layer and the assembly layer in Figure 1.1.
+
 > [!example] Abstraction in layers — the same sum, from Python down to the hardware
 > Figure 1.1 shows abstraction stacked in **layers**, each one hiding the messy layer beneath it. The book illustrates this with a simple calculation, `x = a + b − 5`:
 > - **High-level language** (Python, etc.) — you just write `x = a + b - 5`. Clean, familiar, one line.
