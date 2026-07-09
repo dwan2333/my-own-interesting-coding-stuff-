@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Python/Modules and Libraries/The Yfinance Library.md",
+                "file": "Python/Data Structures/List Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "The Yfinance Library"
+              "title": "List Methods"
             }
           }
         ]
@@ -184,6 +184,10 @@
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Python/Data Structures/Sorting.md",
+    "Python/Data Structures/Sorting.md.tmp.26712.6cdd4e31cdbe",
+    "Python/Modules and Libraries/The Yfinance Library.md",
+    "Python/Data Structures/Tuples.md",
     "Spacex_Historical_Chart.csv",
     "spacex_historical_chart.csv",
     "Python/Modules and Libraries/The Pyperclip Module.md",
@@ -207,7 +211,6 @@
     "Conda/Conda Environment Basics.md",
     "Conda/Conda vs Pip.md",
     "Data Structure and Algorithm/dsa_fig_1.3_bag_as_list.png",
-    "Python/Modules and Libraries/The Yfinance Library.md",
     "Python/Strings and Text/Escape Sequences.md",
     "Python/Strings and Text/String Formatting and Methods.md",
     "Python/Strings and Text/The Regex Module.md",
@@ -219,10 +222,7 @@
     "Python/Python Reference (Main).md.tmp.9528.1f39f0a1c29b",
     "Geography Quiz Generator.py",
     "Python/Core Language",
-    "Python/Modules and Libraries/The Datetime Module.md.tmp.18888.2f97ab11d75a",
-    "Data Structure and Algorithm",
     "Python/Debugging/The Logging Module.md",
-    "Python/Debugging/The Assert Statement.md",
-    "Python/The Regex Module.md"
+    "Python/Debugging/The Assert Statement.md"
   ]
 }
