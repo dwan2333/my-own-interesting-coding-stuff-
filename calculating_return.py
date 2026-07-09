@@ -19,9 +19,15 @@ else:
     data.to_csv(file_name)
 
 
-close_price = data['Close'].tolist()
+# `data['Close']` actually returns a mini-table containing the ticker name (SPCX)
+# We need to specify the ticker name to grab the actual column of numbers!
+close_price = data['Close'][ticker].tolist()
 
-print(close_price)
+ticker_hist = yf.Ticker(f'{ticker}')
+
+hist = ticker_hist.history(period = 'max')
+
+print(hist['Close'].iloc[-2])
 
 
     
