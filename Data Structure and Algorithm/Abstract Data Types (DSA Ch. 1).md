@@ -30,6 +30,21 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 >
 > An **ADT combines both**: it bundles data (data abstraction) with a set of operations you call without seeing their internals (procedural abstraction).
 
+> [!example] Abstraction in layers — the same sum, from Python down to the hardware
+> Figure 1.1 shows abstraction stacked in **layers**, each one hiding the messy layer beneath it. The book illustrates this with a simple calculation, `x = a + b − 5`:
+> - **High-level language** (Python, etc.) — you just write `x = a + b - 5`. Clean, familiar, one line.
+> - **Assembly language** — the processor can't do that in one go. The expression has to be broken into individual instructions that shuttle values between **memory** (where variables like `a`, `b`, `x` live) and **registers** (tiny, super-fast storage slots inside the CPU), performing **one operation at a time**:
+> ```text
+> loadFromMem(R1, 'a')    # copy a from memory into register R1
+> loadFromMem(R2, 'b')    # copy b into register R2
+> add R0, R1, R2          # R0 = R1 + R2   (this is a + b)
+> sub R0, R0, 5           # R0 = R0 − 5
+> storeToMem(R0, 'x')     # copy the result back to memory as x
+> ```
+> - **Hardware** — at the very bottom, even those instructions become binary values and logic circuits flipping 0s and 1s.
+>
+> Each higher layer **hides** the one below. Writing `x = a + b - 5` is an *abstraction* over all those load/add/store steps — you get to think about the **math**, while the language quietly picks the right hardware instructions for you. That's the payoff of abstraction: you utilize the machine's hardware **without** hand-writing hardware instructions.
+
 > [!definition] The two central words
 > - An **Abstract Data Type (ADT)** specifies a set of data values **and** the operations allowed on them — describing *what* it does while **hiding** how it does it. The approved list of operations it exposes is its **interface**.
 > - A **data structure** is the concrete way the data is actually *organized and stored* inside memory — the *how*.
