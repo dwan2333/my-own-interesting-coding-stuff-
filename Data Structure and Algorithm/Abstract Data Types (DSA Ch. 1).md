@@ -35,7 +35,7 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 > - A **compiler** translates the *whole* program into machine code **ahead of time**; you then run the finished result. (C, C++, and Rust work this way.)
 > - An **interpreter** translates and runs the code **as it goes**, roughly line by line. (Python works this way — it first turns your code into compact **bytecode**, which the Python runtime then executes.)
 >
-> Either way, **you never hand-write the load/add/store steps** — the translator generates them for you from your one-line expression. That translator *is* the bridge between the high-level layer and the assembly layer in Figure 1.1.
+> Either way, **you never hand-write the load/add/store steps** — the translator generates them for you from your one-line expression. It has a ready-made low-level pattern for **each operation**: `+` becomes an **add** instruction, a test like `a > b` becomes **compare-and-jump** instructions — the translator just fills in *your* specific variables and emits the pattern. That translator *is* the bridge between the high-level layer and the assembly layer in Figure 1.1.
 
 > [!example] Abstraction in layers — the same sum, from Python down to the hardware
 > Figure 1.1 shows abstraction stacked in **layers**, each one hiding the messy layer beneath it. The book illustrates this with a simple calculation, `x = a + b − 5`:
@@ -51,6 +51,14 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 > - **Hardware** — at the very bottom, even those instructions become binary values and logic circuits flipping 0s and 1s.
 >
 > Each higher layer **hides** the one below. Writing `x = a + b - 5` is an *abstraction* over all those load/add/store steps — you get to think about the **math**, while the language quietly picks the right hardware instructions for you. That's the payoff of abstraction: you utilize the machine's hardware **without** hand-writing hardware instructions.
+
+> [!tip] The mind-blowing part: even data types are an illusion over raw numbers
+> It's not just math. The CPU has **no concept** of a string, a list, or a boolean — it only understands **binary numbers**. High-level languages *fake* those data types using **encoding rules**, then translate every operation on them down into "move and add these numbers in memory." This is **data abstraction** at the deepest level:
+> - **Strings** — each character is stored as its **Unicode/ASCII number**. `"CAT"` is really `67, 65, 84` sitting in three consecutive memory slots; printing it just decodes the numbers back into letters.
+> - **Lists** — the values go into consecutive memory slots, and the language remembers the **starting address** so it can find them again.
+> - **Booleans** — `True` is simply the number `1`; `False` is `0`.
+>
+> So *every* high-level feature — arithmetic **and** data types — ultimately reduces to **adding, subtracting, and moving numbers around in memory**. Data abstraction is what lets you think "a string of letters" while the hardware only ever sees a row of numbers.
 
 > [!definition] The two central words
 > - An **Abstract Data Type (ADT)** specifies a set of data values **and** the operations allowed on them — describing *what* it does while **hiding** how it does it. The approved list of operations it exposes is its **interface**.
