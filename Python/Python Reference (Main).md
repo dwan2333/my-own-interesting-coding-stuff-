@@ -50,6 +50,7 @@ _A growing, example-driven reference on Python — every method and function has
 
 - **[The Assert Statement](<Debugging/The Assert Statement.md>)** — sanity-check tripwires for catching bugs early.
 - **[The Logging Module](<Debugging/The Logging Module.md>)** — recording timestamped messages about what your program does.
+- **[Exceptions - try except finally](<Debugging/Exceptions - try except finally.md>)** — catching errors with `try`/`except`, and guaranteed cleanup with `finally`.
 
 ---
 
