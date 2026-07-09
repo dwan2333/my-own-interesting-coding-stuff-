@@ -10,8 +10,10 @@ _Notes from **Data Structures and Algorithms Using Python** (Rance D. Necaise), 
 
 - **[Chapter 1 — Abstract Data Types](<Abstract Data Types (DSA Ch. 1).md>)**
   - 1.1 Introduction · 1.2 The Date ADT · 1.3 Bags · 1.4 Iterators · 1.5 Application: Student Records
+- **Chapter 3 — Sets and Maps** *(partial)*
+  - **[§3.3 Multi-Dimensional Arrays](<Multi-Dimensional Arrays (DSA Ch. 3.3).md>)** — grids/cubes stored as a 1-D array; row- vs column-major; the index formula
 
-_(More chapters will be added here as they're written.)_
+_(More chapters and sections will be added here as they're written.)_
 
 ---
 

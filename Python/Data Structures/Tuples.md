@@ -155,6 +155,8 @@ print(g[2, 3])       # received a tuple: (2, 3)
 
 So the book's 2-D and multi-dimensional array classes define `__getitem__(self, ndxTuple)` and read `ndxTuple[0]`, `ndxTuple[1]` as the row and column. The tuple is the perfect carrier here precisely *because* it's an immutable, fixed-size group of coordinates. (This is why writing `matrix[r, c]` works in libraries like NumPy too.)
 
+See **[Multi-Dimensional Arrays (DSA §3.3)](<../../Data Structure and Algorithm/Multi-Dimensional Arrays (DSA Ch. 3.3).md>)** for the full picture — how those tuple subscripts index into an array physically stored as one 1-D line.
+
 ---
 
 ## Branch 8 — Tuple vs. List: which to use?
