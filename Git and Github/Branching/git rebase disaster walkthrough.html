@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Rebase Golden Rule — Disaster Walkthrough</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --muted: #6e7781;
+    --green: #2ea44f;
+    --blue: #0969da;
+    --red: #cf222e;
+    --yellow: #bf8700;
+    --bg-subtle: #f6f8fa;
+    --bg-warn: #fff8e1;
+    --bg-danger: #ffebe9;
+    --purple: #6f42c1;
+    --pink: #cf6679;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 40px 20px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    border-bottom: 3px solid var(--red);
+    padding-bottom: 10px;
+  }
+  .subtitle {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 32px;
+    font-size: 18px;
+  }
+
+  .rule-banner {
+    background: var(--bg-danger);
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  .rule-banner strong { color: var(--red); }
+
+  .stage {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .stage h2 {
+    margin-top: 0;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .stage-num {
+    background: var(--blue);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 16px; font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* Commit graph */
+  .commit-graph {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 28px 16px 36px;
+    background: var(--bg-subtle);
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: Consolas, Menlo, "Liberation Mono", monospace;
+    margin: 16px 0;
+  }
+  .commit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    min-width: 90px;
+  }
+  .commit-circle {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: white; font-size: 16px;
+    border: 3px solid;
+  }
+  .commit-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .commit-healthy .commit-circle {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .commit-new .commit-circle {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+  .commit-orphan .commit-circle {
+    background: #ffffff;
+    color: var(--muted);
+    border-color: var(--muted);
+    border-style: dashed;
+    text-decoration: line-through;
+  }
+  .commit-arrow {
+    align-self: center;
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .branch-pointer {
+    background: var(--blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+  .branch-pointer.local { background: var(--purple); }
+  .branch-pointer.remote { background: var(--green); }
+
+  pre {
+    background: #1f2328;
+    color: #f0f6fc;
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: Consolas, Menlo, "Liberation Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 16px 0;
+  }
+  pre.light {
+    background: var(--bg-subtle);
+    color: var(--text);
+  }
+  code {
+    font-family: Consolas, Menlo, "Liberation Mono", monospace;
+    background: var(--bg-subtle);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  pre code { background: transparent; padding: 0; color: inherit; }
+  .force-push-line {
+    color: #ff7b72;
+    font-weight: bold;
+  }
+  .annotation {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .failure-modes {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .failure-card {
+    background: var(--bg-warn);
+    border-left: 4px solid var(--yellow);
+    padding: 16px 20px;
+    border-radius: 6px;
+  }
+  .failure-card.severe {
+    background: var(--bg-danger);
+    border-left-color: var(--red);
+  }
+  .failure-card h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 17px;
+  }
+  .failure-card p { margin: 8px 0 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--bg-subtle); font-weight: 600; }
+
+  .conclusion {
+    background: linear-gradient(135deg, #0969da 0%, #1f2328 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 8px;
+    margin-top: 32px;
+  }
+  .conclusion h2 {
+    margin-top: 0;
+    color: white;
+    border: none;
+  }
+  .conclusion .summary-quote {
+    font-size: 18px;
+    font-style: italic;
+    border-left: 4px solid white;
+    padding-left: 16px;
+    margin: 20px 0;
+  }
+  .conclusion strong { color: #79c0ff; }
+
+  /* Sequence diagram (text-based) */
+  .sequence {
+    font-family: Consolas, Menlo, "Liberation Mono", monospace;
+    background: var(--bg-subtle);
+    padding: 18px 20px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    line-height: 1.9;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+  }
+  .actor {
+    display: inline-block;
+    min-width: 80px;
+    font-weight: bold;
+  }
+  .actor-you    { color: var(--blue); }
+  .actor-bob    { color: var(--purple); }
+  .actor-carol  { color: var(--pink); }
+  .actor-remote { color: var(--green); }
+  .seq-warn { color: var(--red); font-weight: bold; }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    padding: 12px 16px;
+    background: var(--bg-subtle);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-swatch {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid;
+  }
+
+  ul { margin: 8px 0 12px; padding-left: 24px; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>The Golden Rule of Rebasing — Disaster Walkthrough</h1>
+  <p class="subtitle">Why "never rebase shared history" is stated as an <em>absolute</em> rule, not a guideline.</p>
+
+  <div class="rule-banner">
+    <strong>The rule:</strong> Never rebase commits that have been pushed to a public/shared branch. Rebasing replaces commits with new ones that have <em>different SHA-1 hashes</em>, and anyone who already has the originals will have their history broken.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch" style="background: var(--green); border-color: var(--green);"></span> Healthy commit (everyone has it)</div>
+    <div class="legend-item"><span class="legend-swatch" style="background: var(--blue); border-color: var(--blue);"></span> New commit (created by rebase)</div>
+    <div class="legend-item"><span class="legend-swatch" style="background: white; border-color: var(--muted); border-style: dashed;"></span> Orphan commit (no longer on remote)</div>
+  </div>
+
+  <!-- Stage 1 -->
+  <section class="stage">
+    <h2><span class="stage-num">1</span> Shared starting state</h2>
+    <p>You, <strong style="color: var(--purple);">Bob</strong>, and <strong style="color: var(--pink);">Carol</strong> all have <code>main</code> ending in commits X and Y. You notice two small issues:</p>
+    <ul>
+      <li>X's commit message has a typo (<code>projct</code> instead of <code>project</code>)</li>
+      <li>Y has a leftover <code>console.log("DEBUG")</code></li>
+    </ul>
+
+    <div class="commit-graph">
+      <div class="commit commit-healthy">
+        <div class="commit-circle">C</div>
+        <div class="commit-label">c3c3c3c</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-healthy">
+        <div class="commit-circle">X</div>
+        <div class="commit-label">4a2b6e7</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-healthy">
+        <div class="commit-circle">Y</div>
+        <div class="commit-label">9c1d5f8</div>
+        <div class="branch-pointer remote">main · everyone</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stage 2 -->
+  <section class="stage">
+    <h2><span class="stage-num">2</span> You rebase locally to fix both</h2>
+    <p>Using <code>reword</code> for the typo and <code>edit</code> for the debug log:</p>
+    <pre class="light">git rebase -i HEAD~2
+
+reword 4a2b6e7 X: setup projct          <span class="annotation">← typo in message</span>
+edit   9c1d5f8 Y: add database config   <span class="annotation">← debug log in code</span></pre>
+
+    <p>Your local history now has new commits with <strong>brand-new hashes</strong>:</p>
+
+    <div class="commit-graph">
+      <div class="commit commit-healthy">
+        <div class="commit-circle">C</div>
+        <div class="commit-label">c3c3c3c</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-new">
+        <div class="commit-circle">X′</div>
+        <div class="commit-label">d3c2b1a</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-new">
+        <div class="commit-circle">Y′</div>
+        <div class="commit-label">e7a4f8b</div>
+        <div class="branch-pointer local">main · YOU only</div>
+      </div>
+    </div>
+
+    <p style="color: var(--muted); margin-top: 12px;">
+      The code in your project is essentially unchanged (one log line gone), but Git treats X / Y and X′ / Y′ as <strong>four separate commits</strong> because hashes determine identity, not content.
+    </p>
+  </section>
+
+  <!-- Stage 3 -->
+  <section class="stage">
+    <h2><span class="stage-num">3</span> You force-push to the remote</h2>
+    <pre><span class="force-push-line">git push --force origin main</span></pre>
+    <p>The remote <code>main</code> now points at Y′. From the remote's perspective, X and Y simply <strong>don't exist anymore</strong>:</p>
+
+    <div class="commit-graph">
+      <div class="commit commit-healthy">
+        <div class="commit-circle">C</div>
+        <div class="commit-label">c3c3c3c</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-new">
+        <div class="commit-circle">X′</div>
+        <div class="commit-label">d3c2b1a</div>
+      </div>
+      <div class="commit-arrow">→</div>
+      <div class="commit commit-new">
+        <div class="commit-circle">Y′</div>
+        <div class="commit-label">e7a4f8b</div>
+        <div class="branch-pointer remote">origin/main</div>
+      </div>
+    </div>
+
+    <p>But <strong style="color: var(--purple);">Bob</strong> and <strong style="color: var(--pink);">Carol</strong> still have X and Y on their machines.</p>
+  </section>
+
+  <!-- Stage 4 -->
+  <section class="stage">
+    <h2><span class="stage-num">4</span> Three failure modes hit your team</h2>
+
+    <div class="sequence">
+      <span class="actor actor-you">You</span> →→ <span class="actor actor-remote">origin</span>: force-push X′, Y′<br>
+      <span class="actor actor-bob">Bob</span> →→ <span class="actor actor-remote">origin</span>: <code>git pull</code> (Bob still has X, Y locally)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="seq-warn">⚠ Phantom conflicts on every diff line</span><br>
+      <span class="actor actor-bob">Bob</span> →→ <span class="actor actor-bob">bob/login</span>: rebase (anchored to orphan Y)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="seq-warn">⚠ Branch stranded on dead base</span><br>
+      <span class="actor actor-carol">Carol</span> →→ <span class="actor actor-remote">origin</span>: <code>git push</code> (rejected)<br>
+      <span class="actor actor-carol">Carol</span> →→ <span class="actor actor-remote">origin</span>: <code>git push --force</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="seq-warn">⚠ Your X′, Y′ wiped silently</span>
+    </div>
+
+    <div class="failure-modes">
+      <div class="failure-card">
+        <h3>① Bob's phantom conflicts</h3>
+        <p>Bob has X, Y locally. Remote has X′, Y′. When Bob runs <code>git pull</code>, Git tries to merge two timelines of nearly identical code — but it can't see that X and X′ are "the same." It produces conflicts on <strong>every line that differs even slightly</strong>. Bob spends an hour resolving fake conflicts.</p>
+      </div>
+
+      <div class="failure-card">
+        <h3>② Bob's stranded feature branch</h3>
+        <p>Bob's <code>bob/login</code> was anchored to Y, which is now an orphan. When he tries to rebase onto the new main, Git treats his work as descending from Y and applies it onto Y′ — with subtly different bytes. <strong>More conflicts.</strong></p>
+      </div>
+
+      <div class="failure-card severe">
+        <h3>③ Carol's silent rollback</h3>
+        <p>Carol's push is rejected because her tip predates X′. Not knowing about your rebase, she does the same thing you did: <code>git push --force</code>. This <strong>erases X′ and Y′ from the remote entirely</strong>. Your fix is gone. Nobody notices for hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature -->
+  <section class="stage">
+    <h2>The signature in the log</h2>
+    <p>After Bob resolves his merge, his <code>git log --graph</code> shows <strong>both</strong> X and X′, <strong>both</strong> Y and Y′ — duplicates with different hashes representing the same conceptual changes:</p>
+    <pre>* a8c9def  Merge remote-tracking branch 'origin/main'
+|\
+| * e7a4f8b  Y′: add database config       <span class="annotation">← from your rebase</span>
+| * d3c2b1a  X′: setup project              <span class="annotation">← from your rebase</span>
+* | 9c1d5f8  Y: add database config         <span class="annotation">← Bob's original</span>
+* | 4a2b6e7  X: setup projct                <span class="annotation">← Bob's original (typo!)</span>
+|/
+* c3c3c3c  C: initial setup complete</pre>
+    <p>The repo now has <strong>parallel ghost timelines</strong> of the same work. "When did we add the database config?" returns <em>two</em> answers.</p>
+  </section>
+
+  <!-- Why absolute -->
+  <section class="stage">
+    <h2>Why the rule is absolute, not "use caution"</h2>
+    <p>The trigger here was a <em>typo</em> and a <em>debug log</em>. Tiny. Look at the cost/benefit asymmetry:</p>
+    <table>
+      <tr><th>Cost / Benefit</th><th>Magnitude</th></tr>
+      <tr><td>Benefit of rebasing shared history</td><td>Marginal (slightly cleaner messages)</td></tr>
+      <tr><td>Cost when it goes wrong</td><td>Hours of teammate confusion + potential lost work</td></tr>
+      <tr><td>Failure visibility on <strong>your</strong> machine</td><td><strong style="color: var(--red);">Zero</strong> — push and everything looks fine</td></tr>
+      <tr><td>Failure visibility on others' machines</td><td>Hours later, scattered across the team</td></tr>
+    </table>
+    <p>That asymmetry — <em>invisible to you, expensive to them</em> — is why this is stated as an absolute rule, not a guideline.</p>
+  </section>
+
+  <!-- Conclusion -->
+  <div class="conclusion">
+    <h2>The mechanism in one sentence</h2>
+    <div class="summary-quote">
+      Git uses <strong>hashes</strong> (not content) to identify commits. Once a commit is shared, its hash is its identity — change the identity, and every reference to it elsewhere breaks.
+    </div>
+    <p style="margin-bottom: 0;">There's no way for Git to know "X and X′ are basically the same thing." To Git, they're four different commits, two parallel histories, and someone has to pick which timeline wins. The merge or rebase machinery treats X and X′ as separate work and demands reconciliation. <strong>Rebasing shared history forces that reconciliation onto everyone who already had the originals.</strong></p>
+  </div>
+
+</div>
+</body>
+</html>
