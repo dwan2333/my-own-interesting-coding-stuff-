@@ -19,6 +19,7 @@ _A growing, example-driven reference on Python — every method and function has
 - **[List Methods](<Data Structures/List Methods.md>)** — all 11 `list` methods (`append`, `extend`, `pop`, `sort`, …).
 - **[Dictionary Methods](<Data Structures/Dictionary Methods.md>)** — all 11 `dict` methods (`get`, `setdefault`, `update`, `pop`, …).
 - **[The Enumerate Function](<Data Structures/The Enumerate Function.md>)** — pairing items with their index in a loop; what's iterable.
+- **[Tuples](<Data Structures/Tuples.md>)** — the immutable sequence: packing/unpacking, when to use vs. a list.
 
 ---
 
