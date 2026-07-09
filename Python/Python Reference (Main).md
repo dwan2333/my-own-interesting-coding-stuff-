@@ -12,6 +12,7 @@ _A growing, example-driven reference on Python — every method and function has
 - **[Classes and OOP](<Core Language/Classes and OOP.md>)** — classes, instances, `__init__`/`self`, inheritance, composition, `__str__`.
 - **[Any and All](<Core Language/Any and All.md>)** — the `any()` / `all()` built-ins for testing a condition across a collection.
 - **[Lambda Functions](<Core Language/Lambda Functions.md>)** — one-line anonymous functions for inline use with `key=`/`map`/`filter`.
+- **[Generators and Yield](<Core Language/Generators and Yield.md>)** — `yield` for lazy, memory-light streams of values.
 
 ---
 
