@@ -57,6 +57,7 @@ _A growing, example-driven reference on Python — every method and function has
 
 - **[Random Modules](<Modules and Libraries/Random Modules.md>)** — the `random` module: floats, ints, sequences, distributions.
 - **[The Datetime Module](<Modules and Libraries/The Datetime Module.md>)** — dates, times, durations, and text ↔ date conversion.
+- **[The Itertools Module](<Modules and Libraries/The Itertools Module.md>)** — lazy iterator tools: chain, islice, groupby, combinations, product.
 - **[The Collections Module](<Modules and Libraries/The Collections Module.md>)** — `Counter`, `defaultdict`, `namedtuple`, `deque`, `OrderedDict`.
 - **[The Pyperclip Module](<Modules and Libraries/The Pyperclip Module.md>)** — reading and writing the system clipboard.
 - **[The Yfinance Library](<Modules and Libraries/The Yfinance Library.md>)** — downloading Yahoo Finance market data into pandas.
