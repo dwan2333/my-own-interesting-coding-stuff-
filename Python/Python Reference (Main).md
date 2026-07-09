@@ -22,6 +22,7 @@ _A growing, example-driven reference on Python — every method and function has
 - **[Tuples](<Data Structures/Tuples.md>)** — the immutable sequence: packing/unpacking, when to use vs. a list.
 - **[Sorting](<Data Structures/Sorting.md>)** — the `sorted()` function and `.sort()` method: `key`, `reverse`, stability.
 - **[The Zip Function](<Data Structures/The Zip Function.md>)** — pairing several iterables together to loop over them at once.
+- **[Sets](<Data Structures/Sets.md>)** — unordered collection of unique items: dedup, membership, and set math.
 
 ---
 
