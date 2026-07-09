@@ -130,6 +130,84 @@ with open('test.txt', encoding='utf-8') as f:
 
 ---
 
+## Branch 6 — Writing, and the Full Method Set
+
+`write()` writes one string; **`writelines()`** writes a whole **sequence** of strings (it does *not* add newlines — include your own `\n`).
+
+```python
+with open('out.txt', 'w', encoding='utf-8') as f:
+    f.write('one line\n')
+    f.writelines(['a\n', 'b\n', 'c\n'])   # write several strings at once
+```
+
+The most useful file methods and attributes:
+
+| Method / attribute | What it does |
+|---|---|
+| `read([n])` | read all, or `n` characters (text) / bytes (binary) |
+| `readline()` / `readlines()` | one line / a list of all lines |
+| `write(s)` / `writelines(seq)` | write a string / a sequence of strings |
+| `seek(pos)` | jump to byte position `pos` (see Branch 7) |
+| `tell()` | current position, as a byte offset |
+| `flush()` | force buffered writes out to disk now |
+| `close()` | close it (`with` does this for you) |
+| `readable()` / `writable()` / `seekable()` | `True`/`False` — what this file supports |
+| `closed` | `True` once the file is closed |
+| `encoding` | the encoding in use (e.g. `'utf-8'`) |
+
+---
+
+## Branch 7 — File Position: `seek()` and `tell()`
+
+A file has a **position** — where the next read/write happens. Reading advances it; **`tell()`** reports it (as a **byte** offset) and **`seek(pos)`** jumps to a byte.
+
+```python
+with open('poem.txt', encoding='utf-8') as f:
+    print(f.read(5))    # read 5 characters
+    print(f.tell())     # current position (in bytes)
+    f.seek(0)           # jump back to the start
+    print(f.read(3))    # read from the beginning again
+```
+
+This is **random access** — handy for re-reading, or jumping around a large file without reading everything.
+
+---
+
+## Branch 8 — Characters vs. Bytes (the encoding subtlety)
+
+This is the part that trips people up. In **text mode**, `read(n)` returns **`n` characters**; in **binary mode** (`'rb'`), it returns **`n` bytes**. Those aren't the same, because UTF-8 is a **variable-length** encoding — one character can be 1–4 bytes.
+
+```python
+# the file starts with "Sueña..." — the 'ñ' takes 2 bytes in UTF-8
+with open('poem.txt', encoding='utf-8') as f:
+    chars = f.read(10)
+    print(len(chars))     # 10   — ten CHARACTERS
+    print(f.tell())       # 11   — but ELEVEN bytes (ñ counted as 2)
+
+with open('poem.txt', 'rb') as f:
+    data = f.read(10)
+    print(len(data))      # 10   — exactly ten BYTES
+    print(data[:5])       # b'Sue\xc3\xb1'  — the ñ shows as two raw bytes
+```
+
+Check the platform's default encoding (why you should always pass `encoding=` explicitly):
+
+```python
+import sys
+print(sys.getdefaultencoding())   # 'utf-8'  — but the *file* default varies by OS
+```
+
+> [!warning] Don't `seek()` into the middle of a character in text mode
+> Because a character can span several bytes, seeking to a byte that lands **inside** a multi-byte character makes the next read fail with **`UnicodeDecodeError`** — Python can't decode half a character.
+> ```python
+> with open('poem.txt', encoding='utf-8') as f:
+>     f.seek(4)      # byte 4 is the 2nd half of 'ñ'
+>     f.read(1)      # UnicodeDecodeError!
+> ```
+> `seek()` is only truly safe in **binary** mode. In text mode, seek to `0` or to positions you got from `tell()`.
+
+---
+
 ## Key Takeaways
 
 - `open(path, mode, encoding='utf-8')` inside a **`with`** block (auto-closes). Default mode is `'r'`.
@@ -137,7 +215,10 @@ with open('test.txt', encoding='utf-8') as f:
 - **`'w'` vs `'a'`:** both write and both create the file; `'w'` **wipes** existing content on open, `'a'` **preserves** it and writes at the end. `'w'` empties the file the instant it opens, even with no write.
 - **Modifiers:** `'t'` text (default, `str`), `'b'` binary (`bytes`, no encoding), `'+'` read-and-write — combine as `'rb'`, `'w+'`, `'a+'`, etc.
 - **Reading:** `read()` (all), `read(n)` (n chars), `readline()` (one line), `readlines()` (list), or iterate `for line in f:` (lazy, best for big files).
-- **Always pass `encoding='utf-8'`** on Windows to avoid cp1252 problems.
+- **Writing:** `write(s)` (one string), `writelines(seq)` (several — no auto-newlines). `flush()` forces buffered writes to disk.
+- **Position:** `tell()` reports the byte offset; `seek(pos)` jumps to a byte (random access).
+- **Characters ≠ bytes:** in text mode `read(n)` = `n` **characters**; in binary mode = `n` **bytes**. UTF-8 is variable-length, so one character can be several bytes — which is why `seek()` into a multi-byte char errors in text mode.
+- **Always pass `encoding='utf-8'`** on Windows to avoid cp1252 problems; `sys.getdefaultencoding()` shows the default.
 
 ---
 
@@ -146,4 +227,6 @@ with open('test.txt', encoding='utf-8') as f:
 | Source | Date | Type |
 |---|---|---|
 | Automate the Boring Stuff, 3e — Chapter 10 (Files & Paths) | 2026 | Book chapter |
+| Python for Data Analysis, 3e (Wes McKinney) — §3.3 Files and the Operating System | 2026 | Book section |
 | Python `open()` — official built-in functions documentation | 2026 | Standard library reference |
+| Verified against Python 3.14 on `E:\Python` | 2026-07-09 | Local test |

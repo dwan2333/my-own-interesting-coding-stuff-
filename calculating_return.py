@@ -12,8 +12,15 @@ import yfinance as yf
 ticker = input("Please choose the ticker for the stock: ")
 data = yf.download(ticker, interval = '1d', period = 'max')
 file_name = f'{ticker}_historical_chart.csv'
-
 data.to_csv(file_name)
+
+import csv
+
+target_file = open(file_name)
+to_read_target = csv.reader(target_file)
+
+
+
 
 
 
