@@ -1,4 +1,6 @@
-data = ([1,2,3],[2,3,4])
-data * 10
-print(data)
+import numpy as np
+
+
+data = np.array([[1,2,5],[3,2,4]])
+print(data * 10)
 
