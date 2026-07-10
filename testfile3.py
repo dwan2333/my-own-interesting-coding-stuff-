@@ -1,3 +1,4 @@
-print(list(filter(str.isalpha, ['ab', 'a1', 'cd'])))
-print(list(map(str.isalpha, ['ab', 'a1', 'cd'])))          # TypeError: color is keyword-only
+data = ([1,2,3],[2,3,4])
+data * 10
+print(data)
 
