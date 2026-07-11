@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
+                "file": "Git and Github/Git Essential Commands.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Abstract Data Types (DSA Ch. 1)"
+              "title": "Git Essential Commands"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "8167856a06dfda62",
@@ -163,13 +162,23 @@
               "icon": "lucide-list",
               "title": "Outline of Welcome"
             }
+          },
+          {
+            "id": "ebdf1651cac85299",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -179,11 +188,17 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "5fef6e44c579900d",
   "lastOpenFiles": [
+    "Git and Github/Branching/Branching (Main).md",
+    "Git and Github/Branching/git cherry-pick.md",
+    "Git and Github/Branching/git checkout.md",
+    "Git and Github/Branching/git merge.md",
+    "Data Structure and Algorithm/Abstract Data Types (DSA Ch. 1).md",
     "Git and Github/Syncing/Syncing (Main).md",
     "Git and Github/Syncing/git remote.md",
     "Git and Github/Syncing/git push.md",
@@ -200,14 +215,10 @@
     "Git and Github/Collaboration on GitHub",
     "Git and Github/gitignore.md",
     "Git and Github/What is Git and GitHub.md",
-    "Git and Github/Branching/git cherry-pick.md",
     "Git and Github/Branching/git rebase disaster walkthrough.html",
     "Git and Github/Branching/Merge Conflicts.md",
     "Git and Github/Branching/Squashing Commits.md",
     "Git and Github/Branching/git rebase.md",
-    "Git and Github/Branching/Branching (Main).md",
-    "Git and Github/Branching/git merge.md",
-    "Git and Github/Branching/git checkout.md",
     "Git and Github/Branching",
     "Git and Github/Bare Repositories.md",
     "Git and Github",
@@ -216,7 +227,6 @@
     "SPCX_historical_chart.csv",
     "Python/Files and Paths/Pathlib - Building and Inspecting Paths.md",
     "Python/Modules and Libraries/The Collections Module.md",
-    "Python/Modules and Libraries/The Itertools Module.md",
     "Data Structure and Algorithm/Data Structures and Algorithms (Main).md.tmp.24900.3424ee675eaa",
     "Python/Data Structures/Sorting.md.tmp.26712.6cdd4e31cdbe",
     "Spacex_Historical_Chart.csv",
