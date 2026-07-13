@@ -70,6 +70,9 @@ print(f'{"hi":*^8}')      # '***hi***'  — center, pad with *
 > print(f'{spam=}')      # spam=42
 > ```
 
+> [!note] Under the hood: one engine, three doors
+> f-strings, `.format()`, and the `format()` built-in all call the **same method** — `value.__format__(spec)` — which is why the same specs work in all three. See [The format() Function](<The format Function.md>) for the protocol and the `format()` built-in.
+
 ---
 
 ## Branch 3 — `%s` Old-Style Formatting
@@ -273,6 +276,7 @@ print(repr('  hi  '.rstrip()))  # '  hi'  — right end only
 ## Related
 
 - **[The ord() and chr() Functions](<The ord and chr Functions.md>)** — converting between a character and its Unicode code-point number (split out into its own note).
+- **[The format() Function](<The format Function.md>)** — the `format()` built-in and the `__format__` protocol that f-strings and `.format()` share under the hood.
 
 ---
 

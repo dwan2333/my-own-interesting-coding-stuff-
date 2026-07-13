@@ -32,6 +32,7 @@ _A growing, example-driven reference on Python — every method and function has
 ## Strings and Text
 
 - **[String Formatting and Methods](<Strings and Text/String Formatting and Methods.md>)** — f-strings, `%s`, `.format()`, and the `str` methods.
+- **[The format Function](<Strings and Text/The format Function.md>)** — the `format()` built-in and the `__format__` protocol behind f-strings.
 - **[Escape Sequences](<Strings and Text/Escape Sequences.md>)** — `\n`, `\t`, quotes, raw strings, Unicode escapes.
 - **[The ord and chr Functions](<Strings and Text/The ord and chr Functions.md>)** — characters ↔ Unicode code points.
 - **[The Regex Module](<Strings and Text/The Regex Module.md>)** — `re`: search methods, groups, `\d`/`\w`/`\s`, lookaround, flags.
