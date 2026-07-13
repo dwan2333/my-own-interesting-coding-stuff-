@@ -1,0 +1,6 @@
+# Obsidian per-device UI state — changes constantly on every machine,
+# causes sync conflicts between devices. Never worth versioning.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
