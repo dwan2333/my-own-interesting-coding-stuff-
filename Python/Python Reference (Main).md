@@ -63,6 +63,7 @@ _A growing, example-driven reference on Python — every method and function has
 - **[The Collections Module](<Modules and Libraries/The Collections Module.md>)** — `Counter`, `defaultdict`, `namedtuple`, `deque`, `OrderedDict`.
 - **[The Pyperclip Module](<Modules and Libraries/The Pyperclip Module.md>)** — reading and writing the system clipboard.
 - **[The Yfinance Library](<Modules and Libraries/The Yfinance Library.md>)** — downloading Yahoo Finance market data into pandas.
+- **[The NumPy Module](<Modules and Libraries/The NumPy Module.md>)** — ndarrays, vectorized math, Boolean/fancy indexing, `default_rng`, ufuncs, `where`, axis statistics, linear algebra — with exercises.
 
 ---
 
