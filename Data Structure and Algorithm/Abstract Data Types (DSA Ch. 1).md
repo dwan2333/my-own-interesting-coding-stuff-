@@ -127,6 +127,119 @@ Each button is a **method** (a named operation attached to the type). A special 
 >
 > (Inside the implementation, the word **`self`** simply means "the specific instance I'm working on right now.")
 
+### The actual code — Listing 1.2, `date.py` *(added 2026-07-14; previously summarized only)*
+
+The book's partial implementation, faithful to the text (every line below was executed and verified — see the checks after the code):
+
+```python
+# Implements a proleptic Gregorian calendar date as a Julian day number.
+
+class Date :
+    # Creates an object instance for the specified Gregorian date.
+    def __init__( self, month, day, year ):
+        self._julianDay = 0
+        assert self._isValidGregorian( month, day, year ), \
+               "Invalid Gregorian date."
+
+        # The formula's first line, T = (M - 14) / 12, had to be changed
+        # because Python's integer division differs from the mathematical
+        # definition — see the warning below.
+        tmp = 0
+        if month < 3 :
+            tmp = -1
+        self._julianDay = day - 32075 + \
+                          (1461 * (year + 4800 + tmp) // 4) + \
+                          (367 * (month - 2 - tmp * 12) // 12) - \
+                          (3 * ((year + 4900 + tmp) // 100) // 4)
+
+    # Extracts the appropriate Gregorian date component.
+    def month( self ):
+        return (self._toGregorian())[0]     # M from (M, d, y)
+
+    def day( self ):
+        return (self._toGregorian())[1]     # D from (m, D, y)
+
+    def year( self ):
+        return (self._toGregorian())[2]     # Y from (m, d, Y)
+
+    # Returns day of the week as an int between 0 (Mon) and 6 (Sun).
+    def dayOfWeek( self ):
+        month, day, year = self._toGregorian()
+        if month < 3 :
+            month = month + 12
+            year = year - 1
+        return ((13 * month + 3) // 5 + day + \
+                year + year // 4 - year // 100 + year // 400) % 7
+
+    # Returns the date as a string in Gregorian format.
+    def __str__( self ):
+        month, day, year = self._toGregorian()
+        return "%02d/%02d/%04d" % (month, day, year)
+
+    # Logically compares the two dates.
+    def __eq__( self, otherDate ):
+        return self._julianDay == otherDate._julianDay
+
+    def __lt__( self, otherDate ):
+        return self._julianDay < otherDate._julianDay
+
+    def __le__( self, otherDate ):
+        return self._julianDay <= otherDate._julianDay
+
+    # ... the remaining methods (numDays, advanceBy, monthName, isLeapYear,
+    #     _isValidGregorian) are left as exercises by the book ...
+
+    # Returns the Gregorian date as a tuple: (month, day, year).
+    def _toGregorian( self ):
+        A = self._julianDay + 68569
+        B = 4 * A // 146097
+        A = A - (146097 * B + 3) // 4
+        year = 4000 * (A + 1) // 1461001
+        A = A - (1461 * year // 4) + 31
+        month = 80 * A // 2447
+        day = A - (2447 * month // 80)
+        A = month // 11
+        month = month + 2 - (12 * A)
+        year = 100 * (B - 49) + year + A
+        return month, day, year
+```
+
+(To actually run it you need the one method the book leaves as an exercise — a minimal `_isValidGregorian` checking `1 ≤ month ≤ 12` and `day` against that month's length, with 29 for February in leap years.)
+
+> [!example] Walking through the constructor — how a Gregorian date becomes ONE number
+> **Problem.** Store `Date(10, 31, 2023)` as a single Julian day integer.
+> **Setup.** The book uses a published astronomy formula (Seidelmann, *Explanatory Supplement to the Astronomical Almanac*), where day 0 = November 24, 4713 BC and **all divisions are integer divisions**:
+> ```text
+> T    = (M - 14) / 12
+> jday = D - 32075 + (1461 * (Y + 4800 + T) / 4)
+>                  + (367 * (M - 2 - T*12) / 12)
+>                  - (3 * ((Y + 4900 + T) / 100) / 4)
+> ```
+> **Solution.** First the `assert` guards the **precondition** ("the supplied date must be valid" — see the note below); only then does the constructor apply the formula and store the result in the one attribute `self._julianDay`. Nothing else is ever stored — month, day, and year are *recomputed on demand*.
+> **Answer.** Verified by execution: `Date(1, 1, 2000)._julianDay` → **2451545**, the textbook Julian day number for Jan 1, 2000. ✓
+> **Insight.** `T` is a trick playing on the formula's view that **January and February are months 13 and 14 of the *previous* year** — that shift parks the leap day (Feb 29) at the *end* of the counting year, so leap-year corrections never disturb the months after February.
+
+> [!warning] The `tmp` variable — the "why is it written that way" part
+> The book could not copy the formula's first line into Python, because **Python's integer division is not the mathematical definition the formula assumes**:
+> - The formula (and languages like C) **truncate toward zero**: `(10 − 14) / 12` = `−4/12` → **0**.
+> - Python's `//` **floors toward negative infinity**: `(10 - 14) // 12` → **−1**.
+> ```python
+> print((10 - 14) // 12)    # -1  ← Python; the formula needs 0 here
+> ```
+> For any month ≥ 3 that off-by-one would silently corrupt the Julian day. Since `T` can only ever be **−1 (for Jan/Feb) or 0 (for Mar–Dec)**, the book replaces the formula line with an explicit branch — `tmp = -1 if month < 3 else 0` — which is exactly what lines with `tmp` in the constructor do. Same math, Python-proof.
+> This is the chapter's quiet real-world lesson: **porting a formula between languages means checking what its operators actually do**, not just transcribing symbols.
+
+> [!tip] Why `_toGregorian()` exists — and why the accessors look so lazy
+> Several operations (`month()`, `day()`, `year()`, `dayOfWeek()`, `__str__`) all need the reverse conversion (Julian → Gregorian). Rather than duplicating that hairy formula in each method, the book writes it **once** as a helper that returns a `(month, day, year)` **tuple**, and every accessor just picks its slot — `self._toGregorian()[0]` and done.
+> The **leading underscore** in `_toGregorian` and `_julianDay` is Python's "protected by convention" flag: nothing *stops* outside code from touching them, but the name warns "internal wiring — clients use the interface buttons instead." That's encapsulation enforced by discipline, not by the language.
+
+> [!note] The remaining design choices, each in one breath
+> - **`assert` = the precondition check.** §1.2.3 defines a **precondition** (what must be true *before* an operation runs) and a **postcondition** (what's guaranteed *after*). The book tests preconditions with `assert` throughout — fail fast, let the caller decide. See [The Assert Statement](<../Python/Debugging/The Assert Statement.md>).
+> - **`__str__` overload** — `print(firstDay)` "just works" because Python calls `__str__` automatically. The `"%02d/%02d/%04d"` template is old-style `%` formatting (zero-padded 2- and 4-digit numbers) — see [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>).
+> - **Only `==`, `<`, `<=` are implemented — on purpose.** Python 3 auto-derives the rest: `a > b` is answered by swapping into `b < a` (a *reflected* operator), and `!=` by inverting `==`. Three methods buy all six comparisons. Verified: `a > b` and `a != b` work on the class above with no `__gt__`/`__ne__` defined. ✓
+> - **Comparisons and "days between" are trivial** precisely *because* of the Julian-day storage choice: both reduce to integer `==`/`<`/`−` on `_julianDay`. Verified: `Date(6,1,1988)` vs `Date(5,15,1985)` → 1,113 days apart, matching the real calendar. ✓
+> - **`dayOfWeek()`** reuses the same Jan/Feb-belong-to-last-year shift, then a Zeller-style congruence mod 7 (0 = Monday). Verified: it returns **4 (Friday)** for October 15, 1582 — history records the Gregorian calendar's first official day as a Friday. ✓
+
 ---
 
 ## 1.3 Bags — An Unordered Collection
@@ -215,3 +328,4 @@ Re-running the bouncer example (§1.2) is now trivial: store the birth dates in 
 | Rance D. Necaise, *Data Structures and Algorithms Using Python* | Chapter 1 — Abstract Data Types | Textbook |
 | NotebookLM | Per-section summaries (prompted for a first-time reader) from the Ch. 1 PDF | LLM tool |
 | Main-agent verification | Checked the ADT/data-structure claims, the Date/Bag/iterator behavior, and the Julian-day trick against the text | — |
+| Book text, §1.2.4 (added 2026-07-14) | Listing 1.2 `date.py` code + explanations extracted directly from the PDF; all code executed and verified (JDN 2451545 for 2000-01-01; Friday for 1582-10-15; 1,113-day span check) | Direct extraction |
