@@ -319,7 +319,42 @@ class Date :
 
 **The Bag's buttons:** `Bag()` (make an empty bag) · `length()` (count the items) · `contains` (is item X inside? true/false) · `add` (toss an item in) · `remove` (take one copy out; complains with an error if it isn't there) · `iterator` (hand out every item, one by one — see §1.4).
 
-**Choosing the data structure.** Having decided *what* a Bag does, the book picks *how* to store it. Picture a Python **list** as a **growable row of numbered slots (cubbies)**. Between a list and a *dictionary*, the book chooses the **list**: it happily holds duplicates in separate slots without wasting memory, and gives all the room the Bag needs. (A list keeps a strict order and a bag doesn't care about order — but that mismatch is harmless.)
+> [!tip] Why a Bag at all, when Python has lists and dicts? — the book's own answer *(added 2026-07-15)*
+> The book raises exactly this question ("why do we need the Bag ADT when we could simply use the list?") and concedes that **for a small program, a plain list is fine**. The four advantages appear when programs and teams grow. Working through the bag *abstraction* lets you:
+> **(a)** focus on the problem instead of container mechanics, **(b)** avoid errors from *misusing* a list's extra powers (indexing, sorting — operations a bag shouldn't allow), **(c)** coordinate better between modules and teammates (the interface is the agreement), and **(d)** swap in a different, possibly faster implementation later without breaking anything.
+
+### Selecting a Data Structure — the book's three-question checklist *(§1.3.2, added 2026-07-15)*
+
+Implementing an ADT means picking a **data structure** to power it — and there are always several candidates. The book evaluates suitability with **three questions**:
+
+> [!definition] The three suitability questions
+> 1. **Can it store the domain?** The structure must be able to hold *every* value the ADT's definition allows (for a Bag: any comparable items, **including duplicates**).
+> 2. **Can it implement every operation — without breaking the abstraction?** All the ADT's buttons must be buildable from the structure's own operations, with the internals staying hidden from the user.
+> 3. **Is it efficient?** When several structures pass questions 1–2, efficiency picks the winner. The book *postpones* this question — judging efficiency needs **complexity analysis (Big-O)**, which is exactly what the "Necaise 4" chapter on your schedule teaches. In Chapter 1, only questions 1 and 2 are used.
+>
+> There's rarely one "right" answer — the best structure depends on **context**, which is why real libraries ship *several* implementations of the same ADT and let you choose.
+
+**The audition — list vs. dictionary for the Bag.** Both candidates can pass question 1, but differently:
+
+| Candidate | How it would store the bag | Verdict |
+|---|---|---|
+| **List** | each item in its own slot — duplicates simply occupy separate slots (`[19, 74, 23, 19, 12]`) | ✅ **chosen** — natural fit, no wasted space |
+| **Dictionary** | duplicates clash with unique keys, so: item as the **key**, an occurrence **counter** as the value (`{19: 2, 74: 1, …}`); add a duplicate → increment, remove one → decrement | works, but for a simple bag it costs **≈2× the space** when most items are unique (a counter stored per item for nothing) |
+
+The dictionary isn't wrong — the book notes it's an **excellent** choice for the *counting bag* variant, whose whole job is tracking occurrence counts. (That counting-bag-on-a-dict is essentially `collections.Counter` from [The Collections Module](<../Python/Modules and Libraries/The Collections Module.md>) — the standard library made the same selection for the same reason.)
+
+**Question 2, verified operation by operation.** Before committing, the book confirms every Bag button maps onto something the list already provides:
+
+| Bag operation | Implemented with the list's own machinery |
+|---|---|
+| `Bag()` — empty bag | an empty list |
+| `length()` | the list's length (`len`) |
+| `contains(item)` | the list's membership test (`in`) |
+| `add(item)` | **append to the end** — a bag has no ordering, so the cheapest spot is fine |
+| `remove(item)` | find the item's slot, pull it out (`index` + `pop`) |
+| `iterator()` | a `for` loop + a custom iterator class — the subject of §1.4 |
+
+Every operation maps cleanly, so the list passes both questions — **the list is suitable**. (A list keeps a strict order and a bag doesn't care about order; that mismatch is harmless — the Bag simply never *promises* any order through its interface.)
 
 ![Figure 1.3 — A Bag stored as a list: the internal "theItems" list holds [19, 74, 23, 19, 12] in slots 0–4 (note the repeated 19 — bags allow duplicates)](dsa_fig_1.3_bag_as_list.png)
 
