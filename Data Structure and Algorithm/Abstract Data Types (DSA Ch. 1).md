@@ -479,6 +479,174 @@ Re-running the bouncer example (§1.2) is now trivial: store the birth dates in 
 > 6. **Report** — loop the sorted list, translate class codes (1 → "Freshman", …) into words, and print the formatted report.
 > **Insight.** Every hard part (unknown file format, parsing, iterating) is sealed inside an ADT, so the top-level program reads like a short to-do list.
 
+The report the program must produce (the book's sample — records sorted by ID):
+
+```text
+                 LIST OF STUDENTS
+
+ID     NAME                       CLASS       GPA
+-----  -------------------------  ----------  ----
+10015  Smith, John                Sophomore   3.01
+10167  Jones, Wendy               Junior      2.85
+10175  Smith, Jane                Senior      3.92
+  ...
+--------------------------------------------------
+Number of students: 11
+```
+
+### The interface — Student File Reader ADT *(§1.5.1, added 2026-07-15)*
+
+A **reader** is an object whose job is pulling data *into* a program (a *writer* pushes data out). No matter where student records live — text file, binary file, database — extraction is always the same ritual: **connect → extract records → disconnect**. The ADT captures exactly that:
+
+| Button (operation) | What it does |
+|---|---|
+| `StudentFileReader(filename)` | **constructor** — a reader aimed at the given file; the file's type/format is the *implementation's* business |
+| `open()` | opens the connection and prepares for extraction (raises an exception if it can't) |
+| `close()` | closes the connection (exception if it wasn't open) |
+| `fetchRecord()` | extracts and returns **the next** student record — or **`None`** when there are no more |
+| `fetchAll()` | extracts **all** (remaining) records and returns them as a Python **list** |
+
+### The client — Listing 1.5, `studentreport.py` *(verified by execution)*
+
+```python
+# Produces a student report from data extracted from an external source.
+from studentfile import StudentFileReader
+
+# Name of the file to open.
+FILE_NAME = "students.txt"
+
+def main():
+    # Extract the student records from the given text file.
+    reader = StudentFileReader( FILE_NAME )
+    reader.open()
+    studentList = reader.fetchAll()
+    reader.close()
+
+    # Sort the list by id number. Each object is passed to the lambda
+    # expression, which returns the idNum field of the object.
+    studentList.sort( key = lambda rec: rec.idNum )
+
+    # Print the student report.
+    printReport( studentList )
+
+# Prints the student report.
+def printReport( theList ):
+    # The class names associated with the class codes.
+    classNames = ( None, "Freshman", "Sophomore", "Junior", "Senior" )
+
+    # Print the header.
+    print( "LIST OF STUDENTS".center(50) )
+    print( "" )
+    print( "%-5s  %-25s  %-10s  %-4s" % ('ID', 'NAME', 'CLASS', 'GPA') )
+    print( "%5s  %25s  %10s  %4s" % ('-' * 5, '-' * 25, '-' * 10, '-' * 4) )
+    # Print the body.
+    for record in theList :
+        print( "%5d  %-25s  %-10s  %4.2f" % \
+               (record.idNum, \
+                record.lastName + ', ' + record.firstName,
+                classNames[record.classCode], record.gpa) )
+    # Add a footer.
+    print( "-" * 50 )
+    print( "Number of students:", len(theList) )
+
+# Executes the main routine.
+main()
+```
+
+> [!note] The clever bits of the client, one by one
+> - **The whole point, in two lines:** to reuse this program on a *differently formatted* data file, you change the `import` line (point it at another implementation module) and possibly `FILE_NAME` — **nothing else**. The report logic never knew the format anyway.
+> - **`key = lambda rec: rec.idNum`** — the sort doesn't compare whole records; the lambda hands `.sort()` each record's ID as its sorting key. This is exactly the `key=` pattern from [Sorting](<../Python/Data Structures/Sorting.md>) + [Lambda Functions](<../Python/Core Language/Lambda Functions.md>).
+> - **`classNames = (None, "Freshman", …)`** — a lookup [tuple](<../Python/Data Structures/Tuples.md>) with a deliberate `None` parked at slot 0, so classification codes 1–4 index it *directly*: `classNames[2]` → `"Sophomore"`. No if/elif chain.
+> - **The column formatting** is old-style `%` templating — `%-25s` = left-align in 25 chars, `%4.2f` = 2-decimal GPA — the same mini-language catalogued in [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>).
+> - **Connect → fetch → disconnect** happens in four tidy lines at the top of `main()` — the lifecycle the ADT was designed around.
+
+### The storage class — `StudentRecord`, and why not a tuple
+
+```python
+# Storage class used for an individual student record.
+class StudentRecord :
+    def __init__( self ):
+        self.idNum = 0
+        self.firstName = None
+        self.lastName = None
+        self.classCode = 0
+        self.gpa = 0.0
+```
+
+> [!warning] A constructor and nothing else — and that's complete
+> This is a **storage class**: named fields, zero behavior. The book's rules for them:
+> - **Don't use tuples for structured data.** `record[3]` tells you nothing; `record.classCode` documents itself. (The book confines tuples to returning multiple values from functions — like `_toGregorian()` in §1.2. Python's own upgrade for this exact job is `namedtuple` — see [The Collections Module](<../Python/Modules and Libraries/The Collections Module.md>).)
+> - **Its fields are deliberately public** — no leading underscores, unlike `_julianDay` or `_theItems`. Why the double standard? A storage object **is** data, not an abstraction guarding invariants — a restrictive interface would add ceremony and protect nothing.
+> - **It lives in the same module** as the class that produces it (`studentfile.py`), because `fetchRecord()` hands instances *out* to clients. A storage class meant for internal use only would get a `_` name prefix instead.
+
+### The engine — Listing 1.6, `studentfile.py` *(§1.5.2, verified by execution)*
+
+This implementation reads a plain-text format: **five lines per record** — ID, first name, last name, class code, GPA — records back to back:
+
+```text
+10015
+John
+Smith
+2
+3.01
+10334
+Jane
+...
+```
+
+```python
+# Implementation of the StudentFileReader ADT using a text file as the
+# input source in which each field is stored on a separate line.
+
+class StudentFileReader :
+    # Create a new student reader instance.
+    def __init__( self, inputSrc ):
+        self._inputSrc = inputSrc
+        self._inputFile = None
+
+    # Open a connection to the input file.
+    def open( self ):
+        self._inputFile = open( self._inputSrc, "r" )
+
+    # Close the connection to the input file.
+    def close( self ):
+        self._inputFile.close()
+        self._inputFile = None
+
+    # Extract all student records and store them in a list.
+    def fetchAll( self ):
+        theRecords = list()
+        student = self.fetchRecord()
+        while student != None :
+            theRecords.append( student )
+            student = self.fetchRecord()
+        return theRecords
+
+    # Extract the next student record from the file.
+    def fetchRecord( self ):
+        # Read the first line of the record.
+        line = self._inputFile.readline()
+        if line == "" :
+            return None
+
+        # If there is another record, create a storage object and fill it.
+        student = StudentRecord()
+        student.idNum = int( line )
+        student.firstName = self._inputFile.readline().rstrip()
+        student.lastName = self._inputFile.readline().rstrip()
+        student.classCode = int( self._inputFile.readline() )
+        student.gpa = float( self._inputFile.readline() )
+        return student
+```
+
+> [!note] Reading the engine
+> - **No data structure needed** — unusual for an ADT implementation, but a reader *extracts*, it doesn't *store*. Its only state is the filename and the open-file handle (`_inputFile`, protected by convention).
+> - **`fetchAll()` is an event-controlled loop** over `fetchRecord()` — the same *sentinel* pattern as `checkdates.py` in §1.2: keep going until `None` appears.
+> - **`fetchRecord()` does all the real work**: at end-of-file `readline()` returns `""` → return the `None` sentinel; otherwise build a `StudentRecord`, fill its five fields (`.rstrip()` trims the newline off the name lines; `int()`/`float()` convert the numeric ones), hand it back.
+> - **The swap point, made concrete:** to support a completely different file format, you modify **only `fetchRecord()`**. `fetchAll`, the report program, the sorting, the printing — all untouched. That's the §1.1 black-box promise, delivered by design.
+>
+> **Verified end-to-end:** I wrote a `students.txt` with three records deliberately out of order (10334 first), ran `studentreport.py` unmodified, and got the correctly **ID-sorted** report — `10015 Smith, John / Sophomore / 3.01` first, class codes translated via the tuple, footer counting 3 students. ✓
+
 ---
 
 ## Key Ideas & a Beginner's Glossary
