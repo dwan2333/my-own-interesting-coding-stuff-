@@ -131,6 +131,56 @@ Each button is a **method** (a named operation attached to the type). A special 
 > **Answer.** For each qualifying date the program prints "Is at least 21 years of age."
 > **Insight.** The program **never** does leap-year or month-length math itself — it just presses interface buttons. It has no idea *how* a Date works inside, and doesn't need to.
 
+#### The actual code — Listing 1.1, `checkdates.py` *(added 2026-07-15; behavior verified by simulated runs)*
+
+```python
+# Extracts a collection of birth dates from the user and determines
+# if each individual is at least 21 years of age.
+from date import Date
+
+def main():
+    # Date before which a person must have been born to be 21 or older.
+    bornBefore = Date(6, 1, 1988)
+
+    # Extract birth dates from the user and determine if 21 or older.
+    date = promptAndExtractDate()
+    while date is not None :
+        if date <= bornBefore :
+            print( "Is at least 21 years of age: ", date )
+        date = promptAndExtractDate()
+
+# Prompts for and extracts the Gregorian date components. Returns a
+# Date object or None when the user has finished entering dates.
+def promptAndExtractDate():
+    print( "Enter a birth date." )
+    month = int( input("month (0 to quit): ") )
+    if month == 0 :
+        return None
+    else :
+        day = int( input("day: ") )
+        year = int( input("year: ") )
+        return Date( month, day, year )
+
+# Call the main routine.
+main()
+```
+
+> [!tip] The trick: an age check that never computes an age
+> Notice what the program does **not** do: it never subtracts dates, never counts years, never touches "today." Computing someone's age directly is messy (leap years, month lengths, has-the-birthday-happened-yet). The book **inverts the question**:
+> - The book's "today" is June 1, 2009. Anyone 21 or older must have been born **on or before June 1, 1988** — today minus 21 years, computed *once, by a human*, and baked in as `bornBefore = Date(6, 1, 1988)`.
+> - Now "is this person at least 21?" collapses to **one comparison**: `date <= bornBefore`.
+>
+> Remember that for birth dates, **earlier = older** — so *less-or-equal* means *old enough*. The boundary is inclusive: someone born exactly on 06/01/1988 turns 21 exactly on the target day and qualifies (verified: the simulated run prints `Is at least 21 years of age:  06/01/1988`).
+
+> [!note] Where the Date ADT is doing the work — button by button
+> Every line of this program that touches a date goes through the **interface**, never the internals:
+> - **Constructor** — `Date(6, 1, 1988)` builds the target; `Date(month, day, year)` builds one instance per person. Validation is the constructor's job (its `assert` precondition rejects nonsense like month 13) — the loop code doesn't validate anything.
+> - **Comparable** — `date <= bornBefore` is the ADT's `comparable()` operation, which Python lets us spell as an operator via `__le__`. Under the hood (Listing 1.2 below) this is **one integer comparison** of Julian day numbers — all the calendar complexity was paid once, at construction.
+> - **toString** — `print(..., date)` triggers `__str__`, printing `05/15/1985` — the program never formats a date by hand.
+> - The loop itself is a classic **sentinel pattern**: `promptAndExtractDate()` returns a `Date` *or* `None` (when the user types `0` for the month), and `while date is not None` runs until the sentinel appears.
+>
+> The ADT payoff, stated with this example: `checkdates.py` would run **unchanged** if the Date implementation switched from Julian-day storage to three stored fields — the client depends on the *contract*, not the wiring. And in the four-categories language of §1.1: this client uses only the **constructor** and (comparison) **accessors** — it never mutates a date and never iterates, because its job needs neither.
+
 ### Implementing the ADT — the clever internal trick
 
 > [!tip] How is a date actually stored?
