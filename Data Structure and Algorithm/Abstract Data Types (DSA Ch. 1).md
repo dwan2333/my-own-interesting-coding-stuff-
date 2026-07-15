@@ -68,6 +68,21 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 
 ![Figure 1.2 — A "string ADT" as a black box: the user program touches only the interface (str, upper, lower, …); the implementation details are sealed inside](dsa_fig_1.2_adt_vs_implementation.png)
 
+> [!definition] The four kinds of buttons — every ADT operation falls into one of these categories
+> The book sorts everything an interface can offer into **four categories** (added here — presented right alongside Figure 1.2 in the text):
+>
+> | Category | What it does | Date ADT (§1.2) | Bag ADT (§1.3) | Python types you already use |
+> |---|---|---|---|---|
+> | **Constructor** | creates and initializes a new instance | `Date(10, 31, 2023)` | `Bag()` | `list()`, `dict()`, `int("42")` |
+> | **Accessor** | returns data from the instance **without modifying it** | `day()`, `monthName()`, `isLeapYear()` | `length()`, `contains(item)` | `len(nums)`, `x in d`, `s.upper()` |
+> | **Mutator** | **modifies** the contents of the instance | `advanceBy(days)` | `add(item)`, `remove(item)` | `nums.append(x)`, `nums.sort()`, `d.update(…)` |
+> | **Iterator** | hands out the components **one at a time**, sequentially | — (a single date has no items to walk) | `iterator()` — the whole of §1.4 | what a `for` loop drives |
+>
+> Why the sorting habit is worth building:
+> - **Reading a new ADT**: bin its buttons into these four and you instantly know which calls are *safe anywhere* (accessors — they can't change anything) and which ones *change state* (mutators — handle with care).
+> - **Spotting immutability**: a type with **no mutators can never change** after construction. That's why `s.upper()` is an *accessor returning a new string* rather than a mutator — Python strings ship with zero mutators (the "returns a **new** string" warning in [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>) is this exact idea). The partial `Date` class in §1.2 is the same: after the constructor, every implemented method only *reads* `_julianDay`.
+> - **Designing your own**: the Bag is mutator-heavy because a container's whole job is changing contents; a Date is accessor-heavy because a date *is* a fixed value. What you're building dictates the mix.
+
 > [!tip] The analogy that makes it click — a television
 > - The **ADT** is the *idea* of a TV: a box that shows moving pictures and plays sound.
 > - The **interface** is the **remote control** — a fixed set of buttons: Power, Volume Up, Change Channel. *You* are the **client** pressing them.
@@ -311,6 +326,7 @@ Re-running the bouncer example (§1.2) is now trivial: store the birth dates in 
 - **Abstraction** = focusing only on what's relevant and hiding the rest. Two kinds: **procedural abstraction** (use a *function* knowing what it does, not how — e.g. `sqrt`) and **data abstraction** (use a *data type* without knowing how it's stored — e.g. a Python string). An ADT combines both.
 - **Encapsulation / information hiding** — sealing internals behind an interface (the "black box").
 - **Class** = blueprint · **instance/object** = one thing built from it · **method** = a button · **constructor** = the button that builds a new instance · **self** = "this particular instance."
+- **The four operation categories:** **constructor** (creates the instance) · **accessor** (reads without changing — safe anywhere) · **mutator** (changes the contents) · **iterator** (hands out items one at a time). No mutators ⇒ the type is immutable.
 - **Collection** = a group of values · **container** = holds a collection · **sequence** = a container in strict order.
 - **Bag** = unordered collection, duplicates allowed (built here from a **list** = a growable row of numbered slots).
 - **Iterator** = a helper that hands you items one at a time (a conveyor belt); a **for-loop** drives it and stops on the **StopIteration** signal.
