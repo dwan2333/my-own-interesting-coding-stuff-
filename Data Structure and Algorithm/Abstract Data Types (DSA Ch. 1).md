@@ -363,6 +363,46 @@ Every operation maps cleanly, so the list passes both questions — **the list i
 - **contains** — **scan** the slots one by one, checking each.
 - **remove** — scan to **find** the item, pull it out, and **shift** the rest to close the gap so no empty slot is left behind.
 
+### The actual code — Listing 1.3, `linearbag.py` *(§1.3.3, added 2026-07-15; behavior verified by execution)*
+
+```python
+# Implements the Bag ADT container using a Python list.
+
+class Bag :
+    # Constructs an empty bag.
+    def __init__( self ):
+        self._theItems = list()
+
+    # Returns the number of items in the bag.
+    def __len__( self ):
+        return len( self._theItems )
+
+    # Determines if an item is contained in the bag.
+    def __contains__( self, item ):
+        return item in self._theItems
+
+    # Adds a new item to the bag.
+    def add( self, item ):
+        self._theItems.append( item )
+
+    # Removes and returns an instance of the item from the bag.
+    def remove( self, item ):
+        assert item in self._theItems, "The item must be in the bag."
+        ndx = self._theItems.index( item )
+        return self._theItems.pop( ndx )
+
+    # Returns an iterator for traversing the list of items.
+    def __iter__( self ):
+        return _BagIterator( self._theItems )   # the iterator class lives in §1.4
+```
+
+(The book's printed listing leaves `__iter__` as dots and completes it in §1.4 — shown here already wired up. The print run also has a small typo there, `def __iter__( self, item ):`; the correct signature, used above, takes only `self`.)
+
+> [!note] Reading the implementation — three things to notice
+> - **One field is the whole state.** `self._theItems = list()` — an empty bag *is* an empty list, exactly as the operation-mapping table promised. The underscore marks it protected-by-convention, same as `_julianDay` in the Date class.
+> - **The dunder names are deliberate.** The ADT's `length()` and `contains()` are implemented as `__len__` and `__contains__`, so clients write natural Python — `len(myBag)` and `value in myBag` — per the ADT-operations-as-operators convention from §1.2. Sorted into the four categories of §1.1: constructor (`__init__`), accessors (`__len__`, `__contains__`), mutators (`add`, `remove`), iterator (`__iter__`).
+> - **`remove` guards its precondition** with `assert item in self._theItems` before touching anything — the same fail-fast pattern as the Date constructor. And because duplicates occupy separate slots, `remove` takes out exactly **one** occurrence: verified — after `add`ing `19, 74, 23, 19, 12` and calling `remove(19)`, the bag still contains the second `19` and `len` drops 5 → 4. ✓
+
 ---
 
 ## 1.4 Iterators — Visiting Every Item
@@ -379,8 +419,44 @@ An iterator offers two operations:
 
 ![Figure 1.4 — The iterator tracks a position: the _BagIterator holds a pointer into the Bag's list plus curItem = 0 (the slot it will hand out next)](dsa_fig_1.4_bag_iterator.png)
 
+### The actual code — Listing 1.4, `_BagIterator` *(added 2026-07-15; verified by execution)*
+
+This class completes the `linearbag.py` module from §1.3 — it's what the Bag's `__iter__` hands back:
+
+```python
+# An iterator for the Bag ADT implemented as a Python list.
+class _BagIterator :
+    def __init__( self, theList ):
+        self._bagItems = theList     # an ALIAS to the bag's list (no copy)
+        self._curItem = 0            # the slot it will hand out next
+
+    def __iter__( self ):
+        return self                  # an iterator's __iter__ always returns itself
+
+    def __next__( self ):
+        if self._curItem < len( self._bagItems ) :
+            item = self._bagItems[ self._curItem ]
+            self._curItem += 1
+            return item
+        else :
+            raise StopIteration
+```
+
+Two details worth noticing: `_bagItems` is a **reference to the same list** the Bag holds (Figure 1.4 draws exactly this — no data is copied), and all the iterator's "memory" is one integer, `_curItem`. Each `__next__` call hands out the current slot and advances; running off the end raises the `StopIteration` alarm.
+
 > [!tip] What a `for` loop is really doing
 > When you write "for each item in the bag, do …", the loop **automatically**: sets up the iterator, keeps pressing *give-me-the-next-item*, processes whatever comes back, and — the moment the `StopIteration` alarm fires — stops cleanly. You never press the buttons yourself.
+> The book shows the machinery spelled out — this is the exact equivalent of `for item in myBag: print(item)`, and it runs (verified):
+> ```python
+> # Create a _BagIterator object for myBag.
+> iterator = myBag.__iter__()
+> while True :
+>     try :
+>         item = iterator.__next__()   # next item, please
+>         print( item )                # the body of the for loop
+>     except StopIteration :           # the "I'm out of items!" alarm
+>         break
+> ```
 
 Re-running the bouncer example (§1.2) is now trivial: store the birth dates in a Bag, `for` each date the belt hands out, check "born on/before the target?", and print the ones who qualify — all **without knowing how the Bag stores anything.**
 
