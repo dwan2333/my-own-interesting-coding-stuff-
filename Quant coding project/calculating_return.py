@@ -13,6 +13,7 @@ from pathlib import Path
 ticker = input("Please choose the ticker for the stock: ")
 data = yf.download(ticker, interval = '1d', period = 'max')
 file_name = f'{ticker}_historical_chart.csv'
+    # making sure that the historical chart is not duplicated
 if Path(Path.cwd()/f'{file_name}').exists():
     pass
 else:

@@ -4,3 +4,7 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache
 .trash/
+
+# Python bytecode — never worth versioning
+__pycache__/
+*.pyc

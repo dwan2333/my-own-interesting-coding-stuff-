@@ -24,7 +24,7 @@ States = [keys for keys, values in States_and_Captials.items()]
 
 # select a file path to put the folder in 
 print("please type in your choice of the quiz folder path: ")
-quiz_folder = Path(input(">>> ").strip())
+quiz_folder = Path(input(">>> ").strip()) /"Quiz Folder"
 
 # create a new directory named Quiz folder to store all the later quiz 
 if quiz_folder.exists() == False:
@@ -74,10 +74,10 @@ for i in range(number_of_quiz):
 
                 # creating the correct answer sheet 
                 if multiple_choice[x] == correct_answer:
-                    if answer_path.exists() == False:
-                        with answer_path.open('w', encoding = 'UTF-8') as quiz_answer:
+                    try:
+                        with answer_path.open('x+', encoding = 'UTF-8') as quiz_answer:
                             quiz_answer.write(f'{s+1}, {choice[x]}---{correct_answer}\n')
-                    else: 
+                    except FileExistsError: 
                         with answer_path.open('a', encoding = 'UTF-8') as quiz_answer:
                             quiz_answer.write(f'{s+1}, {choice[x]}---{correct_answer}\n')
             quiz.write("\n")
