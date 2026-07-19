@@ -73,11 +73,11 @@ with open('log.txt', 'a', encoding='utf-8') as f:
 
 Two modifiers combine with the letters above:
 
-| Modifier | Meaning |
-|---|---|
-| `'t'` | **text** mode (default) — reads/writes `str`, handles encoding and line endings |
-| `'b'` | **binary** mode — reads/writes `bytes`, no encoding (images, audio, `.zip`) |
-| `'+'` | open for **both reading and writing** |
+| Modifier | Meaning                                                                         |
+| -------- | ------------------------------------------------------------------------------- |
+| `'t'`    | **text** mode (default) — reads/writes `str`, handles encoding and line endings |
+| `'b'`    | **binary** mode — reads/writes `bytes`, no encoding (images, audio, `.zip`)     |
+| `'+'`    | open for **both reading and writing**                                           |
 
 ```python
 # binary read → returns bytes, not str
