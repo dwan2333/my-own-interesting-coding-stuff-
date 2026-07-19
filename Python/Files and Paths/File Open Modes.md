@@ -104,12 +104,12 @@ Common combined modes you'll actually see:
 
 Once a file is open in a read mode, these pull the text out:
 
-| Method | Returns |
-|---|---|
-| `f.read()` | the **entire** file as one string |
-| `f.read(n)` | the next `n` characters |
-| `f.readline()` | the next **single line** (including its `\n`) |
-| `f.readlines()` | a **list** of all lines |
+| Method                     | Returns                                            |
+| -------------------------- | -------------------------------------------------- |
+| `f.read()`                 | the **entire** file as one string                  |
+| `f.read(n)`                | the next `n` characters                            |
+| `f.readline()`             | the next **single line** (including its `\n`)      |
+| `f.readlines()`            | a **list** of all lines                            |
 | iterating `for line in f:` | one line at a time — memory-friendly for big files |
 
 ```python
