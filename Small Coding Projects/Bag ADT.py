@@ -1,6 +1,5 @@
 # Implements the Bag ADT container using a Python list.
-
-class GrabBag :
+class Bag :
     # Constructs an empty bag.
     def __init__( self ):
         self._theItems = list()
@@ -18,20 +17,39 @@ class GrabBag :
         self._theItems.append( item )
 
     # Removes and returns an instance of the item from the bag.
-    def grabItem(self):
-        from random import choice
-        item = choice(self._theItems)
-        self._theItems.remove(item)
-        return item 
+    def remove( self, item ):
+        assert item in self._theItems, "The item must be in the bag."
+        ndx = self._theItems.index( item )
+        return self._theItems.pop( ndx )
 
     # Returns an iterator for traversing the list of items.
     def __iter__( self ):
-        return _BagIterator( self._theItems)  # the iterator class lives in 
-    
-    # representation of the constructor 
-    def __str__(self):
-        return(f'{self._theItems}')
+        return _BagIterator( self._theItems )   # the iterator class lives in §1.4
 
+    '''This is the classical way of doing Python Iterators. There are many simple ways to do this for example:
+
+    Option 1: Returning the built-in iterator of the list directly
+    # def __iter__(self):
+    #     return iter(self._theItems)
+
+    Option 2: Using a generator function (yield)
+    # def __iter__(self):
+    #     for item in self._theItems:
+    #         yield item
+    '''
+
+
+
+    # random removal of an item from the Bag
+    def grabItem(self):
+        from random import choice 
+        removal_choice = choice()
+        self._theItems.remove(removal_choice)
+        return f'{removal_choice} is succesfully removed from the Bag'
+
+    # return number of occureences of the given item in the bag
+    def numOf(self, item):
+        return self._theItems.count(item)
 
 # An iterator for the Bag ADT implemented as a Python list.
 class _BagIterator :
@@ -50,13 +68,5 @@ class _BagIterator :
         else :
             raise StopIteration
 
-
-dt = GrabBag()
-
-dt.add('apple')
-dt.add('computer')
-dt.add('banana')
-
-print(dt.grabItem())
-
-print(dt)
+        
+         

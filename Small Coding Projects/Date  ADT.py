@@ -105,7 +105,7 @@ class Date :
             return True
         if not all([type(month) == int, type(day) == int, type(year) == int]):
             return False 
-        if not (month < 12 and month > 0 ):
+        if not (month <= 12 and month > 0 ):
             return False 
         if not (day < self.numDays() and day > 0):
             return False 
@@ -136,8 +136,19 @@ class Date :
         month,day,year = self._toGregorian()
         return f'{month}{divchar}{day}{divchar}{year}'
 
+    # return bool to determine if the given date is Equinox (meaning they time are equal in day and night)
+    def isEquinox(self):
+        month, day, year = self._toGregorian()
+        if (month == 3 and day == 20) or (month == 9 and day == 22):
+            return True
+        return False 
 
-
+    # return bool to determine if the given date is Solastice (two day when sun reaches highest or lowest given two longest or shortest day)
+    def isSolastice(self):
+        month, day, year = self._toGregorian()
+        if (month == 6 and day == 21) or (month == 12 and day == 21):
+            return True
+        return False
 
 
 
@@ -146,5 +157,5 @@ class Date :
 
         
 
-print(Date(7,1,2026).dayOfWeekName())
-print(Date(7,1,2026).dayOfWeek())
+
+\
