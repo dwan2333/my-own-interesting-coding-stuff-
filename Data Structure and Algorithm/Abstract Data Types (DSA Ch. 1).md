@@ -444,7 +444,29 @@ class _BagIterator :
 
 Two details worth noticing: `_bagItems` is a **reference to the same list** the Bag holds (Figure 1.4 draws exactly this — no data is copied), and all the iterator's "memory" is one integer, `_curItem`. Each `__next__` call hands out the current slot and advances; running off the end raises the `StopIteration` alarm.
 
-> [!tip] What a `for` loop is really doing
+> [!tip] Two shortcut ways to write the same iterator *(added — modern Python the book doesn't show)*
+> The `_BagIterator` class exists to teach you the **protocol** (`__iter__` + `__next__` + `StopIteration`). In day-to-day Python, you'd rarely write that class — either of these one-liners inside `Bag` replaces it, **verified to iterate identically**:
+>
+> **Option 1 — a generator function.** Put a `yield` inside `__iter__` and Python builds the iterator object *for you*:
+> ```python
+> class Bag :
+>     # ... other methods ...
+>     def __iter__( self ):
+>         for item in self._theItems :
+>             yield item
+> ```
+> Calling a function containing `yield` returns a **generator** — an object that already implements `__iter__`/`__next__` and raises `StopIteration` when the function ends. It's `_BagIterator` auto-generated: the paused function *is* the "bookmark," playing the role `_curItem` played. (Full story in [Generators and Yield](<../Python/Core Language/Generators and Yield.md>).)
+>
+> **Option 2 — delegate to the list's own iterator.** The internal list already knows how to iterate, so hand out *its* iterator:
+> ```python
+> class Bag :
+>     # ... other methods ...
+>     def __iter__( self ):
+>         return iter( self._theItems )
+> ```
+> `iter(x)` asks `x` for its iterator — here a ready-made `list_iterator`, the fastest of the three since it's implemented in C.
+>
+> All three versions honor the abstraction equally: the client just writes `for item in bag`, and the internals stay hidden. The book writes the class out **by hand on purpose** — so you see the machinery a `for` loop drives and can recognize `StopIteration` when it appears — and because that explicit pattern translates to languages that have no `yield`. Once the protocol is understood, prefer the shortcuts.
 > When you write "for each item in the bag, do …", the loop **automatically**: sets up the iterator, keeps pressing *give-me-the-next-item*, processes whatever comes back, and — the moment the `StopIteration` alarm fires — stops cleanly. You never press the buttons yourself.
 > The book shows the machinery spelled out — this is the exact equivalent of `for item in myBag: print(item)`, and it runs (verified):
 > ```python
