@@ -107,7 +107,10 @@ class Date :
             return False 
         if not (month <= 12 and month > 0 ):
             return False 
-        if not (day < self.numDays() and day > 0):
+        
+        is_leap = (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
+        max_days = 29 if is_leap and month == 2 else [31,28,31,30,31,30,31,31,30,31,30,31][month - 1]
+        if not (day <= max_days and day > 0):
             return False 
         if year < 0:
             return False 
