@@ -40,6 +40,9 @@ jobs:
             --exclude='.trash' \
             --exclude='__pycache__' \
             --exclude='.gitignore' \
+            --exclude='.claude' \
+            --exclude='/AGENTS.md' \
+            --exclude='/CLAUDE.md' \
             vault/ quartz/content/
           if [ ! -f quartz/content/index.md ]; then
             printf -- '---\ntitle: Home\n---\n\nWelcome to my notes. Browse via the explorer on the left, or use search.\n' > quartz/content/index.md
