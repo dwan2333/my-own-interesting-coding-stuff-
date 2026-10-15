@@ -17,9 +17,15 @@ Read this whole file before changing anything here.
 
 ## 2. Layout
 
-- **Topic folders:** notes live in topic folders at the top of the repo: `Conda`, `Data Structure and Algorithm`, `Git and Github`, `Python`, `Quant coding project`, `Small Coding Projects`. Subfolders group related notes, e.g. `Git and Github\Branching\`.
+- **Topic folders:** notes live in topic folders at the top of the repo: `Conda`, `Data Structures and Algorithms`, `Git and Github`, `Python`, `Quant coding project`, `Small Coding Projects`. Subfolders group related notes, e.g. `Git and Github\Branching\`.
 - **Overview notes:** a topic's overview note is named `<Title> (Main).md`.
 - **Series notes:** number them in reading order: `1 - Short Title.md`, …
+- **Textbooks** (Daniel, 2026-10-15): each book gets its **own folder**, named exactly after its title, inside the topic folder. Never put one book's notes inside another book's folder. Example: `Data Structures and Algorithms\Data Structures and Algorithms Using Python\` and `Data Structures and Algorithms\The Algorithm Design Manual\`.
+  - The book folder holds `<Book Title> (Main).md`, the book's index, plus one folder per chapter. The index is only **what each chapter covers**, like a preface: no reviews, study advice or recommendations. Those go in his HTML study guide (Brain `topics/algorithms/resources.md` has the link).
+  - A chapter folder (e.g. `Chapter 1 Abstract Data Types\`) holds:
+    - `Chapter N (Main).md`: the chapter in **exactly the textbook's order** (sections and subsections), with the book's figures and his earlier questions as `> [!question] Question I had — …` callouts in the sections they belong to;
+    - `Chapter N Exercises.md`: every exercise and project, with collapsed, tested solutions;
+    - any extra notes.
 - **Code files:** working code (`.py`) sits next to the note that explains it, mostly in `Small Coding Projects`.
 - **What gets published:** the website build (`.github\workflows\deploy-quartz.yml`) copies the **whole repo** into the site. It skips only the folders and files listed in its `rsync --exclude` lines. If you add a file at the top of the repo that shouldn't be published, add an exclude for it there.
 
@@ -43,10 +49,26 @@ Read this whole file before changing anything here.
 - **His backup:** his Obsidian Git plugin also commits and pushes ("vault backup: …").
 - **Python on Windows:** run `python`, not `py`. The `py` launcher is broken in some of his terminals.
 
-## 5. Question notes ("Questions I Had While Studying")
+## 5. Question notes ("Questions I Had While Studying") and topic pages
 
-Each coding question Daniel asks gets one readable note, filed in the matching topic folder:
+**Problem questions vs. general-knowledge questions** (Daniel, 2026-10-12)
+- **Question notes are only for specific coding problems:** an error, a piece of code, or an exercise. Only these get the "Question I had while studying" subtitle, a date in the file name, and the `Questions I Had While Studying` folder.
+- **General-knowledge questions** ("how does X work?", e.g. how a tool or protocol works) get a **topic page** instead:
+  - named directly after the topic, no date: `<Topic Name>.md`;
+  - placed in the relevant topic folder (create one if needed), e.g. `Git and Github\<Topic Name>.md`;
+  - organized like his overview notes, with information grouped under clearly titled subcategory sections (model: `Git and Github\Syncing\Syncing (Main).md`): a short intro, a mental-model callout, then the sections, with tables where they help;
+  - concise and easy to read, **without** the problem format (no Question Essence, no "My guess", no collapsed solutions);
+  - linked directly to related notes and categories (bare file names), plus a short Sources list when facts came from the web.
+  - for a tool, library or service where opinions differ, add **What People Are Saying**: key voices first (well-known developers and maintainers, with followers), then the overall mood, each linked and dated; then **My Take** (your own assessment). How to reach X: Brain `AGENTS.md` §2.
+- If a topic grows to several pages, group them into subcategory folders, each with a `(Main).md` overview, the way `Git and Github` is organized.
+- Follow-up questions on the same topic update that page; never repeat what it already says.
+
+Each coding problem Daniel asks about gets one readable note, filed in the matching topic folder:
 `<Topic>\Questions I Had While Studying\YYYY-MM-DD - Short Title.md`
+
+**Textbook problems** (Daniel, 2026-10-15): when the question comes from a book, file it in a folder named **exactly after the book title**, with chapter folders, and give the book a `<Book Title> (Main).md` overview:
+`<Topic>\<Book Title>\Chapter N\Questions I Had While Studying\YYYY-MM-DD - Short Title.md`
+e.g. `Data Structures and Algorithms\The Algorithm Design Manual\Chapter 1\Questions I Had While Studying\`. Link each new note from the book's overview.
 
 If he sent a screenshot, save it next to the note under the same name. Use `python "E:\AI Brain\Big Brain\Brain\system\save_screenshot.py" --dest "<folder>" --name "<note name>"`, then look at the image to confirm it's his.
 

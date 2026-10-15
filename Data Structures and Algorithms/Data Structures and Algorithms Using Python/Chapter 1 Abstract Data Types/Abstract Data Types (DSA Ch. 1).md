@@ -2,8 +2,10 @@
 
 _Notes compiled 2026-06-21 — Rance D. Necaise, *Data Structures and Algorithms Using Python*, Ch. 1, with NotebookLM-assisted summaries (written for a first-time reader) and main-agent verification of the technical claims._
 
+_This is my **first-pass summary**. The detailed notes, in the book's order, are in [Chapter 1 — Abstract Data Types](<Chapter 1 (Main).md>), and the solved exercises in [Chapter 1 Exercises](<Chapter 1 Exercises.md>)._
+
 > [!tip] Companion notes in this vault
-> This chapter's **Bag** is built on a Python **[List](<../Python/Data Structures/List Methods.md>)**; its **iterators** are the machinery that `for` loops and **[The Enumerate Function](<../Python/Data Structures/The Enumerate Function.md>)** rely on; and §1.2 weighs a list against a **[Dictionary](<../Python/Data Structures/Dictionary Methods.md>)** for storage.
+> This chapter's **Bag** is built on a Python **[List](<List Methods.md>)**; its **iterators** are the machinery that `for` loops and **[The Enumerate Function](<The Enumerate Function.md>)** rely on; and §1.2 weighs a list against a **[Dictionary](<Dictionary Methods.md>)** for storage.
 
 ---
 
@@ -80,7 +82,7 @@ A computer, at the bottom, only stores **0s and 1s** — and the same string of 
 >
 > Why the sorting habit is worth building:
 > - **Reading a new ADT**: bin its buttons into these four and you instantly know which calls are *safe anywhere* (accessors — they can't change anything) and which ones *change state* (mutators — handle with care).
-> - **Spotting immutability**: a type with **no mutators can never change** after construction. That's why `s.upper()` is an *accessor returning a new string* rather than a mutator — Python strings ship with zero mutators (the "returns a **new** string" warning in [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>) is this exact idea). The partial `Date` class in §1.2 is the same: after the constructor, every implemented method only *reads* `_julianDay`.
+> - **Spotting immutability**: a type with **no mutators can never change** after construction. That's why `s.upper()` is an *accessor returning a new string* rather than a mutator — Python strings ship with zero mutators (the "returns a **new** string" warning in [String Formatting and Methods](<String Formatting and Methods.md>) is this exact idea). The partial `Date` class in §1.2 is the same: after the constructor, every implemented method only *reads* `_julianDay`.
 > - **Designing your own**: the Bag is mutator-heavy because a container's whole job is changing contents; a Date is accessor-heavy because a date *is* a fixed value. What you're building dictates the mix.
 
 > [!tip] The analogy that makes it click — a television
@@ -299,8 +301,8 @@ class Date :
 > The **leading underscore** in `_toGregorian` and `_julianDay` is Python's "protected by convention" flag: nothing *stops* outside code from touching them, but the name warns "internal wiring — clients use the interface buttons instead." That's encapsulation enforced by discipline, not by the language.
 
 > [!note] The remaining design choices, each in one breath
-> - **`assert` = the precondition check.** §1.2.3 defines a **precondition** (what must be true *before* an operation runs) and a **postcondition** (what's guaranteed *after*). The book tests preconditions with `assert` throughout — fail fast, let the caller decide. See [The Assert Statement](<../Python/Debugging/The Assert Statement.md>).
-> - **`__str__` overload** — `print(firstDay)` "just works" because Python calls `__str__` automatically. The `"%02d/%02d/%04d"` template is old-style `%` formatting (zero-padded 2- and 4-digit numbers) — see [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>).
+> - **`assert` = the precondition check.** §1.2.3 defines a **precondition** (what must be true *before* an operation runs) and a **postcondition** (what's guaranteed *after*). The book tests preconditions with `assert` throughout — fail fast, let the caller decide. See [The Assert Statement](<The Assert Statement.md>).
+> - **`__str__` overload** — `print(firstDay)` "just works" because Python calls `__str__` automatically. The `"%02d/%02d/%04d"` template is old-style `%` formatting (zero-padded 2- and 4-digit numbers) — see [String Formatting and Methods](<String Formatting and Methods.md>).
 > - **Only `==`, `<`, `<=` are implemented — on purpose.** Python 3 auto-derives the rest: `a > b` is answered by swapping into `b < a` (a *reflected* operator), and `!=` by inverting `==`. Three methods buy all six comparisons. Verified: `a > b` and `a != b` work on the class above with no `__gt__`/`__ne__` defined. ✓
 > - **Comparisons and "days between" are trivial** precisely *because* of the Julian-day storage choice: both reduce to integer `==`/`<`/`−` on `_julianDay`. Verified: `Date(6,1,1988)` vs `Date(5,15,1985)` → 1,113 days apart, matching the real calendar. ✓
 > - **`dayOfWeek()`** reuses the same Jan/Feb-belong-to-last-year shift, then a Zeller-style congruence mod 7 (0 = Monday). Verified: it returns **4 (Friday)** for October 15, 1582 — history records the Gregorian calendar's first official day as a Friday. ✓
@@ -341,7 +343,7 @@ Implementing an ADT means picking a **data structure** to power it — and there
 | **List** | each item in its own slot — duplicates simply occupy separate slots (`[19, 74, 23, 19, 12]`) | ✅ **chosen** — natural fit, no wasted space |
 | **Dictionary** | duplicates clash with unique keys, so: item as the **key**, an occurrence **counter** as the value (`{19: 2, 74: 1, …}`); add a duplicate → increment, remove one → decrement | works, but for a simple bag it costs **≈2× the space** when most items are unique (a counter stored per item for nothing) |
 
-The dictionary isn't wrong — the book notes it's an **excellent** choice for the *counting bag* variant, whose whole job is tracking occurrence counts. (That counting-bag-on-a-dict is essentially `collections.Counter` from [The Collections Module](<../Python/Modules and Libraries/The Collections Module.md>) — the standard library made the same selection for the same reason.)
+The dictionary isn't wrong — the book notes it's an **excellent** choice for the *counting bag* variant, whose whole job is tracking occurrence counts. (That counting-bag-on-a-dict is essentially `collections.Counter` from [The Collections Module](<The Collections Module.md>) — the standard library made the same selection for the same reason.)
 
 **Question 2, verified operation by operation.** Before committing, the book confirms every Bag button maps onto something the list already provides:
 
@@ -455,7 +457,7 @@ Two details worth noticing: `_bagItems` is a **reference to the same list** the 
 >         for item in self._theItems :
 >             yield item
 > ```
-> Calling a function containing `yield` returns a **generator** — an object that already implements `__iter__`/`__next__` and raises `StopIteration` when the function ends. It's `_BagIterator` auto-generated: the paused function *is* the "bookmark," playing the role `_curItem` played. (Full story in [Generators and Yield](<../Python/Core Language/Generators and Yield.md>).)
+> Calling a function containing `yield` returns a **generator** — an object that already implements `__iter__`/`__next__` and raises `StopIteration` when the function ends. It's `_BagIterator` auto-generated: the paused function *is* the "bookmark," playing the role `_curItem` played. (Full story in [Generators and Yield](<Generators and Yield.md>).)
 >
 > **Option 2 — delegate to the list's own iterator.** The internal list already knows how to iterate, so hand out *its* iterator:
 > ```python
@@ -577,9 +579,9 @@ main()
 
 > [!note] The clever bits of the client, one by one
 > - **The whole point, in two lines:** to reuse this program on a *differently formatted* data file, you change the `import` line (point it at another implementation module) and possibly `FILE_NAME` — **nothing else**. The report logic never knew the format anyway.
-> - **`key = lambda rec: rec.idNum`** — the sort doesn't compare whole records; the lambda hands `.sort()` each record's ID as its sorting key. This is exactly the `key=` pattern from [Sorting](<../Python/Data Structures/Sorting.md>) + [Lambda Functions](<../Python/Core Language/Lambda Functions.md>).
-> - **`classNames = (None, "Freshman", …)`** — a lookup [tuple](<../Python/Data Structures/Tuples.md>) with a deliberate `None` parked at slot 0, so classification codes 1–4 index it *directly*: `classNames[2]` → `"Sophomore"`. No if/elif chain.
-> - **The column formatting** is old-style `%` templating — `%-25s` = left-align in 25 chars, `%4.2f` = 2-decimal GPA — the same mini-language catalogued in [String Formatting and Methods](<../Python/Strings and Text/String Formatting and Methods.md>).
+> - **`key = lambda rec: rec.idNum`** — the sort doesn't compare whole records; the lambda hands `.sort()` each record's ID as its sorting key. This is exactly the `key=` pattern from [Sorting](<Sorting.md>) + [Lambda Functions](<Lambda Functions.md>).
+> - **`classNames = (None, "Freshman", …)`** — a lookup [tuple](<Tuples.md>) with a deliberate `None` parked at slot 0, so classification codes 1–4 index it *directly*: `classNames[2]` → `"Sophomore"`. No if/elif chain.
+> - **The column formatting** is old-style `%` templating — `%-25s` = left-align in 25 chars, `%4.2f` = 2-decimal GPA — the same mini-language catalogued in [String Formatting and Methods](<String Formatting and Methods.md>).
 > - **Connect → fetch → disconnect** happens in four tidy lines at the top of `main()` — the lifecycle the ADT was designed around.
 
 ### The storage class — `StudentRecord`, and why not a tuple
@@ -597,7 +599,7 @@ class StudentRecord :
 
 > [!warning] A constructor and nothing else — and that's complete
 > This is a **storage class**: named fields, zero behavior. The book's rules for them:
-> - **Don't use tuples for structured data.** `record[3]` tells you nothing; `record.classCode` documents itself. (The book confines tuples to returning multiple values from functions — like `_toGregorian()` in §1.2. Python's own upgrade for this exact job is `namedtuple` — see [The Collections Module](<../Python/Modules and Libraries/The Collections Module.md>).)
+> - **Don't use tuples for structured data.** `record[3]` tells you nothing; `record.classCode` documents itself. (The book confines tuples to returning multiple values from functions — like `_toGregorian()` in §1.2. Python's own upgrade for this exact job is `namedtuple` — see [The Collections Module](<The Collections Module.md>).)
 > - **Its fields are deliberately public** — no leading underscores, unlike `_julianDay` or `_theItems`. Why the double standard? A storage object **is** data, not an abstraction guarding invariants — a restrictive interface would add ceremony and protect nothing.
 > - **It lives in the same module** as the class that produces it (`studentfile.py`), because `fetchRecord()` hands instances *out* to clients. A storage class meant for internal use only would get a `_` name prefix instead.
 
@@ -688,7 +690,7 @@ class StudentFileReader :
 > 2. **The format is known in exactly one place.** Only `fetchRecord()` knows "five lines, this order, these types" — `fetchAll()` just loops it. Fetch-one, fetch-N, fetch-until, a format change: all touch one method. In the monolith, parsing and collecting are welded together, so every variation rewrites the slicing.
 > 3. **`record.gpa` beats `row[4]`.** The nested list revives the tuple problem from §1.5.1: unnamed slots you must memorize, index typos that fail *silently*, and every value still a **string** (`"3.01"`), pushing type conversion out to every user of the data. The storage class converts once, at the boundary, and names every field.
 >
-> **The honest rule:** complexity is insurance — buy it when the data may grow or the format may change or others will use your code; skip it for a run-once script. (Best of both, modern-Python style: keep `fetchRecord()` as the parser and make the collector a lazy **generator** — `while (rec := self.fetchRecord()) is not None: yield rec` — the same shortcut shown for the Bag iterator in §1.4; see [Generators and Yield](<../Python/Core Language/Generators and Yield.md>).)
+> **The honest rule:** complexity is insurance — buy it when the data may grow or the format may change or others will use your code; skip it for a run-once script. (Best of both, modern-Python style: keep `fetchRecord()` as the parser and make the collector a lazy **generator** — `while (rec := self.fetchRecord()) is not None: yield rec` — the same shortcut shown for the Bag iterator in §1.4; see [Generators and Yield](<Generators and Yield.md>).)
 
 ---
 
@@ -705,7 +707,7 @@ class StudentFileReader :
 - **Nice trick to remember:** storing a Date as **one Julian day-number** turns "days between dates" into simple subtraction — a great example of a smart data structure making operations easy.
 
 > [!note] About the chapter's exercises
-> The chapter ends with **Exercises** and **Programming Projects** — but these are hands-on *coding* assignments (finish the `Date` class, write a `printCalendar()`, build a click-counter, etc.), meant to be implemented in Python. They're a great next step *once you start coding*, but they're outside the scope of this plain-language summary, so they aren't reproduced here.
+> The chapter ends with **Exercises** and **Programming Projects** — but these are hands-on *coding* assignments (finish the `Date` class, write a `printCalendar()`, build a click-counter, etc.), meant to be implemented in Python. They're all solved, with tested code, in [Chapter 1 Exercises](<Chapter 1 Exercises.md>).
 
 ---
 
